@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/di/app_di.dart';
-import 'package:todo/presentation/home/widgets/home_screen.dart';
+import 'package:todo/navigation/home_nav.dart';
 
 void main() {
   AppDi.init();
@@ -12,10 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Notes App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen(),
+      initialRoute: HomeRoute.initialRoute.name,
+      getPages: [homeNav],
+      defaultTransition: Platform.isAndroid ? Transition.noTransition : null,
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/route_manager.dart';
 import 'package:todo/di/app_di.dart';
+import 'package:todo/navigation/home_nav.dart';
 import 'package:todo/presentation/home/bloc/home_bloc.dart';
 import 'package:todo/presentation/home/widgets/home_add_button.dart';
 import 'package:todo/presentation/home/widgets/home_loading_widget.dart';
@@ -47,7 +50,7 @@ class HomeScreen extends StatelessWidget {
           case null:
             return;
           case HomeNavState.add:
-            //  TODO: Navigate to add note screen
+            Get.toNamed(HomeRoute.addNote.name);
             break;
         }
         bloc.add(HomeNavEventHandled());
