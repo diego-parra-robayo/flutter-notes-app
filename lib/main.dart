@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todo/di/app_di.dart';
 
 void main() {
+  AppDi.init();
   runApp(const MyApp());
 }
 
