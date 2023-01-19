@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/di/app_di.dart';
 import 'package:todo/navigation/home_nav.dart';
+import 'package:todo/utils/ui/theme/ui.dart';
 
 void main() {
   AppDi.init();
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Notes App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: UI.themes.light,
       initialRoute: HomeRoute.initialRoute.name,
       getPages: [homeNav],
       defaultTransition: Platform.isAndroid ? Transition.noTransition : null,

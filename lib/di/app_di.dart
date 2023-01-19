@@ -6,6 +6,7 @@ import 'package:todo/domain/usecases/add_note_usecase.dart';
 import 'package:todo/domain/usecases/get_note_usecase.dart';
 import 'package:todo/domain/usecases/get_notes_usecase.dart';
 import 'package:todo/domain/usecases/toggle_note_completed_state_usecase.dart';
+import 'package:todo/presentation/add_note/bloc/add_note_bloc.dart';
 import 'package:todo/presentation/home/bloc/home_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -20,7 +21,7 @@ class AppDi {
 
   static void _registerDataSources() {
     getIt.registerLazySingleton<NoteFakeDataSource>(
-      () => const NoteFakeDataSource(),
+      () => NoteFakeDataSource(),
     );
   }
 
@@ -53,6 +54,9 @@ class AppDi {
         getNotesUseCase: getIt(),
         toggleNoteCompletedStateUseCase: getIt(),
       ),
+    );
+    getIt.registerFactory<AddNoteBloc>(
+      () => AddNoteBloc(addNoteUseCase: getIt()),
     );
   }
 }

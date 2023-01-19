@@ -43,14 +43,15 @@ class HomeScreen extends StatelessWidget {
   BlocListener _getNavigationListener() {
     return BlocListener<HomeBloc, HomeState>(
       listenWhen: (previous, current) => previous.navState != current.navState,
-      listener: (context, state) {
+      listener: (context, state) async {
         final bloc = context.read<HomeBloc>();
         final navState = state.navState;
         switch (navState) {
           case null:
             return;
           case HomeNavState.add:
-            Get.toNamed(HomeRoute.addNote.name);
+            await Get.toNamed(HomeRoute.addNote.name);
+            bloc.add(HomeStarted());
             break;
         }
         bloc.add(HomeNavEventHandled());

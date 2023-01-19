@@ -7,10 +7,10 @@ class NoteFakeDataSource {
   final List<NoteModel> _notes;
   final Duration delay;
 
-  const NoteFakeDataSource({
+  NoteFakeDataSource({
     List<NoteModel>? initialNotes,
     this.delay = const Duration(milliseconds: 2000),
-  }) : _notes = initialNotes ?? const [];
+  }) : _notes = initialNotes ?? [];
 
   Future<List<NoteModel>> getNotes() async {
     await Future.delayed(delay);

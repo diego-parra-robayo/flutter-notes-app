@@ -61,7 +61,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             find: (note) => note.id == event.noteId,
             replace: (note) => note.copyWith(isCompleted: !note.isCompleted),
           );
-          emit(state.copyWith(notes: updatedList));
+          emit(state.copyWith(isLoading: false, notes: updatedList));
         },
       );
     });

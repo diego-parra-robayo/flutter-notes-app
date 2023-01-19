@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/note.dart';
+import '../../../domain/entities/note.dart';
 
 class NoteWidget extends StatelessWidget {
   final Note note;
