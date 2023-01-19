@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/presentation/home/bloc/home_bloc.dart';
+import 'package:todo/utils/ui/note_widget.dart';
 
 class HomeNotesList extends StatelessWidget {
   const HomeNotesList({Key? key}) : super(key: key);
@@ -15,13 +16,12 @@ class HomeNotesList extends StatelessWidget {
             itemCount: notes.length,
             itemBuilder: (context, index) {
               final note = notes[index];
-              return CheckboxListTile(
-                value: note.isCompleted,
-                onChanged: (_) => _dispatchToggleCompletedStatePressed(
+              return NoteWidget(
+                note: note,
+                onCompletedChanged: (_) => _dispatchToggleCompletedStatePressed(
                   context,
                   note.id,
                 ),
-                title: Text(note.description),
               );
             },
           );

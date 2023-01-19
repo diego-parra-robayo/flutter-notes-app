@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:todo/data/datasources/remote/note_remote_datasource.dart';
+import 'package:todo/data/datasources/fake/note_fake_datasource.dart';
 import 'package:todo/data/repositories/note_repository_impl.dart';
 import 'package:todo/domain/repositories/note_repository.dart';
 import 'package:todo/domain/usecases/add_note_usecase.dart';
@@ -19,15 +19,15 @@ class AppDi {
   }
 
   static void _registerDataSources() {
-    getIt.registerLazySingleton<NoteRemoteDataSource>(
-      () => const NoteRemoteDataSource(),
+    getIt.registerLazySingleton<NoteFakeDataSource>(
+      () => const NoteFakeDataSource(),
     );
   }
 
   static void _registerRepositories() {
     getIt.registerLazySingleton<NoteRepository>(
       () => NoteRepositoryImpl(
-        remoteDataSource: getIt(),
+        dataSource: getIt(),
       ),
     );
   }

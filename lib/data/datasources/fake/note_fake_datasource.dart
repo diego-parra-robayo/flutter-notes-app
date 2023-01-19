@@ -3,24 +3,34 @@ import 'package:todo/utils/uuid.dart';
 
 import 'models/note_model.dart';
 
-class NoteRemoteDataSource {
+class NoteFakeDataSource {
   final List<NoteModel> _notes;
+  final Duration delay;
 
-  const NoteRemoteDataSource({
+  const NoteFakeDataSource({
     List<NoteModel>? initialNotes,
+    this.delay = const Duration(milliseconds: 2000),
   }) : _notes = initialNotes ?? const [];
 
-  Future<List<NoteModel>> getNotes() async => _notes;
+  Future<List<NoteModel>> getNotes() async {
+    await Future.delayed(delay);
+    return _notes;
+  }
 
-  Future<NoteModel?> getNote({required String noteId}) async =>
-      _notes.firstOrNull((note) => note.id == noteId);
+  Future<NoteModel?> getNote({required String noteId}) async {
+    await Future.delayed(delay);
+    return _notes.firstOrNull((note) => note.id == noteId);
+  }
 
   Future addNote({
+    required String title,
     required String description,
   }) async {
+    await Future.delayed(delay);
     _notes.add(
       NoteModel(
         id: UUID.getUniqueId(),
+        title: title,
         description: description,
         isCompleted: false,
       ),

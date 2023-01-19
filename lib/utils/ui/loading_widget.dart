@@ -8,7 +8,7 @@ class LoadingWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.black.withOpacity(0.4),
+      color: const Color(0xffe5e5e5).withOpacity(0.25),
       alignment: Alignment.center,
       child: const CircularProgressIndicator(),
     );

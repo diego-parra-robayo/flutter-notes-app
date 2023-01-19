@@ -11,7 +11,13 @@ class AddNoteUseCase {
   });
 
   Future<Either<Failure, Unit>> call({
+    required String title,
     required String description,
   }) =>
-      repository.addNote(request: NewNoteRequest(description: description));
+      repository.addNote(
+        request: NewNoteRequest(
+          title: title,
+          description: description,
+        ),
+      );
 }
