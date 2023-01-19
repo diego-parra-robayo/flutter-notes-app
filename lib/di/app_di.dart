@@ -6,6 +6,7 @@ import 'package:todo/domain/usecases/add_note_usecase.dart';
 import 'package:todo/domain/usecases/get_note_usecase.dart';
 import 'package:todo/domain/usecases/get_notes_usecase.dart';
 import 'package:todo/domain/usecases/toggle_note_completed_state_usecase.dart';
+import 'package:todo/presentation/home/bloc/home_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -14,6 +15,7 @@ class AppDi {
     _registerDataSources();
     _registerRepositories();
     _registerUseCases();
+    _registerBlocs();
   }
 
   static void _registerDataSources() {
@@ -42,6 +44,15 @@ class AppDi {
     );
     getIt.registerFactory<ToggleNoteCompletedStateUseCase>(
       () => ToggleNoteCompletedStateUseCase(repository: getIt()),
+    );
+  }
+
+  static void _registerBlocs() {
+    getIt.registerFactory<HomeBloc>(
+      () => HomeBloc(
+        getNotesUseCase: getIt(),
+        toggleNoteCompletedStateUseCase: getIt(),
+      ),
     );
   }
 }
