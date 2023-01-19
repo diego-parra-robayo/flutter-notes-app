@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:todo/utils/list_extensions.dart';
+import 'package:todo/utils/extensions/list_extensions.dart';
 
 import '../../../domain/entities/note.dart';
 import '../../../domain/usecases/get_notes_usecase.dart';

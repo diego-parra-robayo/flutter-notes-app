@@ -16,3 +16,9 @@ class HomeState with _$HomeState {
         navState: null,
       );
 }
+
+extension HomeStateExtensions on HomeState {
+  String? get breakingMessage =>
+      errorMessage ??
+      ((notes.isEmpty && !isLoading) ? 'Notes list is empty' : null);
+}

@@ -1,4 +1,4 @@
-import 'package:todo/utils/list_extensions.dart';
+import 'package:todo/utils/extensions/list_extensions.dart';
 import 'package:todo/utils/uuid.dart';
 
 import 'models/note_model.dart';
