@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/di/app_di.dart';
 import 'package:todo/navigation/home_nav.dart';
 import 'package:todo/utils/ui/theme/ui.dart';
@@ -23,12 +21,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp.router(
       title: 'Notes App',
       theme: UI.themes.light,
-      initialRoute: HomeRoute.initialRoute.name,
-      getPages: [homeNav],
-      defaultTransition: Platform.isAndroid ? Transition.noTransition : null,
+      routerConfig: GoRouter(
+        routes: [homeNav],
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/presentation/edit_note/widgets/save_note_button.dart';
 import 'package:todo/presentation/edit_note/widgets/title_field.dart';
 import 'package:todo/utils/ui/theme/ui.dart';
@@ -13,9 +13,12 @@ import 'edit_note_loading_widget.dart';
 
 class EditNoteScreen extends StatelessWidget {
   final String? noteId;
+  final void Function()? onEditSuccess;
+
   const EditNoteScreen({
     Key? key,
     required this.noteId,
+    this.onEditSuccess,
   }) : super(key: key);
 
   @override
@@ -67,7 +70,8 @@ class EditNoteScreen extends StatelessWidget {
           case null:
             return;
           case EditNoteNavState.pop:
-            Get.back();
+            onEditSuccess?.call();
+            context.pop();
             break;
         }
         bloc.add(EditNoteNavEventHandled());

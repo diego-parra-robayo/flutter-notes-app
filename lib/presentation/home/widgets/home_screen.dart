@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/route_manager.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo/di/app_di.dart';
 import 'package:todo/navigation/home_nav.dart';
 import 'package:todo/presentation/home/bloc/home_bloc.dart';
@@ -50,16 +50,16 @@ class HomeScreen extends StatelessWidget {
         if (navState == null) {
           return;
         } else if (navState is HomeNavToAddNote) {
-          await Get.toNamed(HomeRoute.addNote.name);
-          bloc.add(HomeStarted());
-        } else if (navState is HomeNavToEditNote) {
-          final path =
-              HomeRoute.editNote.name.replaceFirst(':id', navState.noteId);
-          print(path);
-          await Get.toNamed(
-            HomeRoute.editNote.name.replaceFirst(':id', navState.noteId),
+          context.goNamed(
+            HomeRoute.addNote.name,
+            extra: {'onSuccess': () => bloc.add(HomeStarted())},
           );
-          bloc.add(HomeStarted());
+        } else if (navState is HomeNavToEditNote) {
+          context.goNamed(
+            HomeRoute.editNote.name,
+            params: {'id': navState.noteId},
+            extra: {'onSuccess': () => bloc.add(HomeStarted())},
+          );
         }
         bloc.add(HomeNavEventHandled());
       },

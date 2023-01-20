@@ -1,30 +1,39 @@
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo/presentation/edit_note/widgets/edit_note_screen.dart';
 import 'package:todo/presentation/home/widgets/home_screen.dart';
 
-import '../presentation/edit_note/widgets/edit_note_screen.dart';
-
 enum HomeRoute {
-  home(name: '/'),
-  addNote(name: '/add'),
-  editNote(name: '/edit/:id');
+  home(name: 'home'),
+  addNote(name: 'addNote'),
+  editNote(name: 'editNote');
 
   final String name;
+
   const HomeRoute({required this.name});
 
   static HomeRoute get initialRoute => HomeRoute.home;
 }
 
-final homeNav = GetPage(
+final homeNav = GoRoute(
+  path: '/',
   name: HomeRoute.home.name,
-  page: () => const HomeScreen(),
-  children: [
-    GetPage(
+  builder: (context, state) => const HomeScreen(),
+  routes: [
+    GoRoute(
+      path: 'add',
       name: HomeRoute.addNote.name,
-      page: () => const EditNoteScreen(noteId: null),
+      builder: (context, state) => EditNoteScreen(
+        noteId: null,
+        onEditSuccess: (state.extra as Map<String, dynamic>)['onSuccess'],
+      ),
     ),
-    GetPage(
+    GoRoute(
+      path: 'edit/:id',
       name: HomeRoute.editNote.name,
-      page: () => EditNoteScreen(noteId: Get.parameters['id']),
+      builder: (context, state) => EditNoteScreen(
+        noteId: state.params['id'],
+        onEditSuccess: (state.extra as Map<String, dynamic>)['onSuccess'],
+      ),
     ),
   ],
 );
