@@ -19,6 +19,7 @@ mixin _$HomeState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<Note> get notes => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  String? get popUpMessage => throw _privateConstructorUsedError;
   HomeNavState? get navState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,6 +36,7 @@ abstract class $HomeStateCopyWith<$Res> {
       {bool isLoading,
       List<Note> notes,
       String? errorMessage,
+      String? popUpMessage,
       HomeNavState? navState});
 }
 
@@ -54,6 +56,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? isLoading = null,
     Object? notes = null,
     Object? errorMessage = freezed,
+    Object? popUpMessage = freezed,
     Object? navState = freezed,
   }) {
     return _then(_value.copyWith(
@@ -68,6 +71,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      popUpMessage: freezed == popUpMessage
+          ? _value.popUpMessage
+          : popUpMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       navState: freezed == navState
           ? _value.navState
@@ -88,6 +95,7 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       {bool isLoading,
       List<Note> notes,
       String? errorMessage,
+      String? popUpMessage,
       HomeNavState? navState});
 }
 
@@ -105,6 +113,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? notes = null,
     Object? errorMessage = freezed,
+    Object? popUpMessage = freezed,
     Object? navState = freezed,
   }) {
     return _then(_$_HomeState(
@@ -119,6 +128,10 @@ class __$$_HomeStateCopyWithImpl<$Res>
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      popUpMessage: freezed == popUpMessage
+          ? _value.popUpMessage
+          : popUpMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       navState: freezed == navState
           ? _value.navState
@@ -135,6 +148,7 @@ class _$_HomeState implements _HomeState {
       {required this.isLoading,
       required final List<Note> notes,
       required this.errorMessage,
+      required this.popUpMessage,
       required this.navState})
       : _notes = notes;
 
@@ -151,11 +165,13 @@ class _$_HomeState implements _HomeState {
   @override
   final String? errorMessage;
   @override
+  final String? popUpMessage;
+  @override
   final HomeNavState? navState;
 
   @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, notes: $notes, errorMessage: $errorMessage, navState: $navState)';
+    return 'HomeState(isLoading: $isLoading, notes: $notes, errorMessage: $errorMessage, popUpMessage: $popUpMessage, navState: $navState)';
   }
 
   @override
@@ -168,13 +184,20 @@ class _$_HomeState implements _HomeState {
             const DeepCollectionEquality().equals(other._notes, _notes) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
+            (identical(other.popUpMessage, popUpMessage) ||
+                other.popUpMessage == popUpMessage) &&
             (identical(other.navState, navState) ||
                 other.navState == navState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading,
-      const DeepCollectionEquality().hash(_notes), errorMessage, navState);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      const DeepCollectionEquality().hash(_notes),
+      errorMessage,
+      popUpMessage,
+      navState);
 
   @JsonKey(ignore: true)
   @override
@@ -188,6 +211,7 @@ abstract class _HomeState implements HomeState {
       {required final bool isLoading,
       required final List<Note> notes,
       required final String? errorMessage,
+      required final String? popUpMessage,
       required final HomeNavState? navState}) = _$_HomeState;
 
   @override
@@ -196,6 +220,8 @@ abstract class _HomeState implements HomeState {
   List<Note> get notes;
   @override
   String? get errorMessage;
+  @override
+  String? get popUpMessage;
   @override
   HomeNavState? get navState;
   @override

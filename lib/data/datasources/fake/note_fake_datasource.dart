@@ -46,6 +46,12 @@ class NoteFakeDataSource {
     final updatedNote = _notes[noteIndex].copyWith(isCompleted: true);
     _notes[noteIndex] = updatedNote;
   }
+
+  Future deleteNote({
+    required String noteId,
+  }) async {
+    _notes.removeWhere((note) => note.id == noteId);
+  }
 }
 
 final _fakeNotes = [

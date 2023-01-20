@@ -11,6 +11,7 @@ final _lightTheme = ThemeData.light().copyWith(
     error: UI.colors.red,
     background: UI.colors.background,
     secondary: UI.colors.blue,
+    onSecondary: UI.colors.white,
   ),
   scaffoldBackgroundColor: UI.colors.background,
 );

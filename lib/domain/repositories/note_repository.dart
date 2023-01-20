@@ -15,4 +15,7 @@ abstract class NoteRepository {
   Future<Either<Failure, Unit>> toggleCompleted({
     required String noteId,
   });
+  Future<Either<Failure, Unit>> deleteNote({
+    required String noteId,
+  });
 }

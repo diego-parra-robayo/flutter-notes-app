@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:todo/utils/ui/snackbar.dart';
 
 import '../../../di/app_di.dart';
 import '../bloc/add_note_bloc.dart';
@@ -46,11 +47,12 @@ class AddNoteScreenWrapper extends StatelessWidget {
 
   BlocListener _getPopUpMessageListener() {
     return BlocListener<AddNoteBloc, AddNoteState>(
-      listenWhen: (previous, current) => previous.navState != current.navState,
+      listenWhen: (previous, current) =>
+          previous.popUpMessage != current.popUpMessage,
       listener: (context, state) {
         final popUpMessage = state.popUpMessage;
         if (popUpMessage == null) return;
-        Get.showSnackbar(GetSnackBar(title: popUpMessage));
+        showSnackBar(context, message: popUpMessage);
         context.read<AddNoteBloc>().add(AddNotePopUpMessageShown());
       },
     );

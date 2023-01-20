@@ -3,6 +3,7 @@ import 'package:todo/data/datasources/fake/note_fake_datasource.dart';
 import 'package:todo/data/repositories/note_repository_impl.dart';
 import 'package:todo/domain/repositories/note_repository.dart';
 import 'package:todo/domain/usecases/add_note_usecase.dart';
+import 'package:todo/domain/usecases/delete_note_usecase.dart';
 import 'package:todo/domain/usecases/get_note_usecase.dart';
 import 'package:todo/domain/usecases/get_notes_usecase.dart';
 import 'package:todo/domain/usecases/toggle_note_completed_state_usecase.dart';
@@ -46,6 +47,9 @@ class AppDi {
     getIt.registerFactory<ToggleNoteCompletedStateUseCase>(
       () => ToggleNoteCompletedStateUseCase(repository: getIt()),
     );
+    getIt.registerFactory<DeleteNoteUseCase>(
+      () => DeleteNoteUseCase(repository: getIt()),
+    );
   }
 
   static void _registerBlocs() {
@@ -53,6 +57,7 @@ class AppDi {
       () => HomeBloc(
         getNotesUseCase: getIt(),
         toggleNoteCompletedStateUseCase: getIt(),
+        deleteNoteUseCase: getIt(),
       ),
     );
     getIt.registerFactory<AddNoteBloc>(

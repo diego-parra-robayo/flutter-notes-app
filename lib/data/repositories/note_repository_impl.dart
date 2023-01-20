@@ -29,7 +29,9 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<Either<Failure, Note>> getNote({required String noteId}) async {
+  Future<Either<Failure, Note>> getNote({
+    required String noteId,
+  }) async {
     try {
       final noteModel = await dataSource.getNote(noteId: noteId);
       if (noteModel != null) {
@@ -53,10 +55,23 @@ class NoteRepositoryImpl implements NoteRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> toggleCompleted(
-      {required String noteId}) async {
+  Future<Either<Failure, Unit>> toggleCompleted({
+    required String noteId,
+  }) async {
     try {
       await dataSource.toggleCompleted(noteId: noteId);
+      return const Right(unit);
+    } on Exception catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> deleteNote({
+    required String noteId,
+  }) async {
+    try {
+      await dataSource.deleteNote(noteId: noteId);
       return const Right(unit);
     } on Exception catch (e) {
       return Left(ApiFailure(e.toString()));

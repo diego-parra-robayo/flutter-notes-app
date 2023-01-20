@@ -13,4 +13,11 @@ class HomeToggleCompletedPressed extends HomeEvent {
   });
 }
 
+class HomeDeleteNotePressed extends HomeEvent {
+  final String noteId;
+  HomeDeleteNotePressed(this.noteId);
+}
+
 class HomeNavEventHandled extends HomeEvent {}
+
+class HomePopUpMessageShown extends HomeEvent {}

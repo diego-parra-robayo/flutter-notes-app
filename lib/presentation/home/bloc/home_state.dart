@@ -6,6 +6,7 @@ class HomeState with _$HomeState {
     required bool isLoading,
     required List<Note> notes,
     required String? errorMessage,
+    required String? popUpMessage,
     required HomeNavState? navState,
   }) = _HomeState;
 
@@ -13,6 +14,7 @@ class HomeState with _$HomeState {
         isLoading: false,
         notes: [],
         errorMessage: null,
+        popUpMessage: null,
         navState: null,
       );
 }
