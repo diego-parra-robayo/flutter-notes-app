@@ -1,16 +1,17 @@
 import 'package:dartz/dartz.dart';
-import 'package:todo/data/datasources/remote/mappers/note_model_mappers.dart';
-import 'package:todo/data/datasources/remote/note_remote_datasource.dart';
+import 'package:todo/data/datasources/fake/mappers/note_model_mappers.dart';
+import 'package:todo/data/datasources/fake/note_fake_datasource.dart';
 import 'package:todo/domain/entities/new_note_request.dart';
 import 'package:todo/domain/entities/note.dart';
-import 'package:todo/domain/entities/update_note_request.dart';
 import 'package:todo/domain/repositories/note_repository.dart';
 import 'package:todo/utils/failure.dart';
 
-class NoteRepositoryImpl implements NoteRepository {
-  final NoteRemoteDatasource dataSource;
+import '../../domain/entities/update_note_request.dart';
 
-  const NoteRepositoryImpl({
+class NoteRepositoryFake implements NoteRepository {
+  final NoteFakeDataSource dataSource;
+
+  const NoteRepositoryFake({
     required this.dataSource,
   });
 
