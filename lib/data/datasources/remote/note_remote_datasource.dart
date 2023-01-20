@@ -15,7 +15,12 @@ class NoteRemoteDatasource {
   }
 
   Future<List<NoteModel>> getNotes() async {
-    final querySnapshot = await notesRef.get();
+    final querySnapshot = await notesRef
+        .orderBy(
+          'createdAt',
+          descending: false,
+        )
+        .get();
     return querySnapshot.docs.map((doc) => doc.data() as NoteModel).toList();
   }
 
@@ -33,6 +38,7 @@ class NoteRemoteDatasource {
           title: title,
           description: description,
           isCompleted: false,
+          createdAt: FieldValue.serverTimestamp(),
         ),
       );
 

@@ -10,12 +10,16 @@ class NoteModel extends Equatable {
   final String? title;
   final String? description;
   final bool? isCompleted;
+  final dynamic createdAt;
+  final dynamic updatedAt;
 
   const NoteModel({
     this.id,
     this.title,
     this.description,
     this.isCompleted,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory NoteModel.fromJson(Map<String, dynamic> json) =>

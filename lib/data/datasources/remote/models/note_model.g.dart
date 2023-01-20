@@ -11,6 +11,8 @@ NoteModel _$NoteModelFromJson(Map<String, dynamic> json) => NoteModel(
       title: json['title'] as String?,
       description: json['description'] as String?,
       isCompleted: json['isCompleted'] as bool?,
+      createdAt: json['createdAt'],
+      updatedAt: json['updatedAt'],
     );
 
 Map<String, dynamic> _$NoteModelToJson(NoteModel instance) {
@@ -26,5 +28,7 @@ Map<String, dynamic> _$NoteModelToJson(NoteModel instance) {
   writeNotNull('title', instance.title);
   writeNotNull('description', instance.description);
   writeNotNull('isCompleted', instance.isCompleted);
+  writeNotNull('createdAt', instance.createdAt);
+  writeNotNull('updatedAt', instance.updatedAt);
   return val;
 }
