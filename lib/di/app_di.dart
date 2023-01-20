@@ -7,7 +7,8 @@ import 'package:todo/domain/usecases/delete_note_usecase.dart';
 import 'package:todo/domain/usecases/get_note_usecase.dart';
 import 'package:todo/domain/usecases/get_notes_usecase.dart';
 import 'package:todo/domain/usecases/toggle_note_completed_state_usecase.dart';
-import 'package:todo/presentation/add_note/bloc/add_note_bloc.dart';
+import 'package:todo/domain/usecases/update_note_usecase.dart';
+import 'package:todo/presentation/edit_note/bloc/edit_note_bloc.dart';
 import 'package:todo/presentation/home/bloc/home_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
@@ -38,6 +39,9 @@ class AppDi {
     getIt.registerFactory<AddNoteUseCase>(
       () => AddNoteUseCase(repository: getIt()),
     );
+    getIt.registerFactory<UpdateNoteUseCase>(
+      () => UpdateNoteUseCase(repository: getIt()),
+    );
     getIt.registerFactory<GetNoteUseCase>(
       () => GetNoteUseCase(repository: getIt()),
     );
@@ -60,8 +64,12 @@ class AppDi {
         deleteNoteUseCase: getIt(),
       ),
     );
-    getIt.registerFactory<AddNoteBloc>(
-      () => AddNoteBloc(addNoteUseCase: getIt()),
+    getIt.registerFactory<EditNoteBloc>(
+      () => EditNoteBloc(
+        getNoteUseCase: getIt(),
+        addNoteUseCase: getIt(),
+        updateNoteUseCase: getIt(),
+      ),
     );
   }
 }

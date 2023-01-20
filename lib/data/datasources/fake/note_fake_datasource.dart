@@ -1,5 +1,4 @@
 import 'package:todo/utils/extensions/list_extensions.dart';
-import 'package:todo/utils/uuid.dart';
 
 import 'models/note_model.dart';
 
@@ -9,7 +8,7 @@ class NoteFakeDataSource {
 
   NoteFakeDataSource({
     List<NoteModel>? initialNotes,
-    this.delay = const Duration(milliseconds: 2000),
+    this.delay = const Duration(milliseconds: 1000),
   }) : _notes = initialNotes ?? _fakeNotes;
 
   Future<List<NoteModel>> getNotes() async {
@@ -27,14 +26,29 @@ class NoteFakeDataSource {
     required String description,
   }) async {
     await Future.delayed(delay);
-    _notes.add(
-      NoteModel(
-        id: UUID.getUniqueId(),
-        title: title,
-        description: description,
-        isCompleted: false,
-      ),
+    final noteModel = NoteModel(
+      id: _notes.length.toString(),
+      title: title,
+      description: description,
+      isCompleted: false,
     );
+    _notes.add(noteModel);
+  }
+
+  Future updateNote({
+    required String noteId,
+    required String title,
+    required String description,
+  }) async {
+    await Future.delayed(delay);
+    final noteIndex = _notes.indexWhere((note) => note.id == noteId);
+    if (noteIndex == -1) return;
+
+    final updatedNote = _notes[noteIndex].copyWith(
+      title: title,
+      description: description,
+    );
+    _notes[noteIndex] = updatedNote;
   }
 
   Future toggleCompleted({
@@ -56,18 +70,18 @@ class NoteFakeDataSource {
 
 final _fakeNotes = [
   const NoteModel(
-      id: '1',
+      id: '0',
       title: 'Complete Flutter app',
       description: '(No description)',
       isCompleted: false),
   const NoteModel(
-    id: '2',
+    id: '1',
     title: 'Pay credit card',
     description: 'Bank',
     isCompleted: false,
   ),
   const NoteModel(
-    id: '3',
+    id: '2',
     title: 'Buy groceries',
     description: 'Milk, eggs, ...',
     isCompleted: false,

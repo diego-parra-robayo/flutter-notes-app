@@ -1,3 +1,10 @@
 part of 'home_bloc.dart';
 
-enum HomeNavState { add }
+abstract class HomeNavState {}
+
+class HomeNavToAddNote extends HomeNavState {}
+
+class HomeNavToEditNote extends HomeNavState {
+  final String noteId;
+  HomeNavToEditNote({required this.noteId});
+}

@@ -1,29 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:todo/utils/ui/theme/ui.dart';
 
 import '../../../domain/entities/note.dart';
 
 class NoteWidget extends StatelessWidget {
   final Note note;
-  final void Function(bool?) onCompletedChanged;
+  final void Function(bool?) onCheckChanged;
+  final void Function(String id) onPressed;
 
   const NoteWidget({
     Key? key,
     required this.note,
-    required this.onCompletedChanged,
+    required this.onCheckChanged,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      controlAffinity: ListTileControlAffinity.leading,
-      title: Text(
-        note.title,
-        style: Theme.of(context).textTheme.subtitle1?.copyWith(
-            decoration: note.isCompleted ? TextDecoration.lineThrough : null),
+    final textTheme = Theme.of(context).textTheme;
+    return InkWell(
+      onTap: () => onPressed(note.id),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: UI.dimens.d16,
+          horizontal: UI.dimens.d8,
+        ),
+        child: Row(
+          children: [
+            Checkbox(value: note.isCompleted, onChanged: onCheckChanged),
+            SizedBox(width: UI.dimens.d8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    note.title,
+                    style: textTheme.subtitle1?.copyWith(
+                        decoration: note.isCompleted
+                            ? TextDecoration.lineThrough
+                            : null),
+                  ),
+                  SizedBox(height: UI.dimens.d8),
+                  Text(
+                    note.description,
+                    style: textTheme.bodyText2
+                        ?.copyWith(fontWeight: FontWeight.w300),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      subtitle: Text(note.description),
-      value: note.isCompleted,
-      onChanged: onCompletedChanged,
     );
   }
 }

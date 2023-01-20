@@ -6,6 +6,11 @@ class HomeStarted extends HomeEvent {}
 
 class HomeAddNotePressed extends HomeEvent {}
 
+class HomeNotePressed extends HomeEvent {
+  final String noteId;
+  HomeNotePressed(this.noteId);
+}
+
 class HomeToggleCompletedPressed extends HomeEvent {
   final String noteId;
   HomeToggleCompletedPressed({

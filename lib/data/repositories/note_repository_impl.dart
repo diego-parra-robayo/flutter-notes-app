@@ -6,6 +6,8 @@ import 'package:todo/domain/entities/note.dart';
 import 'package:todo/domain/repositories/note_repository.dart';
 import 'package:todo/utils/failure.dart';
 
+import '../../domain/entities/update_note_request.dart';
+
 class NoteRepositoryImpl implements NoteRepository {
   final NoteFakeDataSource dataSource;
 
@@ -19,6 +21,22 @@ class NoteRepositoryImpl implements NoteRepository {
   }) async {
     try {
       await dataSource.addNote(
+        title: request.title,
+        description: request.description,
+      );
+      return const Right(unit);
+    } on Exception catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateNote({
+    required UpdateNoteRequest request,
+  }) async {
+    try {
+      await dataSource.updateNote(
+        noteId: request.noteId,
         title: request.title,
         description: request.description,
       );

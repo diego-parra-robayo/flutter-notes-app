@@ -36,11 +36,9 @@ class HomeNotesList extends StatelessWidget {
                 ),
                 child: NoteWidget(
                   note: note,
-                  onCompletedChanged: (_) =>
-                      _dispatchToggleCompletedStatePressed(
-                    context,
-                    note.id,
-                  ),
+                  onCheckChanged: (_) =>
+                      _dispatchToggleCompletedStatePressed(context, note.id),
+                  onPressed: (_) => _dispatchNotePressed(context, note.id),
                 ),
               );
             },
@@ -71,4 +69,7 @@ class HomeNotesList extends StatelessWidget {
 
   void _dispatchDeleteNote(BuildContext context, String id) =>
       context.read<HomeBloc>().add(HomeDeleteNotePressed(id));
+
+  void _dispatchNotePressed(BuildContext context, String id) =>
+      context.read<HomeBloc>().add(HomeNotePressed(id));
 }

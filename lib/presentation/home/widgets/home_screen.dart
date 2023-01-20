@@ -47,13 +47,19 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) async {
         final bloc = context.read<HomeBloc>();
         final navState = state.navState;
-        switch (navState) {
-          case null:
-            return;
-          case HomeNavState.add:
-            await Get.toNamed(HomeRoute.addNote.name);
-            bloc.add(HomeStarted());
-            break;
+        if (navState == null) {
+          return;
+        } else if (navState is HomeNavToAddNote) {
+          await Get.toNamed(HomeRoute.addNote.name);
+          bloc.add(HomeStarted());
+        } else if (navState is HomeNavToEditNote) {
+          final path =
+              HomeRoute.editNote.name.replaceFirst(':id', navState.noteId);
+          print(path);
+          await Get.toNamed(
+            HomeRoute.editNote.name.replaceFirst(':id', navState.noteId),
+          );
+          bloc.add(HomeStarted());
         }
         bloc.add(HomeNavEventHandled());
       },

@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
-import 'package:todo/presentation/add_note/widgets/add_note_screen.dart';
 import 'package:todo/presentation/home/widgets/home_screen.dart';
+
+import '../presentation/edit_note/widgets/edit_note_screen.dart';
 
 enum HomeRoute {
   home(name: '/'),
-  addNote(name: '/add');
+  addNote(name: '/add'),
+  editNote(name: '/edit/:id');
 
   final String name;
   const HomeRoute({required this.name});
@@ -18,7 +20,11 @@ final homeNav = GetPage(
   children: [
     GetPage(
       name: HomeRoute.addNote.name,
-      page: () => const AddNoteScreen(),
-    )
+      page: () => const EditNoteScreen(noteId: null),
+    ),
+    GetPage(
+      name: HomeRoute.editNote.name,
+      page: () => EditNoteScreen(noteId: Get.parameters['id']),
+    ),
   ],
 );

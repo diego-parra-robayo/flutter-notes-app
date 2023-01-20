@@ -46,7 +46,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _onButtonPressed() {
     on<HomeAddNotePressed>((event, emit) async {
-      emit(state.copyWith(navState: HomeNavState.add));
+      emit(state.copyWith(navState: HomeNavToAddNote()));
+    });
+    on<HomeNotePressed>((event, emit) async {
+      emit(state.copyWith(navState: HomeNavToEditNote(noteId: event.noteId)));
     });
     on<HomeToggleCompletedPressed>((event, emit) async {
       emit(state.copyWith(isLoading: true));
