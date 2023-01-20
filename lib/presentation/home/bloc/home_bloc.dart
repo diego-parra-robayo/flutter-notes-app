@@ -53,8 +53,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
     on<HomeToggleCompletedPressed>((event, emit) async {
       emit(state.copyWith(isLoading: true));
+      final currentList = state.notes;
+      final note = currentList.firstOrNull((note) => note.id == event.noteId);
+      if (note == null) return;
       final updateOrFailure = await toggleNoteCompletedStateUseCase(
         noteId: event.noteId,
+        newState: !note.isCompleted,
       );
       updateOrFailure.fold(
         (failure) => emit(state.copyWith(
@@ -62,7 +66,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           errorMessage: failure.message,
         )),
         (_) {
-          final currentList = state.notes;
           final updatedList = currentList.findAndReplace(
             find: (note) => note.id == event.noteId,
             replace: (note) => note.copyWith(isCompleted: !note.isCompleted),

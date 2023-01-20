@@ -12,6 +12,7 @@ class ToggleNoteCompletedStateUseCase {
 
   Future<Either<Failure, Unit>> call({
     required String noteId,
+    required bool newState,
   }) =>
-      repository.toggleCompleted(noteId: noteId);
+      repository.toggleCompleted(noteId: noteId, newState: newState);
 }

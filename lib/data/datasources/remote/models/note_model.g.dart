@@ -7,15 +7,24 @@ part of 'note_model.dart';
 // **************************************************************************
 
 NoteModel _$NoteModelFromJson(Map<String, dynamic> json) => NoteModel(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
       isCompleted: json['isCompleted'] as bool?,
     );
 
-Map<String, dynamic> _$NoteModelToJson(NoteModel instance) => <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'description': instance.description,
-      'isCompleted': instance.isCompleted,
-    };
+Map<String, dynamic> _$NoteModelToJson(NoteModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('title', instance.title);
+  writeNotNull('description', instance.description);
+  writeNotNull('isCompleted', instance.isCompleted);
+  return val;
+}

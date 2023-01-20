@@ -20,33 +20,43 @@ class NoteRemoteDatasource {
   }
 
   Future<NoteModel?> getNote({required String noteId}) async {
-    throw UnimplementedError();
+    final docSnapshot = await notesRef.doc(noteId).get();
+    return docSnapshot.data() as NoteModel?;
   }
 
   Future addNote({
     required String title,
     required String description,
-  }) async {
-    throw UnimplementedError();
-  }
+  }) =>
+      notesRef.add(
+        NoteModel(
+          title: title,
+          description: description,
+          isCompleted: false,
+        ),
+      );
 
   Future updateNote({
     required String noteId,
     required String title,
     required String description,
-  }) async {
-    throw UnimplementedError();
-  }
+  }) =>
+      notesRef.doc(noteId).set(
+            NoteModel(title: title, description: description),
+            SetOptions(merge: true),
+          );
 
   Future toggleCompleted({
     required String noteId,
-  }) async {
-    throw UnimplementedError();
-  }
+    required bool newState,
+  }) =>
+      notesRef.doc(noteId).set(
+            NoteModel(isCompleted: newState),
+            SetOptions(merge: true),
+          );
 
   Future deleteNote({
     required String noteId,
-  }) async {
-    throw UnimplementedError();
-  }
+  }) =>
+      notesRef.doc(noteId).delete();
 }

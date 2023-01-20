@@ -75,9 +75,10 @@ class NoteRepositoryFake implements NoteRepository {
   @override
   Future<Either<Failure, Unit>> toggleCompleted({
     required String noteId,
+    required bool newState,
   }) async {
     try {
-      await dataSource.toggleCompleted(noteId: noteId);
+      await dataSource.toggleCompleted(noteId: noteId, newState: newState);
       return const Right(unit);
     } catch (e) {
       return Left(ApiFailure(e.toString()));

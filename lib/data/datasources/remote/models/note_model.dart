@@ -4,18 +4,18 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'note_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class NoteModel extends Equatable {
-  final String id;
+  final String? id;
   final String? title;
   final String? description;
   final bool? isCompleted;
 
   const NoteModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.isCompleted,
+    this.id,
+    this.title,
+    this.description,
+    this.isCompleted,
   });
 
   factory NoteModel.fromJson(Map<String, dynamic> json) =>
@@ -32,7 +32,10 @@ class NoteModel extends Equatable {
         'id': snapshot.id,
       });
 
-  Map<String, dynamic> toFirestore(SetOptions? options) => toJson();
+  Map<String, dynamic> toFirestore(SetOptions? options) => {
+        'updatedAt': FieldValue.serverTimestamp(),
+        ...toJson(),
+      };
 
   NoteModel copyWith({
     String? id,

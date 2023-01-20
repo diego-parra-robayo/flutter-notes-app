@@ -53,11 +53,12 @@ class NoteFakeDataSource {
 
   Future toggleCompleted({
     required String noteId,
+    required bool newState,
   }) async {
     final noteIndex = _notes.indexWhere((note) => note.id == noteId);
     if (noteIndex == -1) return;
 
-    final updatedNote = _notes[noteIndex].copyWith(isCompleted: true);
+    final updatedNote = _notes[noteIndex].copyWith(isCompleted: newState);
     _notes[noteIndex] = updatedNote;
   }
 
