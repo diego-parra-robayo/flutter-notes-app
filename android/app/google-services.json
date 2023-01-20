@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "149746484230",
+    "project_id": "notes-app-e6070",
+    "storage_bucket": "notes-app-e6070.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149746484230:android:113c0e9eef0ee91cbdaf87",
+        "android_client_info": {
+          "package_name": "com.wizeline.todo.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149746484230-44kvvdvu5e74lh7pvrcr0r07cotftsoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJwcBYPN067RUDFetK36dl59DiE7PV8mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149746484230-44kvvdvu5e74lh7pvrcr0r07cotftsoj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "149746484230-i5kk81i29vol9ei1tbbc777fve5iaajl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wizeline.todo.todo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

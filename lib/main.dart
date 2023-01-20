@@ -1,12 +1,19 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/di/app_di.dart';
 import 'package:todo/navigation/home_nav.dart';
 import 'package:todo/utils/ui/theme/ui.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   AppDi.init();
   runApp(const MyApp());
 }
