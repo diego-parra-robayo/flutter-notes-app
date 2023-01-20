@@ -15,10 +15,15 @@ class NoteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
+      controlAffinity: ListTileControlAffinity.leading,
+      title: Text(
+        note.title,
+        style: Theme.of(context).textTheme.subtitle1?.copyWith(
+            decoration: note.isCompleted ? TextDecoration.lineThrough : null),
+      ),
+      subtitle: Text(note.description),
       value: note.isCompleted,
       onChanged: onCompletedChanged,
-      title: Text(note.title),
-      subtitle: Text(note.description),
     );
   }
 }

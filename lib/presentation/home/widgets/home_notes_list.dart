@@ -12,7 +12,7 @@ class HomeNotesList extends StatelessWidget {
         buildWhen: (previous, current) => previous.notes != current.notes,
         builder: (context, state) {
           final notes = state.notes;
-          return ListView.builder(
+          return ListView.separated(
             itemCount: notes.length,
             itemBuilder: (context, index) {
               final note = notes[index];
@@ -24,6 +24,7 @@ class HomeNotesList extends StatelessWidget {
                 ),
               );
             },
+            separatorBuilder: (_, __) => const Divider(),
           );
         });
   }

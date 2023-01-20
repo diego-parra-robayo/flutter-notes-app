@@ -10,7 +10,7 @@ class NoteFakeDataSource {
   NoteFakeDataSource({
     List<NoteModel>? initialNotes,
     this.delay = const Duration(milliseconds: 2000),
-  }) : _notes = initialNotes ?? [];
+  }) : _notes = initialNotes ?? _fakeNotes;
 
   Future<List<NoteModel>> getNotes() async {
     await Future.delayed(delay);
@@ -47,3 +47,23 @@ class NoteFakeDataSource {
     _notes[noteIndex] = updatedNote;
   }
 }
+
+final _fakeNotes = [
+  const NoteModel(
+      id: '1',
+      title: 'Complete Flutter app',
+      description: '(No description)',
+      isCompleted: false),
+  const NoteModel(
+    id: '2',
+    title: 'Pay credit card',
+    description: 'Bank',
+    isCompleted: false,
+  ),
+  const NoteModel(
+    id: '3',
+    title: 'Buy groceries',
+    description: 'Milk, eggs, ...',
+    isCompleted: false,
+  ),
+];
