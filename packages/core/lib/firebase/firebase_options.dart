@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '149746484230',
     projectId: 'notes-app-e6070',
     storageBucket: 'notes-app-e6070.appspot.com',
-    iosClientId: '149746484230-i5kk81i29vol9ei1tbbc777fve5iaajl.apps.googleusercontent.com',
+    iosClientId:
+        '149746484230-i5kk81i29vol9ei1tbbc777fve5iaajl.apps.googleusercontent.com',
     iosBundleId: 'com.wizeline.todo.todo',
   );
 }
