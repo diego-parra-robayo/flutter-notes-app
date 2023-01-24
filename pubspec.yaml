@@ -1,5 +1,5 @@
 name: todo
-description: A new Flutter project.
+description: Main package handling todo app.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -9,18 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  dartz: ^0.10.1
-  get_it: ^7.2.0
-  go_router: ^6.0.1
-  flutter_bloc: ^8.1.1
-  freezed_annotation: ^2.2.0
-  equatable: ^2.0.5
+  core:
+    path: packages/core
+  ui:
+    path: packages/ui
+  notes:
+    path: packages/notes
 
   cupertino_icons: ^1.0.2
   firebase_core: ^2.4.1
-  cloud_firestore: ^4.3.1
-  json_serializable: ^6.6.0
+  go_router: ^6.0.1
 
 dev_dependencies:
   flutter_test:
