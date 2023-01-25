@@ -1,6 +1,6 @@
 import 'package:core/failures/failure.dart';
 import 'package:core/shared_entities/note.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:notes/data/datasources/fake/mappers/note_model_mappers.dart';
 
 import '../../domain/entities/new_note_request.dart';

@@ -1,5 +1,5 @@
 import 'package:core/failures/failure.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../entities/update_note_request.dart';
 import '../repositories/note_repository.dart';

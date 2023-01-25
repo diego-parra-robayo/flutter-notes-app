@@ -1,6 +1,6 @@
 import 'package:core/failures/failure.dart';
 import 'package:core/shared_entities/note.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 
 import '../repositories/note_repository.dart';
 
