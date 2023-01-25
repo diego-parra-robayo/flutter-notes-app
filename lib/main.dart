@@ -1,9 +1,8 @@
 import 'package:core/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:notes/navigation/home_nav.dart';
-import 'package:todo/di/app_di.dart';
+import 'package:todo/app_di.dart';
+import 'package:todo/app_nav.dart';
 import 'package:ui/l10n/app_localizations.dart';
 import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
@@ -27,9 +26,7 @@ class MyApp extends StatelessWidget {
       theme: UI.themes.light,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      routerConfig: GoRouter(
-        routes: [homeNav],
-      ),
+      routerConfig: mainNav,
     );
   }
 }
