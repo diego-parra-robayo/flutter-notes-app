@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/l10n/app_localizations_extensions.dart';
 
 void showConfirmDialog(
   BuildContext context, {
@@ -26,8 +27,8 @@ void showConfirmDialog(
         dismissDialogWithResult(false);
       },
       child: Text(
-        cancelText ?? 'Cancel',
-        style: textTheme.button?.copyWith(color: colorTheme.error),
+        cancelText ?? context.l10n.cancel,
+        style: textTheme.labelLarge?.copyWith(color: colorTheme.error),
       ),
     ),
     TextButton(
@@ -36,8 +37,8 @@ void showConfirmDialog(
         dismissDialogWithResult(true);
       },
       child: Text(
-        confirmText ?? 'Confirm',
-        style: textTheme.button?.copyWith(color: colorTheme.primary),
+        confirmText ?? context.l10n.confirm,
+        style: textTheme.labelLarge?.copyWith(color: colorTheme.primary),
       ),
     ),
   ];

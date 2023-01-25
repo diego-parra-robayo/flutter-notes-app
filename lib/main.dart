@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/navigation/home_nav.dart';
 import 'package:todo/di/app_di.dart';
+import 'package:ui/l10n/app_localizations.dart';
+import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 void main() async {
@@ -21,8 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Notes App',
+      onGenerateTitle: (context) => context.l10n.appName,
       theme: UI.themes.light,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: GoRouter(
         routes: [homeNav],
       ),

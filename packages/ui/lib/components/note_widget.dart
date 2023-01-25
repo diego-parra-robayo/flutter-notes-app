@@ -35,7 +35,7 @@ class NoteWidget extends StatelessWidget {
                 children: [
                   Text(
                     note.title,
-                    style: textTheme.subtitle1?.copyWith(
+                    style: textTheme.titleMedium?.copyWith(
                         decoration: note.isCompleted
                             ? TextDecoration.lineThrough
                             : null),
@@ -43,7 +43,7 @@ class NoteWidget extends StatelessWidget {
                   SizedBox(height: UI.dimens.d8),
                   Text(
                     note.description,
-                    style: textTheme.bodyText2
+                    style: textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w300),
                   ),
                 ],

@@ -1,0 +1,12 @@
+{
+  "appName": "Notas",
+  "save": "Guardar",
+  "confirm": "Confirmar",
+  "cancel": "Cancelar",
+
+  "createNoteTitle": "Crear una nota",
+  "editNoteTitle": "Editar nota",
+  "title": "Título",
+  "description": "Descripción",
+  "deleteNoteConfirmation": "¿Seguro deseas eliminar esta nota?"
+}

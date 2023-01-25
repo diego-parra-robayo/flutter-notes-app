@@ -29,7 +29,6 @@ class CustomTextField extends StatefulWidget {
   final int? minLines;
   final bool expands;
   final bool readOnly;
-  final ToolbarOptions toolbarOptions;
   final bool? showCursor;
   final int? maxLength;
   final MaxLengthEnforcement? maxLengthEnforcement;
@@ -77,7 +76,6 @@ class CustomTextField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    ToolbarOptions? toolbarOptions,
     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
@@ -125,31 +123,7 @@ class CustomTextField extends StatefulWidget {
         keyboardType = keyboardType ??
             (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
         enableInteractiveSelection =
-            enableInteractiveSelection ?? (!readOnly || !obscureText),
-        toolbarOptions = toolbarOptions ??
-            (obscureText
-                ? (readOnly
-                    // No point in even offering "Select All" in a read-only obscured
-                    // field.
-                    ? const ToolbarOptions()
-                    // Writable, but obscured.
-                    : const ToolbarOptions(
-                        selectAll: true,
-                        paste: true,
-                      ))
-                : (readOnly
-                    // Read-only, not obscured.
-                    ? const ToolbarOptions(
-                        selectAll: true,
-                        copy: true,
-                      )
-                    // Writable, not obscured.
-                    : const ToolbarOptions(
-                        copy: true,
-                        cut: true,
-                        selectAll: true,
-                        paste: true,
-                      )));
+            enableInteractiveSelection ?? (!readOnly || !obscureText);
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -189,7 +163,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textAlignVertical: widget.textAlignVertical,
       textDirection: widget.textDirection,
       readOnly: widget.readOnly,
-      toolbarOptions: widget.toolbarOptions,
       showCursor: widget.showCursor,
       autofocus: widget.autofocus,
       obscuringCharacter: widget.obscuringCharacter,

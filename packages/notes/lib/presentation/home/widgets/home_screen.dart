@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ui/extensions/snackbar.dart';
+import 'package:ui/l10n/app_localizations_extensions.dart';
 
 import '../../../navigation/home_nav.dart';
 import '../bloc/home_bloc.dart';
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           _getPopUpMessageListener(),
         ],
         child: Scaffold(
-          appBar: AppBar(title: const Text("Notes App")),
+          appBar: AppBar(title: Text(context.l10n.appName)),
           body: Stack(
             children: [
               const HomeLoadingWidget(),

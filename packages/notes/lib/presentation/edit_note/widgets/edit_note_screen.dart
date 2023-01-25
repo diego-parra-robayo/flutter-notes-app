@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:notes/presentation/edit_note/widgets/save_note_button.dart';
 import 'package:notes/presentation/edit_note/widgets/title_field.dart';
 import 'package:ui/extensions/snackbar.dart';
+import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 import '../bloc/edit_note_bloc.dart';
@@ -34,7 +35,7 @@ class EditNoteScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              noteId == null ? 'Create new note' : 'Edit note',
+              noteId == null ? context.l10n.createNoteTitle : context.l10n.editNoteTitle,
             ),
           ),
           body: Stack(
