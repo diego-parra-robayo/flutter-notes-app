@@ -9,8 +9,8 @@ import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 import '../bloc/edit_note_bloc.dart';
-import 'description_field.dart';
-import 'edit_note_loading_widget.dart';
+import '../widgets/description_field.dart';
+import '../widgets/edit_note_loading_widget.dart';
 
 class EditNoteScreen extends StatelessWidget {
   final String? noteId;

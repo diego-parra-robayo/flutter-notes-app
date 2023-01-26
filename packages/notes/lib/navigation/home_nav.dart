@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../presentation/edit_note/widgets/edit_note_screen.dart';
-import '../presentation/home/widgets/home_screen.dart';
+import '../presentation/edit_note/screens/edit_note_screen.dart';
+import '../presentation/home/screens/home_screen.dart';
 
 enum HomeRoute {
   home(name: 'home'),

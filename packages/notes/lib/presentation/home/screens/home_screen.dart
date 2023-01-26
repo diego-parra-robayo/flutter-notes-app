@@ -7,9 +7,9 @@ import 'package:ui/l10n/app_localizations_extensions.dart';
 
 import '../../../navigation/home_nav.dart';
 import '../bloc/home_bloc.dart';
-import 'home_add_button.dart';
-import 'home_loading_widget.dart';
-import 'home_notes_list.dart';
+import '../widgets/home_add_button.dart';
+import '../widgets/home_loading_widget.dart';
+import '../widgets/home_notes_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
