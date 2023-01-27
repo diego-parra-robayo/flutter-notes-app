@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../presentation/edit_note/screens/edit_note_screen.dart';
-import '../presentation/home/screens/home_screen.dart';
+import '../presentation/screens/edit_note_screen.dart';
+import '../presentation/screens/home_screen.dart';
 
 enum HomeRoute {
   home(name: 'home'),
@@ -23,18 +23,12 @@ final homeNav = GoRoute(
     GoRoute(
       path: 'add',
       name: HomeRoute.addNote.name,
-      builder: (context, state) => EditNoteScreen(
-        noteId: null,
-        onEditSuccess: (state.extra as Map<String, dynamic>)['onSuccess'],
-      ),
+      builder: (context, state) => const EditNoteScreen(noteId: null),
     ),
     GoRoute(
       path: 'edit/:id',
       name: HomeRoute.editNote.name,
-      builder: (context, state) => EditNoteScreen(
-        noteId: state.params['id'],
-        onEditSuccess: (state.extra as Map<String, dynamic>)['onSuccess'],
-      ),
+      builder: (context, state) => EditNoteScreen(noteId: state.params['id']),
     ),
   ],
 );

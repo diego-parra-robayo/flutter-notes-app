@@ -1,6 +1,11 @@
 import 'package:core/extensions/list_extensions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'models/note_model.dart';
+
+final noteFakeDataSourceProvider = Provider(
+      (ref) => NoteFakeDataSource(),
+);
 
 class NoteFakeDataSource {
   final List<NoteModel> _notes;
@@ -21,7 +26,7 @@ class NoteFakeDataSource {
     return _notes.firstOrNull((note) => note.id == noteId);
   }
 
-  Future addNote({
+  Future<String> addNote({
     required String title,
     required String description,
   }) async {
@@ -33,6 +38,7 @@ class NoteFakeDataSource {
       isCompleted: false,
     );
     _notes.add(noteModel);
+    return noteModel.id;
   }
 
   Future updateNote({

@@ -1,6 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'firestoreProvider.dart';
 import 'models/note_model.dart';
+
+final noteRemoteDataSourceProvider = Provider(
+  (ref) => NoteRemoteDatasource(database: ref.read(firestoreProvider)),
+);
 
 class NoteRemoteDatasource {
   late final CollectionReference notesRef;
@@ -29,18 +35,20 @@ class NoteRemoteDatasource {
     return docSnapshot.data() as NoteModel?;
   }
 
-  Future addNote({
+  Future<String> addNote({
     required String title,
     required String description,
-  }) =>
-      notesRef.add(
-        NoteModel(
-          title: title,
-          description: description,
-          isCompleted: false,
-          createdAt: FieldValue.serverTimestamp(),
-        ),
-      );
+  }) async {
+    final addedResult = await notesRef.add(
+      NoteModel(
+        title: title,
+        description: description,
+        isCompleted: false,
+        createdAt: FieldValue.serverTimestamp(),
+      ),
+    );
+    return addedResult.id;
+  }
 
   Future updateNote({
     required String noteId,

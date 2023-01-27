@@ -10,7 +10,7 @@ class LoadingWidget extends StatelessWidget {
       height: double.infinity,
       color: const Color(0xffe5e5e5).withOpacity(0.25),
       alignment: Alignment.center,
-      child: const CircularProgressIndicator(),
+      child: const CircularProgressIndicator.adaptive(),
     );
   }
 }

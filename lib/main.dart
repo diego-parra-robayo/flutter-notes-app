@@ -1,7 +1,7 @@
 import 'package:core/firebase/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/app_di.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo/app_nav.dart';
 import 'package:ui/l10n/app_localizations.dart';
 import 'package:ui/l10n/app_localizations_extensions.dart';
@@ -12,8 +12,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  AppDi.init();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
