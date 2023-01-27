@@ -1,4 +1,6 @@
-class UpdateNoteRequest {
+import 'package:equatable/equatable.dart';
+
+class UpdateNoteRequest extends Equatable {
   final String noteId;
   final String title;
   final String description;
@@ -8,4 +10,7 @@ class UpdateNoteRequest {
     required this.title,
     required this.description,
   });
+
+  @override
+  List<Object?> get props => [noteId, title, description];
 }
