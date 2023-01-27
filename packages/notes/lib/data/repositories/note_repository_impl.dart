@@ -55,7 +55,7 @@ class NoteRepositoryImpl implements NoteRepository {
       if (noteModel != null) {
         return Right(noteModel.toNote());
       } else {
-        return Left(NotFound());
+        return const Left(NotFound());
       }
     } catch (e) {
       return Left(ApiFailure(e.toString()));
