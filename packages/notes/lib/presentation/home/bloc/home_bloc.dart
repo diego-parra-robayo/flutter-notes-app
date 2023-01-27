@@ -1,5 +1,6 @@
 import 'package:core/extensions/list_extensions.dart';
 import 'package:core/shared_entities/note.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
