@@ -5,6 +5,7 @@ import 'package:locale/generated/app_localizations.dart';
 import 'package:todo/app_di.dart';
 import 'package:todo/app_nav.dart';
 import 'package:ui/theme/ui.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'firebase_options.dart';
 
@@ -14,6 +15,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   AppDi.init();
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
