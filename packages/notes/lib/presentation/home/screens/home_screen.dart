@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
                   : NotesListBuilder(
                       builder: (context, model) => NotesListWidget(
                         notes: model.notes,
+                        onRefresh: model.onRefresh,
                         onNotePressed: model.onNotePressed,
                         onToggleCompleted: model.onToggleCompleted,
                         onDeleteNote: model.onDeleteNote,

@@ -8,6 +8,7 @@ import 'note_widget.dart';
 
 class NotesListWidget extends StatelessWidget {
   final List<Note> notes;
+  final Future<void> Function() onRefresh;
   final void Function(Note note) onNotePressed;
   final void Function(String id) onToggleCompleted;
   final void Function(String id) onDeleteNote;
@@ -15,6 +16,7 @@ class NotesListWidget extends StatelessWidget {
   const NotesListWidget({
     Key? key,
     required this.notes,
+    required this.onRefresh,
     required this.onNotePressed,
     required this.onToggleCompleted,
     required this.onDeleteNote,
@@ -22,34 +24,37 @@ class NotesListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: notes.length,
-      itemBuilder: (context, index) {
-        final note = notes[index];
-        return Dismissible(
-          key: Key(note.id),
-          confirmDismiss: (direction) =>
-              _confirmDismiss(direction, context, note.id),
-          background: Container(
-            color: UI.colors.green,
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.all(UI.dimens.d16),
-            child: Icon(Icons.check, color: UI.colors.white),
-          ),
-          secondaryBackground: Container(
-            color: UI.colors.red,
-            alignment: Alignment.centerRight,
-            padding: EdgeInsets.all(UI.dimens.d16),
-            child: Icon(Icons.delete, color: UI.colors.white),
-          ),
-          child: NoteWidget(
-            note: note,
-            onCheckChanged: (_) => onToggleCompleted(note.id),
-            onPressed: (_) => onNotePressed(note),
-          ),
-        );
-      },
-      separatorBuilder: (_, __) => const Divider(),
+    return RefreshIndicator(
+      onRefresh: onRefresh,
+      child: ListView.separated(
+        itemCount: notes.length,
+        itemBuilder: (context, index) {
+          final note = notes[index];
+          return Dismissible(
+            key: Key(note.id),
+            confirmDismiss: (direction) =>
+                _confirmDismiss(direction, context, note.id),
+            background: Container(
+              color: UI.colors.green,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.all(UI.dimens.d16),
+              child: Icon(Icons.check, color: UI.colors.white),
+            ),
+            secondaryBackground: Container(
+              color: UI.colors.red,
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.all(UI.dimens.d16),
+              child: Icon(Icons.delete, color: UI.colors.white),
+            ),
+            child: NoteWidget(
+              note: note,
+              onCheckChanged: (_) => onToggleCompleted(note.id),
+              onPressed: (_) => onNotePressed(note),
+            ),
+          );
+        },
+        separatorBuilder: (_, __) => const Divider(),
+      ),
     );
   }
 

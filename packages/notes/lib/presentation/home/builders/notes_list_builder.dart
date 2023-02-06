@@ -26,12 +26,14 @@ class NotesListBuilder extends StatelessWidget {
 
 class NotesListUIModel {
   final List<Note> notes;
+  final Future<void> Function() onRefresh;
   final void Function(Note note) onNotePressed;
   final void Function(String id) onToggleCompleted;
   final void Function(String id) onDeleteNote;
 
   const NotesListUIModel({
     required this.notes,
+    required this.onRefresh,
     required this.onNotePressed,
     required this.onToggleCompleted,
     required this.onDeleteNote,
@@ -40,6 +42,10 @@ class NotesListUIModel {
   factory NotesListUIModel.fromState(HomeState state, BuildContext context) =>
       NotesListUIModel(
         notes: state.notes,
+        onRefresh: () async {
+          _getBloc(context).add(HomeStarted());
+          return;
+        },
         onNotePressed: (note) =>
             _getBloc(context).add(HomeNotePressed(note.id)),
         onToggleCompleted: (id) =>
