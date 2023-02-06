@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:core/os/os.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locale/extensions/app_localizations_extensions.dart';
@@ -43,7 +42,7 @@ void showConfirmDialog(
     ),
   ];
 
-  if (Platform.isIOS) {
+  if (OS.isIOS) {
     showCupertinoDialog(
       context: context,
       builder: (context) => CupertinoAlertDialog(
