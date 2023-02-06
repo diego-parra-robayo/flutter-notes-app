@@ -1,16 +1,8 @@
-import 'package:core/di/get_it.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:locale/extensions/app_localizations_extensions.dart';
-import 'package:notes/presentation/edit_note/widgets/save_note_button.dart';
-import 'package:notes/presentation/edit_note/widgets/title_field.dart';
-import 'package:ui/extensions/snackbar.dart';
+import 'package:notes/presentation/edit_note/builders/builders.dart';
+import 'package:ui/components/components.dart';
 import 'package:ui/theme/ui.dart';
-
-import '../bloc/edit_note_bloc.dart';
-import '../widgets/description_field.dart';
-import '../widgets/edit_note_loading_widget.dart';
 
 class EditNoteScreen extends StatelessWidget {
   final String? noteId;
@@ -24,72 +16,59 @@ class EditNoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          getIt<EditNoteBloc>()..add(EditNoteStarted(noteId: noteId)),
-      child: MultiBlocListener(
-        listeners: [
-          _getNavigationListener(),
-          _getPopUpMessageListener(),
-        ],
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              noteId == null ? context.l10n.createNoteTitle : context.l10n.editNoteTitle,
-            ),
+    return EditNoteScreenBuilder(
+      noteId: noteId,
+      onEditSuccess: onEditSuccess,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            noteId == null
+                ? context.l10n.createNoteTitle
+                : context.l10n.editNoteTitle,
           ),
-          body: Stack(
-            children: [
-              const EditNoteLoadingWidget(),
-              Padding(
-                padding: EdgeInsets.all(UI.dimens.d16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const TitleField(),
-                    SizedBox(height: UI.dimens.d16),
-                    const Expanded(child: DescriptionField()),
-                    SizedBox(height: UI.dimens.d16),
-                    const SaveNoteButton(),
-                  ],
-                ),
-              )
-            ],
+        ),
+        body: Stack(
+          children: [
+            LoadingBuilder(
+              builder: (context, isLoading) =>
+                  isLoading ? const LoadingWidget() : const SizedBox.shrink(),
+            ),
+            Padding(
+              padding: EdgeInsets.all(UI.dimens.d16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TitleBuilder(
+                    builder: (context, controller) => TextField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        label: Text(context.l10n.title),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: UI.dimens.d16),
+                  Expanded(
+                    child: DescriptionBuilder(
+                      builder: (context, controller) => TextField(
+                        controller: controller,
+                        decoration: InputDecoration(
+                          label: Text(context.l10n.description),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: SaveNoteBuilder(
+          builder: (context, onPressed) => FloatingActionButton(
+            onPressed: onPressed,
+            child: Icon(noteId == null ? Icons.add : Icons.save),
           ),
         ),
       ),
-    );
-  }
-
-  BlocListener _getNavigationListener() {
-    return BlocListener<EditNoteBloc, EditNoteState>(
-      listenWhen: (previous, current) => previous.navState != current.navState,
-      listener: (context, state) {
-        final bloc = context.read<EditNoteBloc>();
-        final navState = state.navState;
-        switch (navState) {
-          case null:
-            return;
-          case EditNoteNavState.pop:
-            onEditSuccess?.call();
-            context.pop();
-            break;
-        }
-        bloc.add(EditNoteNavEventHandled());
-      },
-    );
-  }
-
-  BlocListener _getPopUpMessageListener() {
-    return BlocListener<EditNoteBloc, EditNoteState>(
-      listenWhen: (previous, current) =>
-          previous.popUpMessage != current.popUpMessage,
-      listener: (context, state) {
-        final popUpMessage = state.popUpMessage;
-        if (popUpMessage == null) return;
-        showSnackBar(context, message: popUpMessage);
-        context.read<EditNoteBloc>().add(EditNotePopUpMessageShown());
-      },
     );
   }
 }
