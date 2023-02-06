@@ -2,8 +2,8 @@ import 'package:core/di/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:ui/extensions/snackbar.dart';
-import 'package:ui/l10n/app_localizations_extensions.dart';
 
 import '../../../navigation/home_nav.dart';
 import '../bloc/home_bloc.dart';

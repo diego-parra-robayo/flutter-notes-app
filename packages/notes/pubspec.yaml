@@ -14,6 +14,8 @@ dependencies:
     path: ../core
   ui:
     path: ../ui
+  locale:
+    path: ../locale
 
   cupertino_icons: ^1.0.2
   get_it: ^7.2.0

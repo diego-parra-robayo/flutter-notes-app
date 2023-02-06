@@ -2,10 +2,10 @@ import 'package:core/di/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:notes/presentation/edit_note/widgets/save_note_button.dart';
 import 'package:notes/presentation/edit_note/widgets/title_field.dart';
 import 'package:ui/extensions/snackbar.dart';
-import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 import '../bloc/edit_note_bloc.dart';

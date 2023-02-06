@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:locale/extensions/app_localizations_extensions.dart';
+import 'package:locale/generated/app_localizations.dart';
 import 'package:todo/app_di.dart';
 import 'package:todo/app_nav.dart';
-import 'package:ui/l10n/app_localizations.dart';
-import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 import 'firebase_options.dart';

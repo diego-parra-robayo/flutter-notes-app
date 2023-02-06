@@ -13,6 +13,8 @@ dependencies:
     path: packages/core
   ui:
     path: packages/ui
+  locale:
+    path: packages/locale
   notes:
     path: packages/notes
 

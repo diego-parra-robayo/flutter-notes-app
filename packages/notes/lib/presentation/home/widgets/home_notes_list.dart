@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:ui/components/note_widget.dart';
 import 'package:ui/extensions/dialog.dart';
-import 'package:ui/l10n/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 import '../bloc/home_bloc.dart';

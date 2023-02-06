@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/l10n/app_localizations_extensions.dart';
+import 'package:locale/extensions/app_localizations_extensions.dart';
 
 void showConfirmDialog(
   BuildContext context, {
