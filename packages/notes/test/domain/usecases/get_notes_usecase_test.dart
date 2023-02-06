@@ -1,5 +1,5 @@
 import 'package:core/failures/failure.dart';
-import 'package:core/shared_entities/note.dart';
+import 'package:core/entities/note.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';

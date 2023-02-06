@@ -1,4 +1,4 @@
-import 'package:core/shared_entities/note.dart';
+import 'package:core/entities/note.dart';
 
 class FakeNotes {
   const FakeNotes._();
