@@ -30,9 +30,12 @@ class HomeScreen extends StatelessWidget {
               const HomeLoadingWidget(),
               BlocBuilder<HomeBloc, HomeState>(
                 buildWhen: (previous, current) =>
-                    previous.breakingMessage != current.breakingMessage,
-                builder: (context, state) => state.breakingMessage != null
-                    ? Center(child: Text(state.breakingMessage!))
+                    previous.breakingMessage(context.l10n) !=
+                    current.breakingMessage(context.l10n),
+                builder: (context, state) => state
+                            .breakingMessage(context.l10n) !=
+                        null
+                    ? Center(child: Text(state.breakingMessage(context.l10n)!))
                     : const HomeNotesList(),
               )
             ],

@@ -117,6 +117,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @emptyNotesListMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t created a note yet.'**
+  String get emptyNotesListMessage;
+
   /// No description provided for @createNoteTitle.
   ///
   /// In en, this message translates to:
@@ -146,6 +152,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete this note?'**
   String get deleteNoteConfirmation;
+
+  /// No description provided for @deletedNoteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Note deleted'**
+  String get deletedNoteMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

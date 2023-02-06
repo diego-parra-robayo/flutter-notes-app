@@ -20,7 +20,7 @@ class HomeState with _$HomeState {
 }
 
 extension HomeStateExtensions on HomeState {
-  String? get breakingMessage =>
+  String? breakingMessage(AppLocalizations l10n) =>
       errorMessage ??
-      ((notes.isEmpty && !isLoading) ? 'Notes list is empty' : null);
+      ((notes.isEmpty && !isLoading) ? l10n.emptyNotesListMessage : null);
 }

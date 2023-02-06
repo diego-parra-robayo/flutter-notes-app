@@ -3,6 +3,8 @@ import 'package:core/failures/failure.dart';
 import 'package:core/entities/note.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:locale/generated/app_localizations.dart';
+import 'package:locale/generated/app_localizations_en.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:notes/domain/usecases/delete_note_usecase.dart';
 import 'package:notes/domain/usecases/get_notes_usecase.dart';
@@ -144,7 +146,7 @@ void main() {
         },
         build: () => sut,
         seed: () => initialState,
-        act: (bloc) => bloc.add(HomeDeleteNotePressed(noteToDelete.id)),
+        act: (bloc) => bloc.add(HomeDeleteNotePressed(noteToDelete.id, l10n: AppLocalizationsEn())),
         expect: () => [
           initialState.copyWith(isLoading: true),
           initialState.copyWith(notes: endNotes, popUpMessage: 'Note deleted'),

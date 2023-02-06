@@ -4,9 +4,12 @@
   "confirm": "Confirmar",
   "cancel": "Cancelar",
 
+  "emptyNotesListMessage": "Aún no has creado ninguna nota.",
+
   "createNoteTitle": "Crear una nota",
   "editNoteTitle": "Editar nota",
   "title": "Título",
   "description": "Descripción",
-  "deleteNoteConfirmation": "¿Seguro deseas eliminar esta nota?"
+  "deleteNoteConfirmation": "¿Seguro deseas eliminar esta nota?",
+  "deletedNoteMessage": "Nota eliminada"
 }

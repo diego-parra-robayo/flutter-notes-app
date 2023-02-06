@@ -69,8 +69,9 @@ class HomeNotesList extends StatelessWidget {
   void _dispatchToggleCompletedStatePressed(BuildContext context, String id) =>
       context.read<HomeBloc>().add(HomeToggleCompletedPressed(noteId: id));
 
-  void _dispatchDeleteNote(BuildContext context, String id) =>
-      context.read<HomeBloc>().add(HomeDeleteNotePressed(id));
+  void _dispatchDeleteNote(BuildContext context, String id) => context
+      .read<HomeBloc>()
+      .add(HomeDeleteNotePressed(id, l10n: context.l10n));
 
   void _dispatchNotePressed(BuildContext context, String id) =>
       context.read<HomeBloc>().add(HomeNotePressed(id));

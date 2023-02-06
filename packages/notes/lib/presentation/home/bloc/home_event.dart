@@ -8,11 +8,13 @@ class HomeAddNotePressed extends HomeEvent {}
 
 class HomeNotePressed extends HomeEvent {
   final String noteId;
+
   HomeNotePressed(this.noteId);
 }
 
 class HomeToggleCompletedPressed extends HomeEvent {
   final String noteId;
+
   HomeToggleCompletedPressed({
     required this.noteId,
   });
@@ -20,7 +22,12 @@ class HomeToggleCompletedPressed extends HomeEvent {
 
 class HomeDeleteNotePressed extends HomeEvent {
   final String noteId;
-  HomeDeleteNotePressed(this.noteId);
+  final AppLocalizations l10n;
+
+  HomeDeleteNotePressed(
+    this.noteId, {
+    required this.l10n,
+  });
 }
 
 class HomeNavEventHandled extends HomeEvent {}

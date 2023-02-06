@@ -1,16 +1,22 @@
+import 'dart:math';
+
 import 'package:core/extensions/list_extensions.dart';
 import 'package:core/entities/note.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:locale/generated/app_localizations.dart';
 
 import '../../../domain/usecases/delete_note_usecase.dart';
 import '../../../domain/usecases/get_notes_usecase.dart';
 import '../../../domain/usecases/toggle_note_completed_state_usecase.dart';
 
 part 'home_bloc.freezed.dart';
+
 part 'home_event.dart';
+
 part 'home_nav_state.dart';
+
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -89,7 +95,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           emit(state.copyWith(
             isLoading: false,
             notes: newList,
-            popUpMessage: 'Note deleted',
+            popUpMessage: event.l10n.deletedNoteMessage,
           ));
         },
       );

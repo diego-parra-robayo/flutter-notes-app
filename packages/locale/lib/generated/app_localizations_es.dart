@@ -17,6 +17,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cancel => 'Cancelar';
 
   @override
+  String get emptyNotesListMessage => 'Aún no has creado ninguna nota.';
+
+  @override
   String get createNoteTitle => 'Crear una nota';
 
   @override
@@ -30,4 +33,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get deleteNoteConfirmation => '¿Seguro deseas eliminar esta nota?';
+
+  @override
+  String get deletedNoteMessage => 'Nota eliminada';
 }
