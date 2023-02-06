@@ -56,12 +56,12 @@ class HomeScreen extends StatelessWidget {
           return;
         } else if (navState is HomeNavToAddNote) {
           context.goNamed(
-            HomeRoute.addNote.name,
+            HomeRoute.addNote,
             extra: {'onSuccess': () => bloc.add(HomeStarted())},
           );
         } else if (navState is HomeNavToEditNote) {
           context.goNamed(
-            HomeRoute.editNote.name,
+            HomeRoute.editNote,
             params: {'id': navState.noteId},
             extra: {'onSuccess': () => bloc.add(HomeStarted())},
           );
