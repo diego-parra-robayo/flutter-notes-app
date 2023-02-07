@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/di/get_it.dart';
+import 'package:core/synchronization/custom_lock.dart';
 
 import '../data/datasources/fake/note_fake_datasource.dart';
 import '../data/datasources/remote/note_remote_datasource.dart';
@@ -15,12 +16,14 @@ import '../presentation/edit_note/bloc/edit_note_bloc.dart';
 import '../presentation/home/bloc/home_bloc.dart';
 
 class NotesDi {
-  static void init() {
-    _registerDataSources();
-    _registerRepositories();
-    _registerUseCases();
-    _registerBlocs();
-  }
+  static final _lock = CustomLock();
+
+  static void init() => _lock.synchronizedRunOnce(() {
+        _registerDataSources();
+        _registerRepositories();
+        _registerUseCases();
+        _registerBlocs();
+      });
 
   static void _registerDataSources() {
     getIt.registerLazySingleton<FirebaseFirestore>(
