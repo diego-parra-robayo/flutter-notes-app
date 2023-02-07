@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:notes/presentation/edit_note/builders/builders.dart';
-import 'package:ui/components/components.dart';
+import 'package:ui/widgets/widgets.dart';
 import 'package:ui/theme/ui.dart';
 
 class EditNoteScreen extends StatelessWidget {

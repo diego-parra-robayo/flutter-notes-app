@@ -30,6 +30,7 @@ class NotesListUIModel {
   final void Function(Note note) onNotePressed;
   final void Function(String id) onToggleCompleted;
   final void Function(String id) onDeleteNote;
+  final void Function() onAddNote;
 
   const NotesListUIModel({
     required this.notes,
@@ -37,6 +38,7 @@ class NotesListUIModel {
     required this.onNotePressed,
     required this.onToggleCompleted,
     required this.onDeleteNote,
+    required this.onAddNote,
   });
 
   factory NotesListUIModel.fromState(HomeState state, BuildContext context) =>
@@ -52,6 +54,7 @@ class NotesListUIModel {
             _getBloc(context).add(HomeToggleCompletedPressed(noteId: id)),
         onDeleteNote: (id) => _getBloc(context)
             .add(HomeDeleteNotePressed(id, l10n: context.l10n)),
+        onAddNote: () => _getBloc(context).add(HomeAddNotePressed()),
       );
 
   static HomeBloc _getBloc(BuildContext context) => context.read<HomeBloc>();
