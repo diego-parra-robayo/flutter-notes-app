@@ -8,8 +8,8 @@ class HomeScreenWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
+    return Scaffold(
+      body: Stack(
         children: [
           LoadingBuilder(
             builder: (context, isLoading) =>
