@@ -133,7 +133,7 @@ void main() {
       act: (bloc) => bloc.add(EditNoteSaveButtonPressed()),
       expect: () => [
         initialState1.copyWith(isLoading: true),
-        initialState1.copyWith(navState: EditNoteNavState.pop),
+        initialState1.copyWith(navState: EditNoteNavState.popSuccess),
       ],
     );
 
@@ -156,7 +156,7 @@ void main() {
       act: (bloc) => bloc.add(EditNoteSaveButtonPressed()),
       expect: () => [
         initialState2.copyWith(isLoading: true),
-        initialState2.copyWith(navState: EditNoteNavState.pop),
+        initialState2.copyWith(navState: EditNoteNavState.popSuccess),
       ],
     );
   });
@@ -165,7 +165,7 @@ void main() {
     blocTest<EditNoteBloc, EditNoteState>(
       'when navEvent is handled, update navState to null',
       build: () => sut,
-      seed: () => EditNoteState.initial().copyWith(navState: EditNoteNavState.pop),
+      seed: () => EditNoteState.initial().copyWith(navState: EditNoteNavState.popSuccess),
       act: (bloc) => bloc.add(EditNoteNavEventHandled()),
       expect: () => [
         EditNoteState.initial().copyWith(navState: null),

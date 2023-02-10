@@ -2,19 +2,19 @@ import 'package:core/di/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes/navigation/home_nav.dart';
+import 'package:notes/presentation/home/bloc/home_bloc.dart';
 import 'package:ui/extensions/snackbar.dart';
 
 import '../bloc/edit_note_bloc.dart';
 
 class EditNoteScreenBuilder extends StatelessWidget {
   final String? noteId;
-  final void Function()? onEditSuccess;
   final Widget child;
 
   const EditNoteScreenBuilder({
     Key? key,
     required this.noteId,
-    required this.onEditSuccess,
     required this.child,
   }) : super(key: key);
 
@@ -42,9 +42,9 @@ class EditNoteScreenBuilder extends StatelessWidget {
         switch (navState) {
           case null:
             return;
-          case EditNoteNavState.pop:
-            onEditSuccess?.call();
-            context.pop();
+          case EditNoteNavState.popSuccess:
+            context.read<HomeBloc>().add(HomeStarted());
+            context.goNamed(HomeRoute.home);
             break;
         }
         bloc.add(EditNoteNavEventHandled());

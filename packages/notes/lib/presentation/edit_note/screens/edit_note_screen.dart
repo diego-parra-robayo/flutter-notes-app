@@ -6,19 +6,16 @@ import 'package:ui/theme/ui.dart';
 
 class EditNoteScreen extends StatelessWidget {
   final String? noteId;
-  final void Function()? onEditSuccess;
 
   const EditNoteScreen({
     Key? key,
     required this.noteId,
-    this.onEditSuccess,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return EditNoteScreenBuilder(
       noteId: noteId,
-      onEditSuccess: onEditSuccess,
       child: Scaffold(
         appBar: AppBar(
           title: Text(

@@ -1,4 +1,3 @@
-import 'package:core/di/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,15 +13,13 @@ class HomeScreenBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HomeBloc>()..add(HomeStarted()),
-      child: MultiBlocListener(
-        listeners: [
-          _getNavigationListener(),
-          _getPopUpMessageListener(),
-        ],
-        child: child,
-      ),
+    //  BlocProvider already added in homeNav/ShellRoute
+    return MultiBlocListener(
+      listeners: [
+        _getNavigationListener(),
+        _getPopUpMessageListener(),
+      ],
+      child: child,
     );
   }
 
@@ -35,15 +32,11 @@ class HomeScreenBuilder extends StatelessWidget {
         if (navState == null) {
           return;
         } else if (navState is HomeNavToAddNote) {
-          context.goNamed(
-            HomeRoute.addNote,
-            extra: {'onSuccess': () => bloc.add(HomeStarted())},
-          );
+          context.goNamed(HomeRoute.addNote);
         } else if (navState is HomeNavToEditNote) {
           context.goNamed(
             HomeRoute.editNote,
             params: {'id': navState.noteId},
-            extra: {'onSuccess': () => bloc.add(HomeStarted())},
           );
         }
         bloc.add(HomeNavEventHandled());

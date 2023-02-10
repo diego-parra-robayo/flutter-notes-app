@@ -82,7 +82,7 @@ class EditNoteBloc extends Bloc<EditNoteEvent, EditNoteState> {
         )),
         (_) => emit(state.copyWith(
           isLoading: false,
-          navState: EditNoteNavState.pop,
+          navState: EditNoteNavState.popSuccess,
         )),
       );
     });
