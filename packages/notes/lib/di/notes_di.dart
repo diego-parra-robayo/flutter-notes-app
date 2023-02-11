@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/di/get_it.dart';
 import 'package:core/synchronization/custom_lock.dart';
+import 'package:notes/presentation/blocs/note_list/notes_bloc.dart';
 
 import '../data/datasources/fake/note_fake_datasource.dart';
 import '../data/datasources/remote/note_remote_datasource.dart';
@@ -12,8 +13,7 @@ import '../domain/usecases/get_note_usecase.dart';
 import '../domain/usecases/get_notes_usecase.dart';
 import '../domain/usecases/toggle_note_completed_state_usecase.dart';
 import '../domain/usecases/update_note_usecase.dart';
-import '../presentation/edit_note/bloc/edit_note_bloc.dart';
-import '../presentation/home/bloc/home_bloc.dart';
+import '../presentation/blocs/note_form/note_form_bloc.dart';
 
 class NotesDi {
   static final _lock = CustomLock();
@@ -67,15 +67,15 @@ class NotesDi {
   }
 
   static void _registerBlocs() {
-    getIt.registerFactory<HomeBloc>(
-      () => HomeBloc(
+    getIt.registerFactory<NotesBloc>(
+      () => NotesBloc(
         getNotesUseCase: getIt(),
         toggleNoteCompletedStateUseCase: getIt(),
         deleteNoteUseCase: getIt(),
       ),
     );
-    getIt.registerFactory<EditNoteBloc>(
-      () => EditNoteBloc(
+    getIt.registerFactory<NoteFormBloc>(
+      () => NoteFormBloc(
         getNoteUseCase: getIt(),
         addNoteUseCase: getIt(),
         updateNoteUseCase: getIt(),

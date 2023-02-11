@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'package:locale/extensions/app_localizations_extensions.dart';
+import 'package:notes/presentation/builders/builders.dart';
+import 'package:ui/widgets/widgets.dart';
+import 'package:ui/theme/ui.dart';
+
+class EditNoteScreen extends StatelessWidget {
+  final String? noteId;
+
+  const EditNoteScreen({
+    Key? key,
+    required this.noteId,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return NoteFormProvider(
+      noteId: noteId,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            noteId == null
+                ? context.l10n.createNoteTitle
+                : context.l10n.editNoteTitle,
+          ),
+        ),
+        body: Stack(
+          children: [
+            NoteFormLoadingBuilder(
+              builder: (context, isLoading) =>
+              isLoading ? const LoadingWidget() : const SizedBox.shrink(),
+            ),
+            Padding(
+              padding: EdgeInsets.all(UI.dimens.d16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  NoteTitleFieldBuilder(
+                    builder: (context, controller) => TextField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        label: Text(context.l10n.title),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: UI.dimens.d16),
+                  Expanded(
+                    child: NoteDescriptionFieldBuilder(
+                      builder: (context, controller) => TextField(
+                        controller: controller,
+                        decoration: InputDecoration(
+                          label: Text(context.l10n.description),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: SaveNoteBuilder(
+          builder: (context, onPressed) => FloatingActionButton(
+            onPressed: onPressed,
+            child: Icon(noteId == null ? Icons.add : Icons.save),
+          ),
+        ),
+      ),
+    );
+  }
+}

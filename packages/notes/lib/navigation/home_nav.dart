@@ -1,10 +1,10 @@
 import 'package:core/di/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes/presentation/blocs/note_list/notes_bloc.dart';
 
-import '../presentation/edit_note/screens/edit_note_screen.dart';
-import '../presentation/home/bloc/home_bloc.dart';
-import '../presentation/home/screens/home_screen.dart';
+import '../presentation/screens/home/home_screen.dart';
+import '../presentation/screens/edit_note_screen.dart';
 
 class HomeRoute {
   static const home = 'home';
@@ -14,7 +14,7 @@ class HomeRoute {
 
 final homeNav = ShellRoute(
     builder: (context, state, child) => BlocProvider(
-          create: (context) => getIt<HomeBloc>()..add(HomeStarted()),
+          create: (context) => getIt<NotesBloc>()..add(NotesStarted()),
       child: child,
         ),
     routes: [
