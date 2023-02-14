@@ -13,6 +13,12 @@ class GetNoteUseCase {
 
   Future<Either<Failure, Note>> call({
     required String noteId,
-  }) =>
-      repository.getNote(noteId: noteId);
+  }) async {
+    try {
+      final note = await repository.getNote(noteId: noteId);
+      return Right(note);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 }

@@ -62,7 +62,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
   void _onButtonPressed() {
     on<NoteFormSaveButtonPressed>((event, emit) async {
       emit(state.copyWith(isLoading: true));
-      final Either<Failure, Unit> resultOrFailure;
+      final Either<Failure, dynamic> resultOrFailure;
       if (state.noteId != null) {
         resultOrFailure = await updateNoteUseCase(
           noteId: state.noteId!,

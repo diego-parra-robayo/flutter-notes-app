@@ -21,7 +21,7 @@ class NoteFakeDataSource {
     return _notes.firstOrNull((note) => note.id == noteId);
   }
 
-  Future addNote({
+  Future<String> addNote({
     required String title,
     required String description,
   }) async {
@@ -33,6 +33,7 @@ class NoteFakeDataSource {
       isCompleted: false,
     );
     _notes.add(noteModel);
+    return noteModel.id;
   }
 
   Future updateNote({

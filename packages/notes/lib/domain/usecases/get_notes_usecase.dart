@@ -11,5 +11,12 @@ class GetNotesUseCase {
     required this.repository,
   });
 
-  Future<Either<Failure, List<Note>>> call() => repository.getNotes();
+  Future<Either<Failure, List<Note>>> call() async {
+    try {
+      final notes = await repository.getNotes();
+      return Right(notes);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 }

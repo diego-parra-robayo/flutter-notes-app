@@ -10,6 +10,12 @@ class DeleteNoteUseCase {
 
   Future<Either<Failure, Unit>> call({
     required String noteId,
-  }) =>
-      repository.deleteNote(noteId: noteId);
+  }) async {
+    try {
+      await repository.deleteNote(noteId: noteId);
+      return const Right(unit);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 }

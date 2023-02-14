@@ -13,6 +13,12 @@ class ToggleNoteCompletedStateUseCase {
   Future<Either<Failure, Unit>> call({
     required String noteId,
     required bool newState,
-  }) =>
-      repository.toggleCompleted(noteId: noteId, newState: newState);
+  }) async {
+    try {
+      await repository.toggleCompleted(noteId: noteId, newState: newState);
+      return const Right(unit);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 }

@@ -29,18 +29,20 @@ class NoteRemoteDatasource {
     return docSnapshot.data() as NoteModel?;
   }
 
-  Future addNote({
+  Future<String> addNote({
     required String title,
     required String description,
-  }) =>
-      notesRef.add(
-        NoteModel(
-          title: title,
-          description: description,
-          isCompleted: false,
-          createdAt: FieldValue.serverTimestamp(),
-        ),
-      );
+  }) async {
+    final docRef = await notesRef.add(
+      NoteModel(
+        title: title,
+        description: description,
+        isCompleted: false,
+        createdAt: FieldValue.serverTimestamp(),
+      ),
+    );
+    return docRef.id;
+  }
 
   Future updateNote({
     required String noteId,

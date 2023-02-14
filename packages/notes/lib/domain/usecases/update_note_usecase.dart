@@ -13,12 +13,18 @@ class UpdateNoteUseCase {
     required String noteId,
     required String title,
     required String description,
-  }) =>
-      repository.updateNote(
+  }) async {
+    try {
+      await repository.updateNote(
         request: UpdateNoteRequest(
           noteId: noteId,
           title: title,
           description: description,
         ),
       );
+      return const Right(unit);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 }
