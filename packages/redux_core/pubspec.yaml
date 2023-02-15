@@ -1,0 +1,25 @@
+name: redux_core
+description: Package to handle redux app state.
+version: 0.0.1
+
+environment:
+  sdk: '>=2.19.0 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  redux: ^5.0.0
+  flutter_redux: ^0.10.0
+  freezed_annotation: ^2.2.0
+  equatable: ^2.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
+
+flutter:
