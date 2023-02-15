@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:ui/device_utils/device_utils.dart';
 
-import '../theme/ui.dart';
+import '../../theme/ui.dart';
 
-class NoteCardContainer extends StatelessWidget {
-  final Color? cardColor;
-  final double? borderRadius;
+class NoteContainer extends StatelessWidget with PlatformDependentWidget {
   final void Function() onPressed;
   final Widget child;
 
-  const NoteCardContainer({
+  const NoteContainer({
     Key? key,
-    this.cardColor,
-    this.borderRadius,
     required this.onPressed,
     required this.child,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final borderRadiusWidget = borderRadius == null
-        ? BorderRadius.circular(UI.dimens.d16)
-        : borderRadius! == 0
-            ? BorderRadius.zero
-            : BorderRadius.circular(borderRadius!);
+  Widget buildMobile(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: UI.dimens.d16,
+          horizontal: UI.dimens.d8,
+        ),
+        child: child,
+      ),
+    );
+  }
 
+  @override
+  Widget buildWeb(BuildContext context) {
+    final borderRadiusWidget = BorderRadius.circular(UI.dimens.d16);
     return Card(
-      color: cardColor ?? UI.colors.lightGray2,
+      color: UI.colors.lightGray2,
       shape: RoundedRectangleBorder(borderRadius: borderRadiusWidget),
       child: InkWell(
         borderRadius: borderRadiusWidget,
