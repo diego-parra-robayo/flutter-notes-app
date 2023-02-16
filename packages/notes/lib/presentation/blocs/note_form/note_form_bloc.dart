@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/usecases/add_note_usecase.dart';
-import '../../../domain/usecases/get_note_usecase.dart';
-import '../../../domain/usecases/update_note_usecase.dart';
+import '../../../domain/usecases/add_note_middleware.dart';
+import '../../../domain/usecases/get_note_details_middleware.dart';
+import '../../../domain/usecases/update_note_middleware.dart';
 
 part 'note_form_bloc.freezed.dart';
 part 'note_form_state.dart';

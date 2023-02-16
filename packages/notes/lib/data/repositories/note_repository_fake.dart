@@ -1,11 +1,8 @@
-import 'package:core/failures/failure.dart';
-import 'package:core/entities/note.dart';
-import 'package:notes/data/datasources/fake/mappers/note_model_mappers.dart';
-
-import '../../domain/entities/new_note_request.dart';
-import '../../domain/entities/update_note_request.dart';
-import '../../domain/repositories/note_repository.dart';
-import '../datasources/fake/note_fake_datasource.dart';
+import 'package:notes/data/datasources/fake/models/note_model.dart';
+import 'package:notes/data/datasources/fake/note_fake_datasource.dart';
+import 'package:notes/domain/entities/entities.dart';
+import 'package:notes/domain/repositories/note_repository.dart';
+import 'package:redux_core/entities/entities.dart';
 
 class NoteRepositoryFake implements NoteRepository {
   final NoteFakeDataSource dataSource;
@@ -48,7 +45,7 @@ class NoteRepositoryFake implements NoteRepository {
     if (noteModel != null) {
       return noteModel.toNote();
     } else {
-      throw const NotFound();
+      throw const NotFoundFailure();
     }
   }
 

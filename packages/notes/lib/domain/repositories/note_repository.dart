@@ -1,7 +1,5 @@
-import 'package:core/entities/note.dart';
-
-import '../entities/new_note_request.dart';
-import '../entities/update_note_request.dart';
+import 'package:notes/domain/entities/entities.dart';
+import 'package:redux_core/entities/entities.dart';
 
 abstract class NoteRepository {
   Future<List<Note>> getNotes();

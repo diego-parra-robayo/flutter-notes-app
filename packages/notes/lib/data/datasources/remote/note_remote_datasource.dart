@@ -9,7 +9,7 @@ class NoteRemoteDatasource {
     required FirebaseFirestore database,
   }) {
     notesRef = database.collection('notes').withConverter<NoteModel>(
-          fromFirestore: NoteModel.fromFirestore,
+          fromFirestore: NoteModelFirestoreX.fromFirestore,
           toFirestore: (note, options) => note.toFirestore(options),
         );
   }

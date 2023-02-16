@@ -1,31 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:core/di/get_it.dart';
-import 'package:core/synchronization/custom_lock.dart';
-import 'package:notes/presentation/blocs/note_list/notes_bloc.dart';
+import 'package:core/di/di_schema.dart';
+import 'package:notes/data/datasources/fake/note_fake_datasource.dart';
+import 'package:notes/data/datasources/remote/note_remote_datasource.dart';
+import 'package:notes/data/repositories/note_repository_impl.dart';
+import 'package:notes/domain/middlewares/middlewares.dart';
+import 'package:notes/domain/repositories/note_repository.dart';
+import 'package:redux_core/redux_core.dart';
 
-import '../data/datasources/fake/note_fake_datasource.dart';
-import '../data/datasources/remote/note_remote_datasource.dart';
-import '../data/repositories/note_repository_impl.dart';
-import '../domain/repositories/note_repository.dart';
-import '../domain/usecases/add_note_usecase.dart';
-import '../domain/usecases/delete_note_usecase.dart';
-import '../domain/usecases/get_note_usecase.dart';
-import '../domain/usecases/get_notes_usecase.dart';
-import '../domain/usecases/toggle_note_completed_state_usecase.dart';
-import '../domain/usecases/update_note_usecase.dart';
-import '../presentation/blocs/note_form/note_form_bloc.dart';
-
-class NotesDi {
-  static final _lock = CustomLock();
-
-  static void init() => _lock.synchronizedRunOnce(() {
-        _registerDataSources();
-        _registerRepositories();
-        _registerUseCases();
-        _registerBlocs();
-      });
-
-  static void _registerDataSources() {
+class NotesDi extends DiSchema {
+  @override
+  void registerDataSources() {
     getIt.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance,
     );
@@ -37,7 +21,8 @@ class NotesDi {
     );
   }
 
-  static void _registerRepositories() {
+  @override
+  void registerRepositories() {
     getIt.registerLazySingleton<NoteRepository>(
       () => NoteRepositoryImpl(
         dataSource: getIt(),
@@ -45,41 +30,20 @@ class NotesDi {
     );
   }
 
-  static void _registerUseCases() {
-    getIt.registerFactory<AddNoteUseCase>(
-      () => AddNoteUseCase(repository: getIt()),
-    );
-    getIt.registerFactory<UpdateNoteUseCase>(
-      () => UpdateNoteUseCase(repository: getIt()),
-    );
-    getIt.registerFactory<GetNoteUseCase>(
-      () => GetNoteUseCase(repository: getIt()),
-    );
-    getIt.registerFactory<GetNotesUseCase>(
-      () => GetNotesUseCase(repository: getIt()),
-    );
-    getIt.registerFactory<ToggleNoteCompletedStateUseCase>(
-      () => ToggleNoteCompletedStateUseCase(repository: getIt()),
-    );
-    getIt.registerFactory<DeleteNoteUseCase>(
-      () => DeleteNoteUseCase(repository: getIt()),
+  @override
+  void registerMiddlewares() {
+    getIt.registerLazySingleton<List<Middleware<AppState>>>(
+      () => [
+        AddNoteMiddleware(repository: getIt()),
+        DeleteNoteMiddleware(repository: getIt()),
+        GetNoteDetailsMiddleware(repository: getIt()),
+        GetNotesMiddleware(repository: getIt()),
+        ToggleNoteCompletedMiddleware(repository: getIt()),
+        UpdateNoteMiddleware(repository: getIt()),
+      ],
+      instanceName: middlewareKey,
     );
   }
 
-  static void _registerBlocs() {
-    getIt.registerFactory<NotesBloc>(
-      () => NotesBloc(
-        getNotesUseCase: getIt(),
-        toggleNoteCompletedStateUseCase: getIt(),
-        deleteNoteUseCase: getIt(),
-      ),
-    );
-    getIt.registerFactory<NoteFormBloc>(
-      () => NoteFormBloc(
-        getNoteUseCase: getIt(),
-        addNoteUseCase: getIt(),
-        updateNoteUseCase: getIt(),
-      ),
-    );
-  }
+  static const middlewareKey = 'notes/middleware';
 }

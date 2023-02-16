@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:locale/generated/app_localizations.dart';
 
-import '../../../domain/usecases/delete_note_usecase.dart';
-import '../../../domain/usecases/get_notes_usecase.dart';
-import '../../../domain/usecases/toggle_note_completed_state_usecase.dart';
+import '../../../domain/usecases/delete_note_middleware.dart';
+import '../../../domain/usecases/get_notes_middleware.dart';
+import '../../../domain/usecases/toggle_note_completed_middleware.dart';
 
 part 'notes_bloc.freezed.dart';
 

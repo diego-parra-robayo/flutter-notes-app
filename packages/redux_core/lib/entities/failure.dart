@@ -13,6 +13,16 @@ class Failure extends Equatable {
 
   @override
   List<Object?> get props => [message, type];
+
+  Failure copyWith({
+    String? message,
+    FailureType? type,
+  }) {
+    return Failure(
+      message: message ?? this.message,
+      type: type ?? this.type,
+    );
+  }
 }
 
 class NotFoundFailure extends Failure {

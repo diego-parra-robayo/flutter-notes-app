@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../navigation/home_nav.dart';
+import '../../../navigation/notes_routes.dart';
 
 class NavigateToAddNoteBuilder extends StatelessWidget {
   final Widget Function(BuildContext context, void Function() navigate) builder;
@@ -16,7 +16,7 @@ class NavigateToAddNoteBuilder extends StatelessWidget {
     return Builder(
       builder: (context) => builder(
         context,
-        () => context.goNamed(HomeRoute.addNote),
+        () => context.goNamed(NotesRoute.addNote),
       ),
     );
   }

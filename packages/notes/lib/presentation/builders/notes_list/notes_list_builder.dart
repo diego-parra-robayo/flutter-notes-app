@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:notes/presentation/blocs/note_list/notes_bloc.dart';
 
-import '../../../navigation/home_nav.dart';
+import '../../../navigation/notes_routes.dart';
 
 class NotesListBuilder extends StatelessWidget {
   final Widget Function(BuildContext context, NotesListUIModel model) builder;
@@ -52,14 +52,14 @@ class NotesListUIModel {
           return;
         },
         onNotePressed: (note) => context.goNamed(
-          HomeRoute.editNote,
+          NotesRoute.editNote,
           params: {'id': note.id},
         ),
         onToggleCompleted: (id) =>
             _getBloc(context).add(NotesToggleNoteCompletedPressed(noteId: id)),
         onDeleteNote: (id) => _getBloc(context)
             .add(NotesDeleteNotePressed(id, l10n: context.l10n)),
-        onAddNote: () => context.goNamed(HomeRoute.addNote),
+        onAddNote: () => context.goNamed(NotesRoute.addNote),
       );
 
   static NotesBloc _getBloc(BuildContext context) => context.read<NotesBloc>();

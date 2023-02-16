@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes/presentation/blocs/note_list/notes_bloc.dart';
-import 'package:ui/extensions/snackbar.dart';
+import 'package:ui/extensions/custom_snackbar.dart';
 
 class NotesProvider extends StatelessWidget {
   final Widget child;
