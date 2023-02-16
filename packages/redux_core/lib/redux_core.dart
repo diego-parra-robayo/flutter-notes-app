@@ -6,6 +6,4 @@ export 'reducers/reducers.dart';
 export 'selectors/selectors.dart';
 export 'state/state.dart';
 export 'store/store.dart';
-export 'store/app_reducer.dart';
-export 'store/app_state.dart';
-export 'utils/custom_middleware.dart';
+export 'utils/utils.dart';

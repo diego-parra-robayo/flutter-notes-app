@@ -3,7 +3,7 @@ import 'package:redux_core/entities/note.dart';
 import 'package:ui/device_utils/device_utils.dart';
 import 'package:ui/theme/ui.dart';
 
-import '../note_widget/note_widget.dart';
+import 'note_widget/note_widget.dart';
 
 class NotesListWidget extends StatelessWidget with PlatformDependentWidget {
   final List<Note> notes;

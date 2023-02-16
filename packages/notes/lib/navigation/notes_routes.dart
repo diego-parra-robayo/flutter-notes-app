@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:notes/presentation/screens/edit_note_screen.dart';
-import 'package:notes/presentation/screens/home/home_screen.dart';
+import 'package:notes/presentation/screens/home_screen.dart';
 
 class NotesRoute {
   static const home = 'notes/home';

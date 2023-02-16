@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-///   Places a widget in between a parent and its child if certain condition (isActive) is met.
+///   Put a widget between parent-child in the widget tree if [isActive]
+///   condition is met
 class WidgetConnector extends StatelessWidget {
   final bool isActive;
   final Widget Function(BuildContext context, Widget child) parentBuilder;

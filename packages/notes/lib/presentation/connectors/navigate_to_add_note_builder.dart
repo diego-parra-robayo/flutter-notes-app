@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../navigation/notes_routes.dart';
+import 'package:notes/navigation/notes_routes.dart';
 
 class NavigateToAddNoteBuilder extends StatelessWidget {
   final Widget Function(BuildContext context, void Function() navigate) builder;
@@ -13,11 +12,9 @@ class NavigateToAddNoteBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) => builder(
-        context,
-        () => context.goNamed(NotesRoute.addNote),
-      ),
+    return builder(
+      context,
+      () => context.goNamed(NotesRoute.addNote),
     );
   }
 }

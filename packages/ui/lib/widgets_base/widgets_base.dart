@@ -1,4 +1,3 @@
-///   Reusable widgets. Not exactly connected to an entity in the app.
+///   Reusable widgets that not related to an entity nor a theme.
 
 export 'custom_dismissible.dart';
-export 'widget_connector.dart';

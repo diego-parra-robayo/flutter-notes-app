@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../core
   redux_core:
     path: ../redux_core
   locale:

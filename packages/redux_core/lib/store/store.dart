@@ -3,6 +3,9 @@ import 'package:redux/redux.dart';
 import 'app_reducer.dart';
 import 'app_state.dart';
 
+export 'app_reducer.dart';
+export 'app_state.dart';
+
 Store<AppState> createStore({
   required List<Middleware<AppState>> middleware,
 }) =>
