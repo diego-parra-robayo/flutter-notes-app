@@ -1,5 +1,6 @@
 name: redux_core
 description: Package to handle redux app state.
+publish_to: 'none'
 version: 0.0.1
 
 environment:
@@ -9,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  core:
+    path: ../core
 
   redux: ^5.0.0
   flutter_redux: ^0.10.0

@@ -1,2 +1,4 @@
-abstract class Action {}
+abstract class Action {
+  const Action();
+}
 
