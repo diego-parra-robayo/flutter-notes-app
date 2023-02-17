@@ -38,14 +38,12 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
       floatingActionButton: EditNoteSaveFormConnector(
         noteId: widget.noteId,
         builder: (context, callback) => FloatingActionButton(
-          onPressed: _formKey.currentState?.validate() != true
-              ? null
-              : () => callback(
-                    NoteFormData(
-                      title: _titleController.text,
-                      description: _descriptionController.text,
-                    ),
-                  ),
+          onPressed: () => callback(
+            NoteFormData(
+              title: _titleController.text,
+              description: _descriptionController.text,
+            ),
+          ),
           child: saveIcon,
         ),
       ),
