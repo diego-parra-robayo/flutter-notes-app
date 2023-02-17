@@ -34,10 +34,6 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteThunk> {
 
   @override
   void onFailure(Store<AppState> store, AddNoteThunk action, Failure failure) {
-    store.dispatch(
-      SetNoteDetailsFailureAction(
-        failure.copyWith(type: FailureType.popUpMessage),
-      ),
-    );
+    store.dispatch(SetNoteDetailsFailureAction(failure));
   }
 }

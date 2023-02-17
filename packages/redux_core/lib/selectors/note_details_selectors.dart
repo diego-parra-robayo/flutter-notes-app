@@ -10,15 +10,8 @@ bool selectNoteDetailsIsLoading(AppState state) =>
 
 Note? selectNoteDetails(AppState state) => state.noteDetails.data;
 
-Failure? _selectNoteDetailsFailure(AppState state) =>
-    state.noteDetails.status == NoteDetailsStatus.failure
-        ? state.noteDetails.failure
+String? selectNoteDetailsFailure(AppState state) =>
+    state.noteDetails.status == NoteDetailsStatus.popUpFailure ||
+            state.noteDetails.status == NoteDetailsStatus.breakingFailure
+        ? state.noteDetails.failure?.message
         : null;
-
-String? selectNoteDetailsPopUpMessage(AppState state) {
-  final failure = _selectNoteDetailsFailure(state);
-  if (failure?.type == FailureType.popUpMessage) {
-    return failure?.message;
-  }
-  return null;
-}

@@ -26,7 +26,9 @@ NoteDetailsState _setNoteDetailsFailure(
   SetNoteDetailsFailureAction action,
 ) {
   return state.copyWith(
-    status: NoteDetailsStatus.failure,
+    status: action.isBreakingFailure
+        ? NoteDetailsStatus.breakingFailure
+        : NoteDetailsStatus.popUpFailure,
     failure: action.failure,
   );
 }

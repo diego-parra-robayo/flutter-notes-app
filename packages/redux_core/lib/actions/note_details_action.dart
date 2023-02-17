@@ -6,11 +6,16 @@ class SetNoteDetailsLoadingAction extends Action {}
 
 class SetNoteDetailsFailureAction extends Action {
   final Failure failure;
+  final bool isBreakingFailure;
 
-  SetNoteDetailsFailureAction(this.failure);
+  SetNoteDetailsFailureAction(
+    this.failure, {
+    this.isBreakingFailure = false,
+  });
 }
 
 class SetNoteDetailsAction extends Action {
   final Note? note;
+
   SetNoteDetailsAction({required this.note});
 }

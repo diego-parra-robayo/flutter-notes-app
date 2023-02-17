@@ -6,8 +6,12 @@ class SetNotesLoadingAction extends Action {}
 
 class SetNotesFailureAction extends Action {
   final Failure failure;
+  final bool isBreakingFailure;
 
-  SetNotesFailureAction(this.failure);
+  SetNotesFailureAction(
+    this.failure, {
+    this.isBreakingFailure = false,
+  });
 }
 
 class SetNotesAction extends Action {

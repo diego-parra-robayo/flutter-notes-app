@@ -11,21 +11,12 @@ List<Note> selectNotes(AppState state) => state.notes.data;
 Note? selectNote(AppState state, String id) =>
     state.notes.data.firstOrNull((note) => note.id == id);
 
-Failure? _selectNotesFailure(AppState state) =>
-    state.notes.status == NotesStatus.failure ? state.notes.failure : null;
+String? selectNotesPopUpMessage(AppState state) =>
+    state.notes.status == NotesStatus.popUpFailure
+        ? state.noteDetails.failure?.message
+        : null;
 
-String? selectNotesPopUpMessage(AppState state) {
-  final failure = _selectNotesFailure(state);
-  if (failure?.type == FailureType.popUpMessage) {
-    return failure?.message;
-  }
-  return null;
-}
-
-String? selectNotesBreakingMessage(AppState state) {
-  final failure = _selectNotesFailure(state);
-  if (failure?.type == FailureType.breakingMessage) {
-    return failure?.message;
-  }
-  return null;
-}
+String? selectNotesBreakingMessage(AppState state) =>
+    state.notes.status == NotesStatus.breakingFailure
+        ? state.noteDetails.failure?.message
+        : null;

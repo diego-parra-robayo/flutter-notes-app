@@ -47,12 +47,6 @@ class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteThunk> {
     UpdateNoteThunk action,
     Failure failure,
   ) {
-    store.dispatch(
-      SetNoteDetailsFailureAction(
-        failure.copyWith(
-          type: FailureType.popUpMessage,
-        ),
-      ),
-    );
+    store.dispatch(SetNoteDetailsFailureAction(failure));
   }
 }

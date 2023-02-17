@@ -35,9 +35,7 @@ class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsThunk> {
     Failure failure,
   ) {
     store.dispatch(
-      SetNoteDetailsFailureAction(
-        failure.copyWith(type: FailureType.popUpMessage),
-      ),
+      SetNoteDetailsFailureAction(failure, isBreakingFailure: true),
     );
   }
 }

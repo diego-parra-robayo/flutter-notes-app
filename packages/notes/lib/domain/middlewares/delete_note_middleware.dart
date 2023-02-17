@@ -28,10 +28,6 @@ class DeleteNoteMiddleware extends CustomMiddleware<DeleteNoteThunk> {
     DeleteNoteThunk action,
     Failure failure,
   ) {
-    store.dispatch(
-      SetNoteDetailsFailureAction(
-        failure.copyWith(type: FailureType.popUpMessage),
-      ),
-    );
+    store.dispatch(SetNoteDetailsFailureAction(failure));
   }
 }

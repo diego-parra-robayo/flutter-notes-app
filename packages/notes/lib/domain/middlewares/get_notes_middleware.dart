@@ -22,10 +22,6 @@ class GetNotesMiddleware extends CustomMiddleware<GetNotesThunk> {
 
   @override
   void onFailure(Store<AppState> store, GetNotesThunk action, Failure failure) {
-    store.dispatch(
-      SetNotesFailureAction(
-        failure.copyWith(type: FailureType.breakingMessage),
-      ),
-    );
+    store.dispatch(SetNotesFailureAction(failure, isBreakingFailure: true));
   }
 }

@@ -21,7 +21,7 @@ class EditNoteFormConnector extends StatelessWidget {
     return ResourceConnector<AppState, NoteFormData?>(
       onInit: (store) => store.dispatch(GetNoteDetailsThunk(id: noteId)),
       loadingSelector: selectNoteDetailsIsLoading,
-      popUpMessageSelector: selectNoteDetailsPopUpMessage,
+      popUpMessageSelector: selectNoteDetailsFailure,
       dataConverter: (store) {
         final note = selectNoteDetails(store.state);
         if (note == null) return null;

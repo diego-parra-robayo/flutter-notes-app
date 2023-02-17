@@ -13,7 +13,9 @@ NotesState notesReducer(NotesState state, Action action) {
     );
   } else if (action is SetNotesFailureAction) {
     return state.copyWith(
-      status: NotesStatus.failure,
+      status: action.isBreakingFailure
+          ? NotesStatus.breakingFailure
+          : NotesStatus.popUpFailure,
       failure: action.failure,
     );
   } else if (action is SetNotesAction) {
@@ -76,7 +78,9 @@ NotesState _setNotesLoading(NotesState state, SetNotesLoadingAction action) {
 
 NotesState _setNotesFailure(NotesState state, SetNotesFailureAction action) {
   return state.copyWith(
-    status: NotesStatus.failure,
+    status: action.isBreakingFailure
+        ? NotesStatus.breakingFailure
+        : NotesStatus.popUpFailure,
     failure: action.failure,
   );
 }

@@ -44,12 +44,6 @@ class ToggleNoteCompletedMiddleware
     ToggleNoteCompletedThunk action,
     Failure failure,
   ) {
-    store.dispatch(
-      SetNotesFailureAction(
-        failure.copyWith(
-          type: FailureType.popUpMessage,
-        ),
-      ),
-    );
+    store.dispatch(SetNotesFailureAction(failure));
   }
 }
