@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/di/di_schema.dart';
+import 'package:get_it/get_it.dart';
 import 'package:notes/data/datasources/fake/note_fake_datasource.dart';
 import 'package:notes/data/datasources/remote/note_remote_datasource.dart';
 import 'package:notes/data/repositories/note_repository_impl.dart';
@@ -46,4 +47,8 @@ class NotesDi extends DiSchema {
   }
 
   static const middlewareKey = 'notes/middleware';
+
+  static get middlewares => GetIt.instance.get<List<Middleware<AppState>>>(
+        instanceName: middlewareKey,
+      );
 }
