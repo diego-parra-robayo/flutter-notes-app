@@ -53,7 +53,7 @@ class ConfirmDialog extends StatelessAlert
 extension on ConfirmDialog {
   Widget? get _titleWidget => title != null ? Text(title!) : null;
 
-  Widget? get _contentWidget => title != null ? Text(title!) : null;
+  Widget? get _contentWidget => description != null ? Text(description!) : null;
 
   void _dismissDialogWithResult(BuildContext context, bool result) =>
       Navigator.of(context, rootNavigator: true).pop(result);
