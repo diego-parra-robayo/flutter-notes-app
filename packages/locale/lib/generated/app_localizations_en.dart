@@ -32,6 +32,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get description => 'Description';
 
   @override
+  String get nonEmptyValidationMessage => 'This field can\'t be empty';
+
+  @override
   String get deleteNoteConfirmation => 'Are you sure you want to delete this note?';
 
   @override

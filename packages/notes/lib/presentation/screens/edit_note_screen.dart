@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:locale/extensions/app_localizations_extensions.dart';
-import 'package:notes/presentation/builders/builders.dart';
-import 'package:ui/widgets/widgets.dart';
-import 'package:ui/theme/ui.dart';
+import 'package:locale/generated/app_localizations.dart';
+import 'package:notes/presentation/connectors/edit_note_connector.dart';
+import 'package:notes/presentation/widgets/note_form.dart';
 
-class EditNoteScreen extends StatelessWidget {
+class EditNoteScreen extends StatefulWidget {
   final String? noteId;
 
   const EditNoteScreen({
@@ -13,59 +13,58 @@ class EditNoteScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<EditNoteScreen> createState() => _EditNoteScreenState();
+}
+
+class _EditNoteScreenState extends State<EditNoteScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    return NoteFormProvider(
-      noteId: noteId,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            noteId == null
-                ? context.l10n.createNoteTitle
-                : context.l10n.editNoteTitle,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(getTitle(context.l10n)),
+      ),
+      body: EditNoteFormConnector(
+        noteId: widget.noteId,
+        builder: (context, initialFormData) => NoteForm(
+          formKey: _formKey,
+          titleController: _titleController,
+          descriptionController: _descriptionController,
         ),
-        body: Stack(
-          children: [
-            NoteFormLoadingBuilder(
-              builder: (context, isLoading) =>
-              isLoading ? const LoadingWidget() : const SizedBox.shrink(),
-            ),
-            Padding(
-              padding: EdgeInsets.all(UI.dimens.d16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  NoteTitleFieldBuilder(
-                    builder: (context, controller) => TextField(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        label: Text(context.l10n.title),
-                      ),
+      ),
+      floatingActionButton: EditNoteSaveFormConnector(
+        noteId: widget.noteId,
+        builder: (context, callback) => FloatingActionButton(
+          onPressed: _formKey.currentState?.validate() != true
+              ? null
+              : () => callback(
+                    NoteFormData(
+                      title: _titleController.text,
+                      description: _descriptionController.text,
                     ),
                   ),
-                  SizedBox(height: UI.dimens.d16),
-                  Expanded(
-                    child: NoteDescriptionFieldBuilder(
-                      builder: (context, controller) => TextField(
-                        controller: controller,
-                        decoration: InputDecoration(
-                          label: Text(context.l10n.description),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: SaveNoteBuilder(
-          builder: (context, onPressed) => FloatingActionButton(
-            onPressed: onPressed,
-            child: Icon(noteId == null ? Icons.add : Icons.save),
-          ),
+          child: saveIcon,
         ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+}
+
+extension on State<EditNoteScreen> {
+  bool get isNewNote => widget.noteId == null;
+
+  String getTitle(AppLocalizations l10n) =>
+      isNewNote ? l10n.createNoteTitle : l10n.editNoteTitle;
+
+  Icon get saveIcon => Icon(isNewNote ? Icons.add : Icons.save);
 }

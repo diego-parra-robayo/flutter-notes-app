@@ -20,4 +20,4 @@ class NoteDetailsState with _$NoteDetailsState {
       );
 }
 
-enum NoteDetailsStatus { idle, loading, success, failure }
+enum NoteDetailsStatus { idle, loading, loadSuccess, saveSuccess, failure }

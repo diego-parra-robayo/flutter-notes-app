@@ -147,6 +147,12 @@ abstract class AppLocalizations {
   /// **'Description'**
   String get description;
 
+  /// No description provided for @nonEmptyValidationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This field can\'t be empty'**
+  String get nonEmptyValidationMessage;
+
   /// No description provided for @deleteNoteConfirmation.
   ///
   /// In en, this message translates to:

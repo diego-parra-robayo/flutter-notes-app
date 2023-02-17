@@ -25,6 +25,7 @@ class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteThunk> {
     final note = selectNote(store.state, action.id);
     if (note == null) return;
 
+    store.dispatch(SetNoteDetailsLoadingAction());
     final updatedNote = note.copyWith(
       title: action.title,
       description: action.description,

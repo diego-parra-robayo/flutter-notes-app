@@ -10,6 +10,7 @@
   "editNoteTitle": "Editar nota",
   "title": "Título",
   "description": "Descripción",
+  "nonEmptyValidationMessage": "This field can't be empty",
   "deleteNoteConfirmation": "¿Seguro deseas eliminar esta nota?",
   "deletedNoteMessage": "Nota eliminada"
 }
