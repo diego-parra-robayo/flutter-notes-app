@@ -14,12 +14,13 @@ class StoreListener<S, VM> extends StatelessWidget {
     this.child,
   }) : super(key: key);
 
+  //  TODO: Check if this can be improved without rebuilding the child
   @override
   Widget build(BuildContext context) {
     return StoreConnector<S, VM>(
       distinct: true,
       converter: converter,
-      rebuildOnChange: false,
+      rebuildOnChange: true,
       builder: (context, _) => child ?? const SizedBox.shrink(),
       onWillChange: (_, vm) => listener(context, vm),
     );
