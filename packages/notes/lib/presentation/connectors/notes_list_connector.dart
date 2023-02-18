@@ -60,7 +60,7 @@ class NotesListViewModel extends Equatable {
   ) {
     return NotesListViewModel(
       notes: selectNotes(store.state),
-      onRefresh: () => store.dispatch(const GetNotesRequest()),
+      onRefresh: () => store.dispatch(const GetNotesRequest(forceRefresh: true)),
       onNotePressed: (note) => context.goNamed(
         NotesRoute.editNote,
         params: {'id': note.id},

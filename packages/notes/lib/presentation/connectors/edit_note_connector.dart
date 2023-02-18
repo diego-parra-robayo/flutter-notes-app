@@ -18,7 +18,10 @@ class EditNoteConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResourceConnector<AppState, EditNoteViewModel>(
-      onInit: (store) => store.dispatch(GetNoteDetailsRequest(id: noteId)),
+      onInit: (store) => store.dispatch(GetNoteDetailsRequest(
+        id: noteId,
+        forceRefresh: false,
+      )),
       loadingSelector: selectNoteDetailsIsLoading,
       popUpMessageSelector: selectNoteDetailsFailure,
       dataConverter: (store) => EditNoteViewModel.fromStore(

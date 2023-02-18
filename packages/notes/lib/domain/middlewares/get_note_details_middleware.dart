@@ -4,8 +4,12 @@ import '../repositories/note_repository.dart';
 
 class GetNoteDetailsRequest extends Action {
   final String? id;
+  final bool forceRefresh;
 
-  const GetNoteDetailsRequest({required this.id});
+  const GetNoteDetailsRequest({
+    required this.id,
+    this.forceRefresh = true,
+  });
 }
 
 class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsRequest> {
@@ -17,7 +21,10 @@ class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsRequest> {
 
   @override
   Future execute(Store<AppState> store, GetNoteDetailsRequest action) async {
-    if (selectNoteDetails(store.state)?.id == action.id) return;
+    if (!action.forceRefresh &&
+        action.id == selectNoteDetails(store.state)?.id) {
+      return;
+    }
 
     store.dispatch(SetNoteDetailsAction(note: null));
 
