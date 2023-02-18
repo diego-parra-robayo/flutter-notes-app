@@ -42,19 +42,23 @@ class NotesListWidget extends StatelessWidget with PlatformDependentWidget {
   @override
   Widget buildWeb(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: width ~/ 300,
-        mainAxisSpacing: UI.dimens.d16,
-        crossAxisSpacing: UI.dimens.d16,
-        mainAxisExtent: 100,
-      ),
-      itemBuilder: (context, index) => NoteWidget(
-        note: notes[index],
-        onPressed: onNotePressed,
-        onToggleCompleted: onToggleCompleted,
-        onDeletePressed: onDeleteNote,
-        isDismissible: false,
+    return Padding(
+      padding: EdgeInsets.all(UI.dimens.d16),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: width ~/ 300,
+          mainAxisSpacing: UI.dimens.d16,
+          crossAxisSpacing: UI.dimens.d16,
+          mainAxisExtent: 100,
+        ),
+        itemBuilder: (context, index) => NoteWidget(
+          note: notes[index],
+          onPressed: onNotePressed,
+          onToggleCompleted: onToggleCompleted,
+          onDeletePressed: onDeleteNote,
+          isDismissible: false,
+        ),
+        itemCount: notes.length,
       ),
     );
   }
