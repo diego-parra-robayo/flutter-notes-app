@@ -1,19 +1,19 @@
 import 'package:redux_core/redux_core.dart';
 
-import '../entities/new_note_request.dart';
+import '../entities/new_note_request_model.dart';
 import '../repositories/note_repository.dart';
 
-class AddNoteThunk extends Action {
+class AddNoteRequest extends Action {
   final String title;
   final String description;
 
-  const AddNoteThunk({
+  const AddNoteRequest({
     required this.title,
     required this.description,
   });
 }
 
-class AddNoteMiddleware extends CustomMiddleware<AddNoteThunk> {
+class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
   final NoteRepository repository;
 
   AddNoteMiddleware({
@@ -21,10 +21,10 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteThunk> {
   });
 
   @override
-  Future execute(Store<AppState> store, AddNoteThunk action) async {
+  Future execute(Store<AppState> store, AddNoteRequest action) async {
     store.dispatch(SetNoteDetailsLoadingAction());
     final note = await repository.addNote(
-      request: NewNoteRequest(
+      request: NewNoteRequestModel(
         title: action.title,
         description: action.description,
       ),
@@ -33,7 +33,7 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteThunk> {
   }
 
   @override
-  void onFailure(Store<AppState> store, AddNoteThunk action, Failure failure) {
+  void onFailure(Store<AppState> store, AddNoteRequest action, Failure failure) {
     store.dispatch(SetNoteDetailsFailureAction(failure));
   }
 }

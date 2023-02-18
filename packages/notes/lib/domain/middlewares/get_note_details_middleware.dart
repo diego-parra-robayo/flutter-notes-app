@@ -2,13 +2,13 @@ import 'package:redux_core/redux_core.dart';
 
 import '../repositories/note_repository.dart';
 
-class GetNoteDetailsThunk extends Action {
+class GetNoteDetailsRequest extends Action {
   final String? id;
 
-  const GetNoteDetailsThunk({required this.id});
+  const GetNoteDetailsRequest({required this.id});
 }
 
-class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsThunk> {
+class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsRequest> {
   final NoteRepository repository;
 
   GetNoteDetailsMiddleware({
@@ -16,7 +16,7 @@ class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsThunk> {
   });
 
   @override
-  Future execute(Store<AppState> store, GetNoteDetailsThunk action) async {
+  Future execute(Store<AppState> store, GetNoteDetailsRequest action) async {
     if (selectNoteDetails(store.state)?.id == action.id) return;
 
     store.dispatch(SetNoteDetailsAction(note: null));
@@ -31,7 +31,7 @@ class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsThunk> {
   @override
   void onFailure(
     Store<AppState> store,
-    GetNoteDetailsThunk action,
+    GetNoteDetailsRequest action,
     Failure failure,
   ) {
     store.dispatch(

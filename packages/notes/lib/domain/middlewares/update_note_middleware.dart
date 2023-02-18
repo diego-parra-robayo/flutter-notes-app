@@ -1,27 +1,27 @@
 import 'package:redux_core/redux_core.dart';
 
-import '../entities/update_note_request.dart';
+import '../entities/update_note_request_model.dart';
 import '../repositories/note_repository.dart';
 
-class UpdateNoteThunk extends Action {
+class UpdateNoteRequest extends Action {
   final String id;
   final String title;
   final String description;
 
-  UpdateNoteThunk({
+  UpdateNoteRequest({
     required this.id,
     required this.title,
     required this.description,
   });
 }
 
-class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteThunk> {
+class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteRequest> {
   final NoteRepository repository;
 
   UpdateNoteMiddleware({required this.repository});
 
   @override
-  Future execute(Store<AppState> store, UpdateNoteThunk action) async {
+  Future execute(Store<AppState> store, UpdateNoteRequest action) async {
     final note = selectNote(store.state, action.id);
     if (note == null) return;
 
@@ -31,7 +31,7 @@ class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteThunk> {
       description: action.description,
     );
     await repository.updateNote(
-      request: UpdateNoteRequest(
+      request: UpdateNoteRequestModel(
         noteId: updatedNote.id,
         title: updatedNote.title,
         description: updatedNote.description,
@@ -44,7 +44,7 @@ class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteThunk> {
   @override
   void onFailure(
     Store<AppState> store,
-    UpdateNoteThunk action,
+    UpdateNoteRequest action,
     Failure failure,
   ) {
     store.dispatch(SetNoteDetailsFailureAction(failure));

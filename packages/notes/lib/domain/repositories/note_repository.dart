@@ -9,11 +9,11 @@ abstract class NoteRepository {
   });
 
   Future<Note> addNote({
-    required NewNoteRequest request,
+    required NewNoteRequestModel request,
   });
 
   Future<void> updateNote({
-    required UpdateNoteRequest request,
+    required UpdateNoteRequestModel request,
   });
 
   Future<void> toggleCompleted({

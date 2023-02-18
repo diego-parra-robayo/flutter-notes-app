@@ -1,2 +1,2 @@
-export 'new_note_request.dart';
-export 'update_note_request.dart';
+export 'new_note_request_model.dart';
+export 'update_note_request_model.dart';

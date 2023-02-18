@@ -26,7 +26,7 @@ class NotesListConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResourceConnector<AppState, NotesListViewModel>(
-      onInit: (store) => store.dispatch(const GetNotesThunk()),
+      onInit: (store) => store.dispatch(const GetNotesRequest()),
       loadingSelector: selectNotesIsLoading,
       loadingBuilder: loadingBuilder,
       popUpMessageSelector: selectNotesPopUpMessage,
@@ -60,15 +60,15 @@ class NotesListViewModel extends Equatable {
   ) {
     return NotesListViewModel(
       notes: selectNotes(store.state),
-      onRefresh: () => store.dispatch(const GetNotesThunk()),
+      onRefresh: () => store.dispatch(const GetNotesRequest()),
       onNotePressed: (note) => context.goNamed(
         NotesRoute.editNote,
         params: {'id': note.id},
       ),
       onToggleCompleted: (id) => store.dispatch(
-        ToggleNoteCompletedThunk(id: id),
+        ToggleNoteCompletedRequest(id: id),
       ),
-      onDeleteNote: (id) => store.dispatch(DeleteNoteThunk(id)),
+      onDeleteNote: (id) => store.dispatch(DeleteNoteRequest(id)),
     );
   }
 

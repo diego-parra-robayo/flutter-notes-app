@@ -18,7 +18,7 @@ class EditNoteConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResourceConnector<AppState, EditNoteViewModel>(
-      onInit: (store) => store.dispatch(GetNoteDetailsThunk(id: noteId)),
+      onInit: (store) => store.dispatch(GetNoteDetailsRequest(id: noteId)),
       loadingSelector: selectNoteDetailsIsLoading,
       popUpMessageSelector: selectNoteDetailsFailure,
       dataConverter: (store) => EditNoteViewModel.fromStore(
@@ -61,11 +61,11 @@ class EditNoteViewModel extends Equatable {
             ),
       onSaveCallback: (formData) {
         final request = noteId == null
-            ? AddNoteThunk(
+            ? AddNoteRequest(
                 title: formData.title,
                 description: formData.description,
               )
-            : UpdateNoteThunk(
+            : UpdateNoteRequest(
                 id: noteId,
                 title: formData.title,
                 description: formData.description,

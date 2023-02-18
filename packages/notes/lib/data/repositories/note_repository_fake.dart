@@ -13,7 +13,7 @@ class NoteRepositoryFake implements NoteRepository {
 
   @override
   Future<Note> addNote({
-    required NewNoteRequest request,
+    required NewNoteRequestModel request,
   }) async {
     final id = await dataSource.addNote(
       title: request.title,
@@ -29,7 +29,7 @@ class NoteRepositoryFake implements NoteRepository {
 
   @override
   Future<void> updateNote({
-    required UpdateNoteRequest request,
+    required UpdateNoteRequestModel request,
   }) =>
       dataSource.updateNote(
         noteId: request.noteId,
