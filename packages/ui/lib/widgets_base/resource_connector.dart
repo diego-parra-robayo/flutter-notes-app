@@ -13,6 +13,7 @@ class ResourceConnector<S, VM> extends StatelessWidget {
   final String? Function(S state)? popUpMessageSelector;
   final void Function(BuildContext context, String? message)?
       popUpMessageListener;
+  final List<ListenerPair<S>>? additionalListeners;
   final String? Function(S state)? breakingMessageSelector;
   final Widget? Function(BuildContext context, String? message)?
       breakingMessageBuilder;
@@ -26,6 +27,7 @@ class ResourceConnector<S, VM> extends StatelessWidget {
     this.loadingBuilder,
     this.popUpMessageSelector,
     this.popUpMessageListener,
+    this.additionalListeners,
     this.breakingMessageSelector,
     this.breakingMessageBuilder,
     required this.dataConverter,
@@ -47,6 +49,14 @@ class ResourceConnector<S, VM> extends StatelessWidget {
             converter: (store) => popUpMessageSelector!(store.state),
             listener: _safePopUpMessageListener,
           ),
+        if (additionalListeners != null &&
+            additionalListeners?.isNotEmpty == true)
+          ...additionalListeners!.map(
+            (e) => StoreListener<S, Object>(
+              converter: (store) => e.selector(store.state),
+              listener: e.listener,
+            ),
+          ),
         WidgetConnector(
           isActive: breakingMessageSelector != null,
           parentBuilder: (context, child) => StoreConnector<S, String?>(
@@ -65,6 +75,16 @@ class ResourceConnector<S, VM> extends StatelessWidget {
       ],
     );
   }
+}
+
+class ListenerPair<S> {
+  final dynamic Function(S state) selector;
+  final void Function(BuildContext context, dynamic data) listener;
+
+  const ListenerPair({
+    required this.selector,
+    required this.listener,
+  });
 }
 
 extension<S, VM> on ResourceConnector<S, VM> {

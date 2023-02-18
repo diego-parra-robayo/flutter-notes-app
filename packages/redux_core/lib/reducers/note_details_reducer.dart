@@ -34,14 +34,16 @@ NoteDetailsState _setNoteDetailsFailure(
 }
 
 NoteDetailsState _updateNoteDetails(NoteDetailsState state, dynamic action) {
-  if (action is SetNoteDetailsAction ||
-      action is AddNoteAction ||
+  if(action is SetNoteDetailsAction) {
+    return state.copyWith(
+      status: NoteDetailsStatus.loadSuccess,
+      data: action.note,
+    );
+  } else if (action is AddNoteAction ||
       action is UpdateNoteAction ||
       action is DeleteNoteAction) {
     final Note? note;
-    if (action is SetNoteDetailsAction) {
-      note = action.note;
-    } else if (action is AddNoteAction) {
+    if (action is AddNoteAction) {
       note = action.newNote;
     } else if (action is UpdateNoteAction) {
       note = action.updatedNote;

@@ -63,7 +63,7 @@ class NotesListViewModel extends Equatable {
       onRefresh: () => store.dispatch(const GetNotesThunk()),
       onNotePressed: (note) => context.goNamed(
         NotesRoute.editNote,
-        queryParams: {'id': note.id},
+        params: {'id': note.id},
       ),
       onToggleCompleted: (id) => store.dispatch(
         ToggleNoteCompletedThunk(id: id),

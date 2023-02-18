@@ -5,12 +5,11 @@ import 'package:notes/domain/middlewares/middlewares.dart';
 import 'package:redux_core/redux_core.dart';
 import 'package:ui/widgets_base/resource_connector.dart';
 
-class EditNoteFormConnector extends StatelessWidget {
+class EditNoteConnector extends StatelessWidget {
   final String? noteId;
-  final Widget Function(BuildContext context, NoteFormData? initialFormData)
-      builder;
+  final Widget Function(BuildContext context, EditNoteViewModel vm) builder;
 
-  const EditNoteFormConnector({
+  const EditNoteConnector({
     Key? key,
     required this.noteId,
     required this.builder,
@@ -18,56 +17,66 @@ class EditNoteFormConnector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResourceConnector<AppState, NoteFormData?>(
+    return ResourceConnector<AppState, EditNoteViewModel>(
       onInit: (store) => store.dispatch(GetNoteDetailsThunk(id: noteId)),
       loadingSelector: selectNoteDetailsIsLoading,
       popUpMessageSelector: selectNoteDetailsFailure,
-      dataConverter: (store) {
-        final note = selectNoteDetails(store.state);
-        if (note == null) return null;
-        return NoteFormData(title: note.title, description: note.description);
-      },
+      dataConverter: (store) => EditNoteViewModel.fromStore(
+        store,
+        noteId: noteId,
+      ),
       dataBuilder: builder,
+      additionalListeners: [
+        ListenerPair(
+          selector: selectNoteDetailsStatus,
+          listener: (context, status) {
+            if (status == NoteDetailsStatus.saveSuccess) context.pop();
+          },
+        ),
+      ],
     );
   }
 }
 
-class EditNoteSaveFormConnector extends StatelessWidget {
-  final String? noteId;
-  final Widget Function(BuildContext context, OnSaveCallback callback) builder;
+class EditNoteViewModel extends Equatable {
+  final NoteFormData? initialFormData;
+  final void Function(NoteFormData data) onSaveCallback;
 
-  const EditNoteSaveFormConnector({
-    Key? key,
-    required this.noteId,
-    required this.builder,
-  }) : super(key: key);
+  const EditNoteViewModel({
+    required this.initialFormData,
+    required this.onSaveCallback,
+  });
 
-  @override
-  Widget build(BuildContext context) {
-    return StoreListener<AppState, NoteDetailsStatus>(
-      converter: (store) => selectNoteDetailsStatus(store.state),
-      listener: (context, status) {
-        if (status == NoteDetailsStatus.saveSuccess) context.pop();
+  factory EditNoteViewModel.fromStore(
+    Store<AppState> store, {
+    required String? noteId,
+  }) {
+    final note = selectNoteDetails(store.state);
+    return EditNoteViewModel(
+      initialFormData: note == null
+          ? null
+          : NoteFormData(
+              title: note.title,
+              description: note.description,
+            ),
+      onSaveCallback: (formData) {
+        final request = noteId == null
+            ? AddNoteThunk(
+                title: formData.title,
+                description: formData.description,
+              )
+            : UpdateNoteThunk(
+                id: noteId,
+                title: formData.title,
+                description: formData.description,
+              );
+        store.dispatch(request);
       },
-      child: StoreConnector<AppState, OnSaveCallback>(
-        rebuildOnChange: false,
-        converter: (store) => (formData) {
-          final request = noteId == null
-              ? AddNoteThunk(
-                  title: formData.title,
-                  description: formData.description,
-                )
-              : UpdateNoteThunk(
-                  id: noteId!,
-                  title: formData.title,
-                  description: formData.description,
-                );
-          store.dispatch(request);
-        },
-        builder: builder,
-      ),
     );
   }
+
+  @override
+  List<Object?> get props => [initialFormData];
 }
 
 class NoteFormData extends Equatable {
@@ -82,5 +91,3 @@ class NoteFormData extends Equatable {
   @override
   List<Object?> get props => [title, description];
 }
-
-typedef OnSaveCallback = void Function(NoteFormData data);
