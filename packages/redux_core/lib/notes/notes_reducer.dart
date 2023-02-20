@@ -12,6 +12,7 @@ final Reducer<NotesState> notesReducer = combineReducers([
   TypedReducer<NotesState, SetNoteDetailsAction>(_setNoteDetails),
   TypedReducer<NotesState, Action>(_saveNote),
   TypedReducer<NotesState, DeleteNoteAction>(_deleteNote),
+  TypedReducer<NotesState, ClearNotesAction>(_clearNotes),
 ]);
 
 NotesState _setNotesLoading(NotesState state, SetNotesLoadingAction action) {
@@ -87,5 +88,15 @@ NotesState _deleteNote(NotesState state, DeleteNoteAction action) {
     noteIdList: noteIdList,
     noteIdDetails:
         state.noteIdDetails == action.id ? null : state.noteIdDetails,
+  );
+}
+
+NotesState _clearNotes(NotesState state, ClearNotesAction action) {
+  return state.copyWith(
+    status: NotesStatus.saveSuccess,
+    notesById: {},
+    noteIdList: [],
+    noteIdDetails: null,
+    failure: null,
   );
 }

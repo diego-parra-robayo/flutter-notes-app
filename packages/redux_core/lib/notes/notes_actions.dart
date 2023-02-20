@@ -43,3 +43,5 @@ class DeleteNoteAction extends Action {
 
   const DeleteNoteAction(this.id);
 }
+
+class ClearNotesAction extends Action {}

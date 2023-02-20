@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AppState {
+  AuthState get auth => throw _privateConstructorUsedError;
   NotesState get notes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,8 +29,9 @@ abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({NotesState notes});
+  $Res call({AuthState auth, NotesState notes});
 
+  $AuthStateCopyWith<$Res> get auth;
   $NotesStateCopyWith<$Res> get notes;
 }
 
@@ -46,14 +48,27 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? auth = null,
     Object? notes = null,
   }) {
     return _then(_value.copyWith(
+      auth: null == auth
+          ? _value.auth
+          : auth // ignore: cast_nullable_to_non_nullable
+              as AuthState,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as NotesState,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthStateCopyWith<$Res> get auth {
+    return $AuthStateCopyWith<$Res>(_value.auth, (value) {
+      return _then(_value.copyWith(auth: value) as $Val);
+    });
   }
 
   @override
@@ -72,8 +87,10 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       __$$_AppStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({NotesState notes});
+  $Res call({AuthState auth, NotesState notes});
 
+  @override
+  $AuthStateCopyWith<$Res> get auth;
   @override
   $NotesStateCopyWith<$Res> get notes;
 }
@@ -89,9 +106,14 @@ class __$$_AppStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? auth = null,
     Object? notes = null,
   }) {
     return _then(_$_AppState(
+      auth: null == auth
+          ? _value.auth
+          : auth // ignore: cast_nullable_to_non_nullable
+              as AuthState,
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
@@ -103,14 +125,16 @@ class __$$_AppStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppState implements _AppState {
-  _$_AppState({required this.notes});
+  _$_AppState({required this.auth, required this.notes});
 
+  @override
+  final AuthState auth;
   @override
   final NotesState notes;
 
   @override
   String toString() {
-    return 'AppState(notes: $notes)';
+    return 'AppState(auth: $auth, notes: $notes)';
   }
 
   @override
@@ -118,11 +142,12 @@ class _$_AppState implements _AppState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppState &&
+            (identical(other.auth, auth) || other.auth == auth) &&
             (identical(other.notes, notes) || other.notes == notes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, notes);
+  int get hashCode => Object.hash(runtimeType, auth, notes);
 
   @JsonKey(ignore: true)
   @override
@@ -132,8 +157,12 @@ class _$_AppState implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  factory _AppState({required final NotesState notes}) = _$_AppState;
+  factory _AppState(
+      {required final AuthState auth,
+      required final NotesState notes}) = _$_AppState;
 
+  @override
+  AuthState get auth;
   @override
   NotesState get notes;
   @override
