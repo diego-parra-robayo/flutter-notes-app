@@ -19,6 +19,8 @@ dependencies:
     path: packages/locale
   notes:
     path: packages/notes
+  auth:
+    path: packages/auth
 
   cupertino_icons: ^1.0.5
   firebase_core: ^2.6.1
