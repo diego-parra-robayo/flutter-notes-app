@@ -1,4 +1,9 @@
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/notes_actions.dart';
+import 'package:redux_core/notes/notes_selectors.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
+import 'package:redux_core/utils/action.dart';
 
 import '../repositories/note_repository.dart';
 
@@ -21,7 +26,7 @@ class ToggleNoteCompletedMiddleware
     Store<AppState> store,
     ToggleNoteCompletedRequest action,
   ) async {
-    final note = selectNote(store.state, action.id);
+    final note = selectNotesMap(store.state)[action.id];
     if (note == null) return;
 
     store.dispatch(SetNotesLoadingAction());
@@ -44,6 +49,6 @@ class ToggleNoteCompletedMiddleware
     ToggleNoteCompletedRequest action,
     Failure failure,
   ) {
-    store.dispatch(SetNotesFailureAction(failure));
+    store.dispatch(SetNotesFailureAction(failure, isBreakingFailure: false));
   }
 }

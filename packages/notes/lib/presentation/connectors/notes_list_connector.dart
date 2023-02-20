@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/domain/middlewares/middlewares.dart';
 import 'package:notes/navigation/notes_routes.dart';
+import 'package:redux_core/notes/note.dart';
+import 'package:redux_core/notes/notes_selectors.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
 import 'package:ui/widgets_base/resource_connector.dart';
 
 class NotesListConnector extends StatelessWidget {

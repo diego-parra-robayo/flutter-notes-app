@@ -1,5 +1,5 @@
 import 'package:notes/domain/entities/entities.dart';
-import 'package:redux_core/entities/entities.dart';
+import 'package:redux_core/notes/note.dart';
 
 abstract class NoteRepository {
   Future<List<Note>> getNotes();

@@ -1,4 +1,8 @@
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/notes_actions.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
+import 'package:redux_core/utils/action.dart';
 
 import '../repositories/note_repository.dart';
 
@@ -17,7 +21,7 @@ class DeleteNoteMiddleware extends CustomMiddleware<DeleteNoteRequest> {
 
   @override
   Future execute(Store<AppState> store, DeleteNoteRequest action) async {
-    store.dispatch(SetNoteDetailsLoadingAction());
+    store.dispatch(SetNotesLoadingAction());
     await repository.deleteNote(noteId: action.id);
     store.dispatch(DeleteNoteAction(action.id));
   }
@@ -28,6 +32,6 @@ class DeleteNoteMiddleware extends CustomMiddleware<DeleteNoteRequest> {
     DeleteNoteRequest action,
     Failure failure,
   ) {
-    store.dispatch(SetNoteDetailsFailureAction(failure));
+    store.dispatch(SetNotesFailureAction(failure));
   }
 }

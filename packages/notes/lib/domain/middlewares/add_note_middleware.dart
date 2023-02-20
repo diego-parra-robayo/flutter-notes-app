@@ -1,4 +1,8 @@
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/notes_actions.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
+import 'package:redux_core/utils/action.dart';
 
 import '../entities/new_note_request_model.dart';
 import '../repositories/note_repository.dart';
@@ -22,7 +26,7 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
 
   @override
   Future execute(Store<AppState> store, AddNoteRequest action) async {
-    store.dispatch(SetNoteDetailsLoadingAction());
+    store.dispatch(SetNotesLoadingAction());
     final note = await repository.addNote(
       request: NewNoteRequestModel(
         title: action.title,
@@ -34,6 +38,6 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
 
   @override
   void onFailure(Store<AppState> store, AddNoteRequest action, Failure failure) {
-    store.dispatch(SetNoteDetailsFailureAction(failure));
+    store.dispatch(SetNotesFailureAction(failure));
   }
 }

@@ -1,4 +1,9 @@
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/notes_actions.dart';
+import 'package:redux_core/notes/notes_selectors.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
+import 'package:redux_core/utils/action.dart';
 
 import '../repositories/note_repository.dart';
 
@@ -21,17 +26,23 @@ class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsRequest> {
 
   @override
   Future execute(Store<AppState> store, GetNoteDetailsRequest action) async {
-    if (!action.forceRefresh &&
-        action.id == selectNoteDetails(store.state)?.id) {
-      return;
+    if (!action.forceRefresh) {
+      if (action.id == selectNoteDetails(store.state)?.id) {
+        return;
+      }
+      final cachedNote = selectNotesMap(store.state)[action.id];
+      if (cachedNote != null) {
+        store.dispatch(SetNoteDetailsAction(cachedNote));
+        return;
+      }
     }
 
-    store.dispatch(SetNoteDetailsAction(note: null));
+    store.dispatch(const SetNoteDetailsAction(null));
 
     if (action.id != null) {
-      store.dispatch(SetNoteDetailsLoadingAction());
+      store.dispatch(SetNotesLoadingAction());
       final note = await repository.getNote(noteId: action.id!);
-      store.dispatch(SetNoteDetailsAction(note: note));
+      store.dispatch(SetNoteDetailsAction(note));
     }
   }
 
@@ -41,8 +52,6 @@ class GetNoteDetailsMiddleware extends CustomMiddleware<GetNoteDetailsRequest> {
     GetNoteDetailsRequest action,
     Failure failure,
   ) {
-    store.dispatch(
-      SetNoteDetailsFailureAction(failure, isBreakingFailure: true),
-    );
+    store.dispatch(SetNotesFailureAction(failure));
   }
 }

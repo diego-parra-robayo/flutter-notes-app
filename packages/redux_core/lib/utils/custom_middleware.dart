@@ -1,4 +1,6 @@
-import '../redux_core.dart';
+import 'package:redux/redux.dart';
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/store/app_state.dart';
 
 abstract class CustomMiddleware<Action> extends MiddlewareClass<AppState> {
   Future execute(Store<AppState> store, Action action);

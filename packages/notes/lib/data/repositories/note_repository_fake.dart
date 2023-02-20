@@ -2,7 +2,8 @@ import 'package:notes/data/datasources/fake/models/note_model.dart';
 import 'package:notes/data/datasources/fake/note_fake_datasource.dart';
 import 'package:notes/domain/entities/entities.dart';
 import 'package:notes/domain/repositories/note_repository.dart';
-import 'package:redux_core/entities/entities.dart';
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/note.dart';
 
 class NoteRepositoryFake implements NoteRepository {
   final NoteFakeDataSource dataSource;

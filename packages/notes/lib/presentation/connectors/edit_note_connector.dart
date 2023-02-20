@@ -2,7 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/domain/middlewares/middlewares.dart';
+import 'package:redux_core/notes/notes_selectors.dart';
+import 'package:redux_core/notes/notes_state.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
 import 'package:ui/widgets_base/resource_connector.dart';
 
 class EditNoteConnector extends StatelessWidget {
@@ -22,8 +25,9 @@ class EditNoteConnector extends StatelessWidget {
         id: noteId,
         forceRefresh: false,
       )),
-      loadingSelector: selectNoteDetailsIsLoading,
-      popUpMessageSelector: selectNoteDetailsFailure,
+      loadingSelector: selectNotesIsLoading,
+      popUpMessageSelector: (state) =>
+          selectNotesPopUpMessage(state) ?? selectNotesBreakingMessage(state),
       dataConverter: (store) => EditNoteViewModel.fromStore(
         store,
         noteId: noteId,
@@ -31,9 +35,9 @@ class EditNoteConnector extends StatelessWidget {
       dataBuilder: builder,
       additionalListeners: [
         ListenerPair(
-          selector: selectNoteDetailsStatus,
+          selector: selectNotesStatus,
           listener: (context, status) {
-            if (status == NoteDetailsStatus.saveSuccess) context.pop();
+            if (status == NotesStatus.saveSuccess) context.pop();
           },
         ),
       ],

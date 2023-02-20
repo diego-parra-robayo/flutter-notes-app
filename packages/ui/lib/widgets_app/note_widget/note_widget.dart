@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redux_core/entities/entities.dart';
+import 'package:redux_core/notes/note.dart';
 import 'package:ui/widgets_app/note_widget/note_delete/note_delete_icon.dart';
 import 'package:ui/widgets_base/widget_connector.dart';
 

@@ -17,8 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NotesState {
   NotesStatus get status => throw _privateConstructorUsedError;
-  List<Note> get data => throw _privateConstructorUsedError;
   Failure? get failure => throw _privateConstructorUsedError;
+  Map<String, Note> get notesById => throw _privateConstructorUsedError;
+  List<String> get noteIdList => throw _privateConstructorUsedError;
+  String? get noteIdDetails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotesStateCopyWith<NotesState> get copyWith =>
@@ -31,7 +33,12 @@ abstract class $NotesStateCopyWith<$Res> {
           NotesState value, $Res Function(NotesState) then) =
       _$NotesStateCopyWithImpl<$Res, NotesState>;
   @useResult
-  $Res call({NotesStatus status, List<Note> data, Failure? failure});
+  $Res call(
+      {NotesStatus status,
+      Failure? failure,
+      Map<String, Note> notesById,
+      List<String> noteIdList,
+      String? noteIdDetails});
 }
 
 /// @nodoc
@@ -48,22 +55,32 @@ class _$NotesStateCopyWithImpl<$Res, $Val extends NotesState>
   @override
   $Res call({
     Object? status = null,
-    Object? data = null,
     Object? failure = freezed,
+    Object? notesById = null,
+    Object? noteIdList = null,
+    Object? noteIdDetails = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as NotesStatus,
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
       failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      notesById: null == notesById
+          ? _value.notesById
+          : notesById // ignore: cast_nullable_to_non_nullable
+              as Map<String, Note>,
+      noteIdList: null == noteIdList
+          ? _value.noteIdList
+          : noteIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      noteIdDetails: freezed == noteIdDetails
+          ? _value.noteIdDetails
+          : noteIdDetails // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -76,7 +93,12 @@ abstract class _$$_NotesStateCopyWith<$Res>
       __$$_NotesStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({NotesStatus status, List<Note> data, Failure? failure});
+  $Res call(
+      {NotesStatus status,
+      Failure? failure,
+      Map<String, Note> notesById,
+      List<String> noteIdList,
+      String? noteIdDetails});
 }
 
 /// @nodoc
@@ -91,22 +113,32 @@ class __$$_NotesStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? data = null,
     Object? failure = freezed,
+    Object? notesById = null,
+    Object? noteIdList = null,
+    Object? noteIdDetails = freezed,
   }) {
     return _then(_$_NotesState(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as NotesStatus,
-      data: null == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<Note>,
       failure: freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure?,
+      notesById: null == notesById
+          ? _value._notesById
+          : notesById // ignore: cast_nullable_to_non_nullable
+              as Map<String, Note>,
+      noteIdList: null == noteIdList
+          ? _value._noteIdList
+          : noteIdList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      noteIdDetails: freezed == noteIdDetails
+          ? _value.noteIdDetails
+          : noteIdDetails // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -116,26 +148,39 @@ class __$$_NotesStateCopyWithImpl<$Res>
 class _$_NotesState implements _NotesState {
   _$_NotesState(
       {required this.status,
-      required final List<Note> data,
-      required this.failure})
-      : _data = data;
+      required this.failure,
+      required final Map<String, Note> notesById,
+      required final List<String> noteIdList,
+      required this.noteIdDetails})
+      : _notesById = notesById,
+        _noteIdList = noteIdList;
 
   @override
   final NotesStatus status;
-  final List<Note> _data;
   @override
-  List<Note> get data {
-    if (_data is EqualUnmodifiableListView) return _data;
+  final Failure? failure;
+  final Map<String, Note> _notesById;
+  @override
+  Map<String, Note> get notesById {
+    if (_notesById is EqualUnmodifiableMapView) return _notesById;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_data);
+    return EqualUnmodifiableMapView(_notesById);
+  }
+
+  final List<String> _noteIdList;
+  @override
+  List<String> get noteIdList {
+    if (_noteIdList is EqualUnmodifiableListView) return _noteIdList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_noteIdList);
   }
 
   @override
-  final Failure? failure;
+  final String? noteIdDetails;
 
   @override
   String toString() {
-    return 'NotesState(status: $status, data: $data, failure: $failure)';
+    return 'NotesState(status: $status, failure: $failure, notesById: $notesById, noteIdList: $noteIdList, noteIdDetails: $noteIdDetails)';
   }
 
   @override
@@ -144,13 +189,23 @@ class _$_NotesState implements _NotesState {
         (other.runtimeType == runtimeType &&
             other is _$_NotesState &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._data, _data) &&
-            (identical(other.failure, failure) || other.failure == failure));
+            (identical(other.failure, failure) || other.failure == failure) &&
+            const DeepCollectionEquality()
+                .equals(other._notesById, _notesById) &&
+            const DeepCollectionEquality()
+                .equals(other._noteIdList, _noteIdList) &&
+            (identical(other.noteIdDetails, noteIdDetails) ||
+                other.noteIdDetails == noteIdDetails));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, status, const DeepCollectionEquality().hash(_data), failure);
+      runtimeType,
+      status,
+      failure,
+      const DeepCollectionEquality().hash(_notesById),
+      const DeepCollectionEquality().hash(_noteIdList),
+      noteIdDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -162,15 +217,21 @@ class _$_NotesState implements _NotesState {
 abstract class _NotesState implements NotesState {
   factory _NotesState(
       {required final NotesStatus status,
-      required final List<Note> data,
-      required final Failure? failure}) = _$_NotesState;
+      required final Failure? failure,
+      required final Map<String, Note> notesById,
+      required final List<String> noteIdList,
+      required final String? noteIdDetails}) = _$_NotesState;
 
   @override
   NotesStatus get status;
   @override
-  List<Note> get data;
-  @override
   Failure? get failure;
+  @override
+  Map<String, Note> get notesById;
+  @override
+  List<String> get noteIdList;
+  @override
+  String? get noteIdDetails;
   @override
   @JsonKey(ignore: true)
   _$$_NotesStateCopyWith<_$_NotesState> get copyWith =>

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:redux_core/entities/note.dart';
+import 'package:redux_core/notes/note.dart';
 
 class NoteModel extends Equatable {
   final String id;

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../entities/failure.dart';
-import '../entities/note.dart';
+import '../failure/failure.dart';
+import 'note.dart';
 
 part 'notes_state.freezed.dart';
 
@@ -9,21 +9,26 @@ part 'notes_state.freezed.dart';
 class NotesState with _$NotesState {
   factory NotesState({
     required NotesStatus status,
-    required List<Note> data,
     required Failure? failure,
+    required Map<String, Note> notesById,
+    required List<String> noteIdList,
+    required String? noteIdDetails,
   }) = _NotesState;
 
   factory NotesState.initial() => NotesState(
-        status: NotesStatus.idle,
-        data: [],
-        failure: null,
-      );
+    status: NotesStatus.idle,
+    failure: null,
+    notesById: {},
+    noteIdList: [],
+    noteIdDetails: null,
+  );
 }
 
 enum NotesStatus {
   idle,
   loading,
-  success,
+  loadSuccess,
+  saveSuccess,
   popUpFailure,
   breakingFailure,
 }

@@ -1,4 +1,9 @@
+import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/notes_actions.dart';
+import 'package:redux_core/notes/notes_selectors.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
+import 'package:redux_core/utils/action.dart';
 
 import '../repositories/note_repository.dart';
 
@@ -30,7 +35,10 @@ class GetNotesMiddleware extends CustomMiddleware<GetNotesRequest> {
 
   @override
   void onFailure(
-      Store<AppState> store, GetNotesRequest action, Failure failure) {
+    Store<AppState> store,
+    GetNotesRequest action,
+    Failure failure,
+  ) {
     store.dispatch(SetNotesFailureAction(failure, isBreakingFailure: true));
   }
 }

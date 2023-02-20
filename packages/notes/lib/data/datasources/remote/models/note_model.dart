@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:redux_core/entities/note.dart';
+import 'package:redux_core/notes/note.dart';
 
 part 'note_model.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redux_core/entities/note.dart';
+import 'package:redux_core/notes/note.dart';
 import 'package:ui/device_utils/device_utils.dart';
 import 'package:ui/theme/ui.dart';
 
@@ -24,7 +24,7 @@ class NotesListWidget extends StatelessWidget with PlatformDependentWidget {
   @override
   Widget buildMobile(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => onRefresh,
+      onRefresh: () async => onRefresh(),
       child: ListView.separated(
         itemCount: notes.length,
         itemBuilder: (context, index) => NoteWidget(

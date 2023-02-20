@@ -1,6 +1,6 @@
-import 'package:redux_core/entities/entities.dart';
-
-import 'action.dart';
+import '../failure/failure.dart';
+import '../utils/action.dart';
+import 'note.dart';
 
 class SetNotesLoadingAction extends Action {}
 
@@ -8,7 +8,7 @@ class SetNotesFailureAction extends Action {
   final Failure failure;
   final bool isBreakingFailure;
 
-  SetNotesFailureAction(
+  const SetNotesFailureAction(
     this.failure, {
     this.isBreakingFailure = false,
   });
@@ -18,6 +18,12 @@ class SetNotesAction extends Action {
   final List<Note> notes;
 
   const SetNotesAction(this.notes);
+}
+
+class SetNoteDetailsAction extends Action {
+  final Note? note;
+
+  const SetNoteDetailsAction(this.note);
 }
 
 class AddNoteAction extends Action {

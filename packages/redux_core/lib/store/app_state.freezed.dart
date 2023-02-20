@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AppState {
   NotesState get notes => throw _privateConstructorUsedError;
-  NoteDetailsState get noteDetails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateCopyWith<AppState> get copyWith =>
@@ -29,10 +28,9 @@ abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res, AppState>;
   @useResult
-  $Res call({NotesState notes, NoteDetailsState noteDetails});
+  $Res call({NotesState notes});
 
   $NotesStateCopyWith<$Res> get notes;
-  $NoteDetailsStateCopyWith<$Res> get noteDetails;
 }
 
 /// @nodoc
@@ -49,17 +47,12 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @override
   $Res call({
     Object? notes = null,
-    Object? noteDetails = null,
   }) {
     return _then(_value.copyWith(
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as NotesState,
-      noteDetails: null == noteDetails
-          ? _value.noteDetails
-          : noteDetails // ignore: cast_nullable_to_non_nullable
-              as NoteDetailsState,
     ) as $Val);
   }
 
@@ -68,14 +61,6 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   $NotesStateCopyWith<$Res> get notes {
     return $NotesStateCopyWith<$Res>(_value.notes, (value) {
       return _then(_value.copyWith(notes: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $NoteDetailsStateCopyWith<$Res> get noteDetails {
-    return $NoteDetailsStateCopyWith<$Res>(_value.noteDetails, (value) {
-      return _then(_value.copyWith(noteDetails: value) as $Val);
     });
   }
 }
@@ -87,12 +72,10 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       __$$_AppStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({NotesState notes, NoteDetailsState noteDetails});
+  $Res call({NotesState notes});
 
   @override
   $NotesStateCopyWith<$Res> get notes;
-  @override
-  $NoteDetailsStateCopyWith<$Res> get noteDetails;
 }
 
 /// @nodoc
@@ -107,17 +90,12 @@ class __$$_AppStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? notes = null,
-    Object? noteDetails = null,
   }) {
     return _then(_$_AppState(
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as NotesState,
-      noteDetails: null == noteDetails
-          ? _value.noteDetails
-          : noteDetails // ignore: cast_nullable_to_non_nullable
-              as NoteDetailsState,
     ));
   }
 }
@@ -125,16 +103,14 @@ class __$$_AppStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppState implements _AppState {
-  _$_AppState({required this.notes, required this.noteDetails});
+  _$_AppState({required this.notes});
 
   @override
   final NotesState notes;
-  @override
-  final NoteDetailsState noteDetails;
 
   @override
   String toString() {
-    return 'AppState(notes: $notes, noteDetails: $noteDetails)';
+    return 'AppState(notes: $notes)';
   }
 
   @override
@@ -142,13 +118,11 @@ class _$_AppState implements _AppState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppState &&
-            (identical(other.notes, notes) || other.notes == notes) &&
-            (identical(other.noteDetails, noteDetails) ||
-                other.noteDetails == noteDetails));
+            (identical(other.notes, notes) || other.notes == notes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, notes, noteDetails);
+  int get hashCode => Object.hash(runtimeType, notes);
 
   @JsonKey(ignore: true)
   @override
@@ -158,14 +132,10 @@ class _$_AppState implements _AppState {
 }
 
 abstract class _AppState implements AppState {
-  factory _AppState(
-      {required final NotesState notes,
-      required final NoteDetailsState noteDetails}) = _$_AppState;
+  factory _AppState({required final NotesState notes}) = _$_AppState;
 
   @override
   NotesState get notes;
-  @override
-  NoteDetailsState get noteDetails;
   @override
   @JsonKey(ignore: true)
   _$$_AppStateCopyWith<_$_AppState> get copyWith =>

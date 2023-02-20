@@ -7,6 +7,7 @@ import 'package:notes/data/repositories/note_repository_impl.dart';
 import 'package:notes/domain/middlewares/middlewares.dart';
 import 'package:notes/domain/repositories/note_repository.dart';
 import 'package:redux_core/redux_core.dart';
+import 'package:redux_core/store/app_state.dart';
 
 class NotesDi extends DiSchema {
   @override
