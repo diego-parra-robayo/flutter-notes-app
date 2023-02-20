@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AuthRoute {
+  const AuthRoute._();
+
   static const signIn = 'auth/login';
 }
 

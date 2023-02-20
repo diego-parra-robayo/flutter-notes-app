@@ -4,7 +4,7 @@ import 'package:redux_core/store/store.dart';
 
 final appStore = createStore(
   middleware: [
-    ...AuthDi.middlewares,
-    ...NotesDi.middlewares,
+    ...AuthDi.instance.middlewares,
+    ...NotesDi.instance.middlewares,
   ],
 );

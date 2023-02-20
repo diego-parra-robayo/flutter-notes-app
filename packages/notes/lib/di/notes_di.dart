@@ -10,6 +10,8 @@ import 'package:redux_core/redux_core.dart';
 import 'package:redux_core/store/app_state.dart';
 
 class NotesDi extends DiSchema {
+  static NotesDi get instance => GetIt.instance.get();
+
   @override
   void registerDataSources() {
     getIt.registerLazySingleton<FirebaseFirestore>(
@@ -43,13 +45,10 @@ class NotesDi extends DiSchema {
         ToggleNoteCompletedMiddleware(repository: getIt()),
         UpdateNoteMiddleware(repository: getIt()),
       ],
-      instanceName: middlewareKey,
+      instanceName: middlewaresKey,
     );
   }
 
-  static const middlewareKey = 'notes/middleware';
-
-  static get middlewares => GetIt.instance.get<List<Middleware<AppState>>>(
-        instanceName: middlewareKey,
-      );
+  List<Middleware<AppState>> get middlewares =>
+      getIt(instanceName: middlewaresKey);
 }

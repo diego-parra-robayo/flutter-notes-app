@@ -3,6 +3,8 @@ import 'package:notes/presentation/screens/edit_note_screen.dart';
 import 'package:notes/presentation/screens/home_screen.dart';
 
 class NotesRoute {
+  const NotesRoute._();
+
   static const home = 'notes/home';
   static const addNote = 'notes/add';
   static const editNote = 'notes/edit';
@@ -10,7 +12,7 @@ class NotesRoute {
 
 final notesRoutes = [
   GoRoute(
-    path: '/',
+    path: '/notes',
     name: NotesRoute.home,
     builder: (context, state) => const HomeScreen(),
     routes: [
