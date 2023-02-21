@@ -11,6 +11,14 @@ class Failure extends Equatable {
   List<Object?> get props => [message];
 }
 
+class UnauthenticatedFailure extends Failure {
+  const UnauthenticatedFailure({
+    String? message,
+  }) : super(
+          message: message ?? 'Please sign in to access this feature.',
+        );
+}
+
 class NotFoundFailure extends Failure {
   const NotFoundFailure({
     String? message,

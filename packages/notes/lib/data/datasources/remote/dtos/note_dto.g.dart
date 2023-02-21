@@ -6,8 +6,9 @@ part of 'note_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NoteDto _$NoteModelFromJson(Map<String, dynamic> json) => NoteDto(
+NoteDto _$NoteDtoFromJson(Map<String, dynamic> json) => NoteDto(
       id: json['id'] as String?,
+      userId: json['userId'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
       isCompleted: json['isCompleted'] as bool?,
@@ -15,7 +16,7 @@ NoteDto _$NoteModelFromJson(Map<String, dynamic> json) => NoteDto(
       updatedAt: json['updatedAt'],
     );
 
-Map<String, dynamic> _$NoteModelToJson(NoteDto instance) {
+Map<String, dynamic> _$NoteDtoToJson(NoteDto instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -25,6 +26,7 @@ Map<String, dynamic> _$NoteModelToJson(NoteDto instance) {
   }
 
   writeNotNull('id', instance.id);
+  writeNotNull('userId', instance.userId);
   writeNotNull('title', instance.title);
   writeNotNull('description', instance.description);
   writeNotNull('isCompleted', instance.isCompleted);

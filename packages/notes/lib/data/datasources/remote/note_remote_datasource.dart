@@ -15,11 +15,15 @@ class NoteRemoteDatasource {
   }
 
   Future<List<NoteDto>> getNotes() async {
+    final querySnapshot =
+        await notesRef.orderBy('createdAt', descending: false).get();
+    return querySnapshot.docs.map((doc) => doc.data() as NoteDto).toList();
+  }
+
+  Future<List<NoteDto>> getNotesByUser({required String userId}) async {
     final querySnapshot = await notesRef
-        .orderBy(
-          'createdAt',
-          descending: false,
-        )
+        .where('userId', isEqualTo: userId)
+        .orderBy('createdAt', descending: false)
         .get();
     return querySnapshot.docs.map((doc) => doc.data() as NoteDto).toList();
   }
@@ -30,11 +34,13 @@ class NoteRemoteDatasource {
   }
 
   Future<String> addNote({
+    required String userId,
     required String title,
     required String description,
   }) async {
     final docRef = await notesRef.add(
       NoteDto(
+        userId: userId,
         title: title,
         description: description,
         isCompleted: false,

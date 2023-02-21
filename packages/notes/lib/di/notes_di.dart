@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:notes/data/datasources/fake/note_fake_datasource.dart';
 import 'package:notes/data/datasources/remote/note_remote_datasource.dart';
 import 'package:notes/data/repositories/note_repository_impl.dart';
+import 'package:notes/domain/middlewares/get_my_notes_middleware.dart';
 import 'package:notes/domain/middlewares/middlewares.dart';
 import 'package:notes/domain/repositories/note_repository.dart';
 import 'package:redux_core/redux_core.dart';
@@ -51,6 +52,7 @@ class NotesDi extends DiSchema {
         DeleteNoteMiddleware(repository: getIt()),
         GetNoteDetailsMiddleware(repository: getIt()),
         GetNotesMiddleware(repository: getIt()),
+        GetMyNotesMiddleware(repository: getIt()),
         ToggleNoteCompletedMiddleware(repository: getIt()),
         UpdateNoteMiddleware(repository: getIt()),
       ],

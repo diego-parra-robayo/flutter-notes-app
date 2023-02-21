@@ -58,6 +58,10 @@ class NoteRepositoryFake implements NoteRepository {
   }
 
   @override
+  Future<List<Note>> getNotesByUser({required String userId}) =>
+    getNotes();
+
+  @override
   Future<void> toggleCompleted({
     required String noteId,
     required bool newState,

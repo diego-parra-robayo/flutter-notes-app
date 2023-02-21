@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes/domain/middlewares/get_my_notes_middleware.dart';
 import 'package:notes/domain/middlewares/middlewares.dart';
 import 'package:notes/navigation/notes_routes.dart';
 import 'package:redux_core/notes/note.dart';
 import 'package:redux_core/notes/notes_selectors.dart';
+import 'package:redux_core/notes/notes_state.dart';
 import 'package:redux_core/redux_core.dart';
 import 'package:redux_core/store/app_state.dart';
 import 'package:ui/widgets_base/resource_connector.dart';
@@ -29,12 +31,17 @@ class NotesListConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResourceConnector<AppState, NotesListViewModel>(
-      onInit: (store) => store.dispatch(const GetNotesRequest()),
+      onInit: (store) => store.dispatch(const GetMyNotesRequest()),
       loadingSelector: selectNotesIsLoading,
       loadingBuilder: loadingBuilder,
       popUpMessageSelector: selectNotesPopUpMessage,
       popUpMessageListener: popUpMessageListener,
-      breakingMessageSelector: selectNotesBreakingMessage,
+      breakingMessageSelector: (state) =>
+          selectNotesBreakingMessage(state) ??
+          (state.notes.status != NotesStatus.loading &&
+                  state.notes.noteIdList.isEmpty
+              ? 'You don\'t have any note yet. Click add to create a note.'
+              : null),
       breakingMessageBuilder: breakingMessageBuilder,
       dataConverter: (store) => NotesListViewModel.fromStore(store, context),
       dataBuilder: dataBuilder,
@@ -63,7 +70,8 @@ class NotesListViewModel extends Equatable {
   ) {
     return NotesListViewModel(
       notes: selectNotes(store.state),
-      onRefresh: () => store.dispatch(const GetNotesRequest(forceRefresh: true)),
+      onRefresh: () =>
+          store.dispatch(const GetMyNotesRequest(forceRefresh: true)),
       onNotePressed: (note) => context.goNamed(
         NotesRoute.editNote,
         params: {'id': note.id},

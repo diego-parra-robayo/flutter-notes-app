@@ -1,6 +1,7 @@
 import 'package:auth/domain/repositories/auth_repository.dart';
 import 'package:redux_core/auth/auth_actions.dart';
 import 'package:redux_core/failure/failure.dart';
+import 'package:redux_core/notes/notes_actions.dart';
 import 'package:redux_core/redux_core.dart';
 import 'package:redux_core/store/app_state.dart';
 import 'package:redux_core/utils/action.dart';
@@ -19,6 +20,7 @@ class SignOutMiddleware extends CustomMiddleware<SignOutRequest> {
     store.dispatch(SetAuthLoadingAction());
     await repository.signOut();
     store.dispatch(const SignOutAction());
+    store.dispatch(const ClearNotesAction());
   }
 
   @override

@@ -5,6 +5,10 @@ import 'package:redux_core/notes/note.dart';
 abstract class NoteRepository {
   Future<List<Note>> getNotes();
 
+  Future<List<Note>> getNotesByUser({
+    required String userId,
+  });
+
   Future<Note> getNote({
     required String noteId,
   });

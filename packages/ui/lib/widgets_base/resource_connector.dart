@@ -6,7 +6,7 @@ import 'package:ui/widgets_base/widget_connector.dart';
 
 import '../theme/ui.dart';
 
-class ResourceConnector<S, VM> extends StatelessWidget {
+class ResourceConnector<S, VM> extends StatefulWidget {
   final void Function(Store<S> store)? onInit;
   final bool Function(S state)? loadingSelector;
   final Widget? Function(BuildContext context, bool isLoading)? loadingBuilder;
@@ -35,41 +35,52 @@ class ResourceConnector<S, VM> extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ResourceConnector<S, VM>> createState() => _ResourceConnectorState<S, VM>();
+}
+
+class _ResourceConnectorState<S, VM> extends State<ResourceConnector<S, VM>> {
+  @override
+  void initState() {
+    super.initState();
+    final store = StoreProvider.of<S>(context, listen: false);
+    widget.onInit?.call(store);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (loadingSelector != null)
+        if (widget.loadingSelector != null)
           StoreConnector<S, bool>(
             distinct: true,
-            converter: (store) => loadingSelector!(store.state),
-            builder: _safeLoadingBuilder,
+            converter: (store) => widget.loadingSelector!(store.state),
+            builder: widget._safeLoadingBuilder,
           ),
-        if (popUpMessageSelector != null)
+        if (widget.popUpMessageSelector != null)
           StoreListener<S, String?>(
-            converter: (store) => popUpMessageSelector!(store.state),
-            listener: _safePopUpMessageListener,
+            converter: (store) => widget.popUpMessageSelector!(store.state),
+            listener: widget._safePopUpMessageListener,
           ),
-        if (additionalListeners != null &&
-            additionalListeners?.isNotEmpty == true)
-          ...additionalListeners!.map(
+        if (widget.additionalListeners != null &&
+            widget.additionalListeners?.isNotEmpty == true)
+          ...widget.additionalListeners!.map(
             (e) => StoreListener<S, Object>(
               converter: (store) => e.selector(store.state),
               listener: e.listener,
             ),
           ),
         WidgetConnector(
-          isActive: breakingMessageSelector != null,
+          isActive: widget.breakingMessageSelector != null,
           parentBuilder: (context, child) => StoreConnector<S, String?>(
             distinct: true,
-            converter: (store) => breakingMessageSelector!(store.state),
+            converter: (store) => widget.breakingMessageSelector!(store.state),
             builder: (context, vm) =>
-                _safeBreakingMessageBuilder(context, vm) ?? child,
+                widget._safeBreakingMessageBuilder(context, vm) ?? child,
           ),
           child: StoreConnector<S, VM>(
-            onInit: onInit,
             distinct: true,
-            converter: dataConverter,
-            builder: dataBuilder,
+            converter: widget.dataConverter,
+            builder: widget.dataBuilder,
           ),
         ),
       ],

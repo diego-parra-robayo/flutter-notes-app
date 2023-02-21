@@ -8,6 +8,7 @@ part 'note_dto.g.dart';
 @JsonSerializable(includeIfNull: false)
 class NoteDto extends Equatable {
   final String? id;
+  final String? userId;
   final String? title;
   final String? description;
   final bool? isCompleted;
@@ -16,6 +17,7 @@ class NoteDto extends Equatable {
 
   const NoteDto({
     this.id,
+    this.userId,
     this.title,
     this.description,
     this.isCompleted,
@@ -24,13 +26,14 @@ class NoteDto extends Equatable {
   });
 
   factory NoteDto.fromJson(Map<String, dynamic> json) =>
-      _$NoteModelFromJson(json);
+      _$NoteDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NoteModelToJson(this);
+  Map<String, dynamic> toJson() => _$NoteDtoToJson(this);
 
   @override
   List<Object?> get props => [
         id,
+        userId,
         title,
         description,
         isCompleted,
@@ -38,12 +41,14 @@ class NoteDto extends Equatable {
 
   NoteDto copyWith({
     String? id,
+    String? userId,
     String? title,
     String? description,
     bool? isCompleted,
   }) {
     return NoteDto(
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       title: title ?? this.title,
       description: description ?? this.description,
       isCompleted: isCompleted ?? this.isCompleted,

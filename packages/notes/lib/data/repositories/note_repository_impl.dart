@@ -18,6 +18,7 @@ class NoteRepositoryImpl implements NoteRepository {
     required NewNoteRequestEntity request,
   }) async {
     final id = await dataSource.addNote(
+      userId: request.userId,
       title: request.title,
       description: request.description,
     );
@@ -43,9 +44,9 @@ class NoteRepositoryImpl implements NoteRepository {
   Future<Note> getNote({
     required String noteId,
   }) async {
-    final noteModel = await dataSource.getNote(noteId: noteId);
-    if (noteModel != null) {
-      return noteModel.toNote();
+    final noteDto = await dataSource.getNote(noteId: noteId);
+    if (noteDto != null) {
+      return noteDto.toNote();
     } else {
       throw const NotFoundFailure();
     }
@@ -54,7 +55,13 @@ class NoteRepositoryImpl implements NoteRepository {
   @override
   Future<List<Note>> getNotes() async {
     final notes = await dataSource.getNotes();
-    return notes.map((noteModel) => noteModel.toNote()).toList();
+    return notes.map((noteDto) => noteDto.toNote()).toList();
+  }
+
+  @override
+  Future<List<Note>> getNotesByUser({required String userId}) async {
+    final notes = await dataSource.getNotesByUser(userId: userId);
+    return notes.map((noteDto) => noteDto.toNote()).toList();
   }
 
   @override

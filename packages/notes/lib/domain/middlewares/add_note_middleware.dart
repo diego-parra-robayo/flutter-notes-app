@@ -1,3 +1,4 @@
+import 'package:redux_core/auth/auth_selectors.dart';
 import 'package:redux_core/failure/failure.dart';
 import 'package:redux_core/notes/notes_actions.dart';
 import 'package:redux_core/redux_core.dart';
@@ -26,9 +27,13 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
 
   @override
   Future execute(Store<AppState> store, AddNoteRequest action) async {
+    final authUser = selectAuthenticatedProfile(store.state);
+    if (authUser == null) throw const UnauthenticatedFailure();
+
     store.dispatch(SetNotesLoadingAction());
     final note = await repository.addNote(
       request: NewNoteRequestEntity(
+        userId: authUser.userId,
         title: action.title,
         description: action.description,
       ),
@@ -37,7 +42,8 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
   }
 
   @override
-  void onFailure(Store<AppState> store, AddNoteRequest action, Failure failure) {
+  void onFailure(
+      Store<AppState> store, AddNoteRequest action, Failure failure) {
     store.dispatch(SetNotesFailureAction(failure));
   }
 }
