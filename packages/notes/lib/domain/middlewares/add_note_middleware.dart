@@ -4,7 +4,7 @@ import 'package:redux_core/redux_core.dart';
 import 'package:redux_core/store/app_state.dart';
 import 'package:redux_core/utils/action.dart';
 
-import '../entities/new_note_request_model.dart';
+import '../entities/new_note_request_entity.dart';
 import '../repositories/note_repository.dart';
 
 class AddNoteRequest extends Action {
@@ -28,7 +28,7 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
   Future execute(Store<AppState> store, AddNoteRequest action) async {
     store.dispatch(SetNotesLoadingAction());
     final note = await repository.addNote(
-      request: NewNoteRequestModel(
+      request: NewNoteRequestEntity(
         title: action.title,
         description: action.description,
       ),

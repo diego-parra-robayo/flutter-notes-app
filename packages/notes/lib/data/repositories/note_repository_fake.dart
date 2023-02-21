@@ -1,6 +1,7 @@
-import 'package:notes/data/datasources/fake/models/note_model.dart';
+import 'package:notes/data/datasources/fake/dtos/note_dto.dart';
 import 'package:notes/data/datasources/fake/note_fake_datasource.dart';
-import 'package:notes/domain/entities/entities.dart';
+import 'package:notes/domain/entities/new_note_request_entity.dart';
+import 'package:notes/domain/entities/update_note_request_entity.dart';
 import 'package:notes/domain/repositories/note_repository.dart';
 import 'package:redux_core/failure/failure.dart';
 import 'package:redux_core/notes/note.dart';
@@ -14,7 +15,7 @@ class NoteRepositoryFake implements NoteRepository {
 
   @override
   Future<Note> addNote({
-    required NewNoteRequestModel request,
+    required NewNoteRequestEntity request,
   }) async {
     final id = await dataSource.addNote(
       title: request.title,
@@ -30,7 +31,7 @@ class NoteRepositoryFake implements NoteRepository {
 
   @override
   Future<void> updateNote({
-    required UpdateNoteRequestModel request,
+    required UpdateNoteRequestEntity request,
   }) =>
       dataSource.updateNote(
         noteId: request.noteId,

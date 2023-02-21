@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:redux_core/notes/note.dart';
 
-class NoteModel extends Equatable {
+class NoteDto extends Equatable {
   final String id;
   final String? title;
   final String? description;
   final bool? isCompleted;
 
-  const NoteModel({
+  const NoteDto({
     required this.id,
     required this.title,
     required this.description,
@@ -17,13 +17,13 @@ class NoteModel extends Equatable {
   @override
   List<Object?> get props => [id, title, description, isCompleted];
 
-  NoteModel copyWith({
+  NoteDto copyWith({
     String? id,
     String? title,
     String? description,
     bool? isCompleted,
   }) {
-    return NoteModel(
+    return NoteDto(
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
@@ -32,7 +32,7 @@ class NoteModel extends Equatable {
   }
 }
 
-extension NoteModelDomainX on NoteModel {
+extension NoteModelDomainX on NoteDto {
   Note toNote() => Note(
         id: id,
         title: title ?? '',

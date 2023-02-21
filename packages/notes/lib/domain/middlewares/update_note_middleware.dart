@@ -5,7 +5,7 @@ import 'package:redux_core/redux_core.dart';
 import 'package:redux_core/store/app_state.dart';
 import 'package:redux_core/utils/action.dart';
 
-import '../entities/update_note_request_model.dart';
+import '../entities/update_note_request_entity.dart';
 import '../repositories/note_repository.dart';
 
 class UpdateNoteRequest extends Action {
@@ -36,7 +36,7 @@ class UpdateNoteMiddleware extends CustomMiddleware<UpdateNoteRequest> {
       description: action.description,
     );
     await repository.updateNote(
-      request: UpdateNoteRequestModel(
+      request: UpdateNoteRequestEntity(
         noteId: updatedNote.id,
         title: updatedNote.title,
         description: updatedNote.description,

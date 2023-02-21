@@ -1,22 +1,22 @@
 import 'package:core/extensions/list_extensions.dart';
 
-import 'models/note_model.dart';
+import 'dtos/note_dto.dart';
 
 class NoteFakeDataSource {
-  final List<NoteModel> _notes;
+  final List<NoteDto> _notes;
   final Duration delay;
 
   NoteFakeDataSource({
-    List<NoteModel>? initialNotes,
+    List<NoteDto>? initialNotes,
     this.delay = const Duration(milliseconds: 1000),
   }) : _notes = initialNotes ?? _fakeNotes;
 
-  Future<List<NoteModel>> getNotes() async {
+  Future<List<NoteDto>> getNotes() async {
     await Future.delayed(delay);
     return _notes;
   }
 
-  Future<NoteModel?> getNote({required String noteId}) async {
+  Future<NoteDto?> getNote({required String noteId}) async {
     await Future.delayed(delay);
     return _notes.firstOrNull((note) => note.id == noteId);
   }
@@ -26,7 +26,7 @@ class NoteFakeDataSource {
     required String description,
   }) async {
     await Future.delayed(delay);
-    final noteModel = NoteModel(
+    final noteModel = NoteDto(
       id: _notes.length.toString(),
       title: title,
       description: description,
@@ -71,18 +71,18 @@ class NoteFakeDataSource {
 }
 
 final _fakeNotes = [
-  const NoteModel(
+  const NoteDto(
       id: '0',
       title: 'Complete Flutter app',
       description: '(No description)',
       isCompleted: false),
-  const NoteModel(
+  const NoteDto(
     id: '1',
     title: 'Pay credit card',
     description: 'Bank',
     isCompleted: false,
   ),
-  const NoteModel(
+  const NoteDto(
     id: '2',
     title: 'Buy groceries',
     description: 'Milk, eggs, ...',

@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class NewNoteRequestModel extends Equatable {
+class NewNoteRequestEntity extends Equatable {
   final String title;
   final String description;
 
-  const NewNoteRequestModel({
+  const NewNoteRequestEntity({
     required this.title,
     required this.description,
   });

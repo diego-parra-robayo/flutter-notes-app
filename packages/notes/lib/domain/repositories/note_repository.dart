@@ -1,4 +1,5 @@
-import 'package:notes/domain/entities/entities.dart';
+import 'package:notes/domain/entities/new_note_request_entity.dart';
+import 'package:notes/domain/entities/update_note_request_entity.dart';
 import 'package:redux_core/notes/note.dart';
 
 abstract class NoteRepository {
@@ -9,11 +10,11 @@ abstract class NoteRepository {
   });
 
   Future<Note> addNote({
-    required NewNoteRequestModel request,
+    required NewNoteRequestEntity request,
   });
 
   Future<void> updateNote({
-    required UpdateNoteRequestModel request,
+    required UpdateNoteRequestEntity request,
   });
 
   Future<void> toggleCompleted({

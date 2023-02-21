@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'models/note_model.dart';
+import 'dtos/note_dto.dart';
 
 class NoteRemoteDatasource {
   late final CollectionReference notesRef;
@@ -8,25 +8,25 @@ class NoteRemoteDatasource {
   NoteRemoteDatasource({
     required FirebaseFirestore database,
   }) {
-    notesRef = database.collection('notes').withConverter<NoteModel>(
+    notesRef = database.collection('notes').withConverter<NoteDto>(
           fromFirestore: NoteModelFirestoreX.fromFirestore,
           toFirestore: (note, options) => note.toFirestore(options),
         );
   }
 
-  Future<List<NoteModel>> getNotes() async {
+  Future<List<NoteDto>> getNotes() async {
     final querySnapshot = await notesRef
         .orderBy(
           'createdAt',
           descending: false,
         )
         .get();
-    return querySnapshot.docs.map((doc) => doc.data() as NoteModel).toList();
+    return querySnapshot.docs.map((doc) => doc.data() as NoteDto).toList();
   }
 
-  Future<NoteModel?> getNote({required String noteId}) async {
+  Future<NoteDto?> getNote({required String noteId}) async {
     final docSnapshot = await notesRef.doc(noteId).get();
-    return docSnapshot.data() as NoteModel?;
+    return docSnapshot.data() as NoteDto?;
   }
 
   Future<String> addNote({
@@ -34,7 +34,7 @@ class NoteRemoteDatasource {
     required String description,
   }) async {
     final docRef = await notesRef.add(
-      NoteModel(
+      NoteDto(
         title: title,
         description: description,
         isCompleted: false,
@@ -50,7 +50,7 @@ class NoteRemoteDatasource {
     required String description,
   }) =>
       notesRef.doc(noteId).set(
-            NoteModel(title: title, description: description),
+            NoteDto(title: title, description: description),
             SetOptions(merge: true),
           );
 
@@ -59,7 +59,7 @@ class NoteRemoteDatasource {
     required bool newState,
   }) =>
       notesRef.doc(noteId).set(
-            NoteModel(isCompleted: newState),
+            NoteDto(isCompleted: newState),
             SetOptions(merge: true),
           );
 
