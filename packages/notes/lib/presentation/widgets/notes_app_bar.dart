@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/presentation/connectors/sign_out_connector.dart';
 import 'package:ui/theme/ui.dart';
@@ -18,7 +19,7 @@ class NotesAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         SignOutConnector(
           builder: (context, vm) => vm.isLoading
-              ? const LoadingWidget()
+              ? const LoadingAppBarWidget()
               : IconButton(
                   onPressed: vm.onSignOut,
                   icon: const Icon(Icons.logout),

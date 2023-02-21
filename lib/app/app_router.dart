@@ -9,7 +9,7 @@ final appRouter = GoRouter(
   initialLocation: '/notes',
   redirect: (context, state) {
     final appState = StoreProvider.of<AppState>(context, listen: false).state;
-    if (!selectAuthIsAuthenticated(appState) &&
+    if (selectAuthIsAuthenticated(appState) == false &&
         state.name != AuthRoute.signIn) {
       return '/auth/login';
     }

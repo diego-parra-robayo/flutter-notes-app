@@ -64,7 +64,7 @@ class _ResourceConnectorState<S, VM> extends State<ResourceConnector<S, VM>> {
         if (widget.additionalListeners != null &&
             widget.additionalListeners?.isNotEmpty == true)
           ...widget.additionalListeners!.map(
-            (e) => StoreListener<S, Object>(
+            (e) => StoreListener<S, dynamic>(
               converter: (store) => e.selector(store.state),
               listener: e.listener,
             ),

@@ -23,7 +23,7 @@ class SignOutConnector extends StatelessWidget {
         ListenerPair(
           selector: selectAuthIsAuthenticated,
           listener: (context, isAuthenticated) {
-            if (!isAuthenticated) NotesDi.instance.onSignedOut(context);
+            if (isAuthenticated == false) NotesDi.instance.onSignedOut(context);
           },
         )
       ],

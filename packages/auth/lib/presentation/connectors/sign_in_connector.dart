@@ -23,7 +23,7 @@ class SignInConnector extends StatelessWidget {
         ListenerPair(
           selector: selectAuthIsAuthenticated,
           listener: (context, authenticated) {
-            if (authenticated) {
+            if (authenticated == true) {
               AuthDi.instance.onAuthenticatedSuccess(context);
             }
           },
