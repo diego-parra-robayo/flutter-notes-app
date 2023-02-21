@@ -47,7 +47,7 @@ class NoteRepositoryFake implements NoteRepository {
     if (noteModel != null) {
       return noteModel.toNote();
     } else {
-      throw const NotFoundFailure();
+      throw NotFoundFailure();
     }
   }
 

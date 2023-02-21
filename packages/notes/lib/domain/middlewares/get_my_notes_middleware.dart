@@ -25,7 +25,7 @@ class GetMyNotesMiddleware extends CustomMiddleware<GetMyNotesRequest> {
   @override
   Future execute(Store<AppState> store, GetMyNotesRequest action) async {
     final authUser = selectAuthenticatedProfile(store.state);
-    if (authUser == null) throw const UnauthenticatedFailure();
+    if (authUser == null) throw UnauthenticatedFailure();
 
     if (!action.forceRefresh &&
         selectNotes(store.state)

@@ -10,14 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
   core:
     path: ../core
   redux_core:
     path: ../redux_core
   ui:
     path: ../ui
-  locale:
-    path: ../locale
 
   cupertino_icons: ^1.0.5
   get_it: ^7.2.0

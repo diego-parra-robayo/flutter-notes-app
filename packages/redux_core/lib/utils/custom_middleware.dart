@@ -12,7 +12,7 @@ abstract class CustomMiddleware<Action> extends MiddlewareClass<AppState> {
     if (e is Failure) {
       return e;
     } else {
-      return Failure(message: e.toString());
+      return Failure(getMessage: (_) => e.toString());
     }
   }
 

@@ -18,7 +18,7 @@ class SignOutConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResourceConnector(
-      popUpMessageSelector: selectAuthFailure,
+      popUpFailureSelector: selectAuthFailure,
       additionalListeners: [
         ListenerPair(
           selector: selectAuthIsAuthenticated,

@@ -1,0 +1,7 @@
+{
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "signIn": "Iniciar sesión",
+  "signOut": "Cerrar sesión",
+  "invalidEmailErrorMessage": "Por favor ingresa un correo electrónico válido"
+}

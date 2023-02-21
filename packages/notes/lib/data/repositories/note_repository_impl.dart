@@ -48,7 +48,7 @@ class NoteRepositoryImpl implements NoteRepository {
     if (noteDto != null) {
       return noteDto.toNote();
     } else {
-      throw const NotFoundFailure();
+      throw NotFoundFailure();
     }
   }
 

@@ -1,4 +1,6 @@
-import 'package:locale/generated/app_localizations.dart';
+import 'package:auth/l10n/auth_localizations_extensions.dart';
+import 'package:core/l10n/core_localizations_extensions.dart';
+import 'package:flutter/cupertino.dart';
 
 class FieldValidator {
   FieldValidator._();
@@ -8,10 +10,10 @@ class FieldValidator {
 
   static String? notEmpty(
     String input, {
-    required AppLocalizations l10n,
+    required BuildContext context,
   }) {
     if (input.isEmpty) {
-      return l10n.emptyFieldErrorMessage;
+      return context.l10n.emptyFieldErrorMessage;
     }
     return null;
   }
@@ -19,12 +21,12 @@ class FieldValidator {
   static String? isValidEmail(
     String input, {
     isRequired = true,
-    required AppLocalizations l10n,
+    required BuildContext context,
   }) {
     if (input.isEmpty) {
-      return isRequired ? l10n.emptyFieldErrorMessage : null;
+      return isRequired ? context.l10n.emptyFieldErrorMessage : null;
     } else if (!RegExp(_emailRegExp).hasMatch(input)) {
-      return l10n.invalidEmailErrorMessage;
+      return context.l10nAuth.invalidEmailErrorMessage;
     }
     return null;
   }

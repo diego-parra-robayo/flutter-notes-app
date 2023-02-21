@@ -1,0 +1,12 @@
+{
+  "appName": "Notas",
+  "save": "Guardar",
+  "confirm": "Confirmar",
+  "cancel": "Cancelar",
+
+  "emptyFieldErrorMessage": "Este campo no puede estar vacío",
+  "notAuthenticatedFailureMessage": "Por favor inicia sesión para acceder a esta funcionalidad",
+  "notFoundFailureMessage": "Elemento no encontrado",
+
+  "deleteNoteConfirmation": "¿Seguro deseas eliminar esta nota?"
+}

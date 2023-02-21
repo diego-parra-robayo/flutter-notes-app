@@ -1,3 +1,4 @@
+import 'package:redux_core/failure/failure.dart';
 import 'package:redux_core/store/app_state.dart';
 import 'package:reselect/reselect.dart';
 
@@ -16,17 +17,17 @@ final bool Function(AppState) selectNotesIsLoading = createSelector1(
   (notesState) => notesState.status == NotesStatus.loading,
 );
 
-final String? Function(AppState) selectNotesPopUpMessage = createSelector1(
+final Failure? Function(AppState) selectNotesPopUpFailure = createSelector1(
   _selectNotesState,
   (notesState) => notesState.status == NotesStatus.popUpFailure
-      ? notesState.failure?.message
+      ? notesState.failure
       : null,
 );
 
-final String? Function(AppState) selectNotesBreakingMessage = createSelector1(
+final Failure? Function(AppState) selectNotesBreakingFailure = createSelector1(
   _selectNotesState,
   (notesState) => notesState.status == NotesStatus.breakingFailure
-      ? notesState.failure?.message
+      ? notesState.failure
       : null,
 );
 

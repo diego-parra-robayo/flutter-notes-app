@@ -1,5 +1,5 @@
+import 'package:core/l10n/core_localizations_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:notes/presentation/connectors/navigate_to_add_note_builder.dart';
 import 'package:notes/presentation/connectors/notes_list_connector.dart';
 import 'package:notes/presentation/widgets/notes_app_bar.dart';

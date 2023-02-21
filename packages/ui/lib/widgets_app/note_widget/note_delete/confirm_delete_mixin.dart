@@ -1,5 +1,5 @@
+import 'package:core/l10n/core_localizations_extensions.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:locale/extensions/app_localizations_extensions.dart';
 
 import '../../../alerts/confirm_dialog.dart';
 

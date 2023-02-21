@@ -1,8 +1,8 @@
+import 'package:auth/l10n/auth_localizations_extensions.dart';
 import 'package:auth/presentation/connectors/sign_in_connector.dart';
 import 'package:ui/widgets_base/custom_text_form_field.dart';
 import 'package:auth/utils/field_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:ui/theme/ui.dart';
 
 class SignInForm extends StatefulWidget {
@@ -29,11 +29,10 @@ class _SignInFormState extends State<SignInForm> {
     _validationPropsMap = {
       _SignInFormKeys.email: TextFormFieldValidationProps(
         validator: (input) =>
-            FieldValidator.isValidEmail(input, l10n: context.l10n),
+            FieldValidator.isValidEmail(input, context: context),
       ),
       _SignInFormKeys.password: TextFormFieldValidationProps(
-        validator: (input) =>
-            FieldValidator.notEmpty(input, l10n: context.l10n),
+        validator: (input) => FieldValidator.notEmpty(input, context: context),
       ),
     };
   }
@@ -54,13 +53,13 @@ class _SignInFormState extends State<SignInForm> {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomTextFormField(
-                label: '${context.l10n.email}*',
+                label: '${context.l10nAuth.email}*',
                 validationProps: _validationPropsMap[_SignInFormKeys.email]!,
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(height: UI.dimens.d16),
               CustomTextFormField(
-                label: '${context.l10n.password}*',
+                label: '${context.l10nAuth.password}*',
                 validationProps: _validationPropsMap[_SignInFormKeys.password]!,
                 obscureText: true,
               ),
@@ -78,7 +77,7 @@ class _SignInFormState extends State<SignInForm> {
                           ),
                         )
                     : null,
-                child: Text(context.l10n.signIn),
+                child: Text(context.l10nAuth.signIn),
               ),
             ],
           ),

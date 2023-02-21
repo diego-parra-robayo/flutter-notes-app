@@ -15,8 +15,6 @@ dependencies:
     path: ../core
   redux_core:
     path: ../redux_core
-  locale:
-    path: ../locale
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redux_core/failure/failure.dart';
 import 'package:redux_core/redux_core.dart';
 import 'package:ui/alerts/custom_snackbar.dart';
 import 'package:ui/widgets_app/loading_widget.dart';
@@ -10,11 +11,11 @@ class ResourceConnector<S, VM> extends StatefulWidget {
   final void Function(Store<S> store)? onInit;
   final bool Function(S state)? loadingSelector;
   final Widget? Function(BuildContext context, bool isLoading)? loadingBuilder;
-  final String? Function(S state)? popUpMessageSelector;
-  final void Function(BuildContext context, String? message)?
-      popUpMessageListener;
+  final Failure? Function(S state)? popUpFailureSelector;
+  final void Function(BuildContext context, Failure? message)?
+      popUpFailureListener;
   final List<ListenerPair<S>>? additionalListeners;
-  final String? Function(S state)? breakingMessageSelector;
+  final Failure? Function(S state)? breakingMessageSelector;
   final Widget? Function(BuildContext context, String? message)?
       breakingMessageBuilder;
   final VM Function(Store<S> store) dataConverter;
@@ -25,8 +26,8 @@ class ResourceConnector<S, VM> extends StatefulWidget {
     this.onInit,
     this.loadingSelector,
     this.loadingBuilder,
-    this.popUpMessageSelector,
-    this.popUpMessageListener,
+    this.popUpFailureSelector,
+    this.popUpFailureListener,
     this.additionalListeners,
     this.breakingMessageSelector,
     this.breakingMessageBuilder,
@@ -35,7 +36,8 @@ class ResourceConnector<S, VM> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ResourceConnector<S, VM>> createState() => _ResourceConnectorState<S, VM>();
+  State<ResourceConnector<S, VM>> createState() =>
+      _ResourceConnectorState<S, VM>();
 }
 
 class _ResourceConnectorState<S, VM> extends State<ResourceConnector<S, VM>> {
@@ -56,10 +58,10 @@ class _ResourceConnectorState<S, VM> extends State<ResourceConnector<S, VM>> {
             converter: (store) => widget.loadingSelector!(store.state),
             builder: widget._safeLoadingBuilder,
           ),
-        if (widget.popUpMessageSelector != null)
-          StoreListener<S, String?>(
-            converter: (store) => widget.popUpMessageSelector!(store.state),
-            listener: widget._safePopUpMessageListener,
+        if (widget.popUpFailureSelector != null)
+          StoreListener<S, Failure?>(
+            converter: (store) => widget.popUpFailureSelector!(store.state),
+            listener: widget._safePopUpFailureListener,
           ),
         if (widget.additionalListeners != null &&
             widget.additionalListeners?.isNotEmpty == true)
@@ -73,7 +75,8 @@ class _ResourceConnectorState<S, VM> extends State<ResourceConnector<S, VM>> {
           isActive: widget.breakingMessageSelector != null,
           parentBuilder: (context, child) => StoreConnector<S, String?>(
             distinct: true,
-            converter: (store) => widget.breakingMessageSelector!(store.state),
+            converter: (store) => widget.breakingMessageSelector!(store.state)
+                ?.getMessage(context),
             builder: (context, vm) =>
                 widget._safeBreakingMessageBuilder(context, vm) ?? child,
           ),
@@ -112,12 +115,12 @@ extension<S, VM> on ResourceConnector<S, VM> {
 
   void Function(
     BuildContext context,
-    String? message,
-  ) get _safePopUpMessageListener =>
-      popUpMessageListener ??
-      (context, message) {
-        if (message != null) {
-          CustomSnackBar(message: message).show(context);
+    Failure? failure,
+  ) get _safePopUpFailureListener =>
+      popUpFailureListener ??
+      (context, failure) {
+        if (failure != null) {
+          CustomSnackBar(message: failure.getMessage(context)).show(context);
         }
       };
 

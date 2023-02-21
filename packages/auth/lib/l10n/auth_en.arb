@@ -1,0 +1,7 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "invalidEmailErrorMessage": "Please enter a valid email"
+}

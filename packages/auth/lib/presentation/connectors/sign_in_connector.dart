@@ -18,7 +18,7 @@ class SignInConnector extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResourceConnector<AppState, SignInCallback>(
       loadingSelector: selectAuthIsLoading,
-      popUpMessageSelector: selectAuthFailure,
+      popUpFailureSelector: selectAuthFailure,
       additionalListeners: [
         ListenerPair(
           selector: selectAuthIsAuthenticated,

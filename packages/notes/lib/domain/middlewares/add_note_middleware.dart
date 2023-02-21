@@ -28,7 +28,7 @@ class AddNoteMiddleware extends CustomMiddleware<AddNoteRequest> {
   @override
   Future execute(Store<AppState> store, AddNoteRequest action) async {
     final authUser = selectAuthenticatedProfile(store.state);
-    if (authUser == null) throw const UnauthenticatedFailure();
+    if (authUser == null) throw UnauthenticatedFailure();
 
     store.dispatch(SetNotesLoadingAction());
     final note = await repository.addNote(

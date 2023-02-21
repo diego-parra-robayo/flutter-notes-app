@@ -1,0 +1,12 @@
+{
+  "appName": "Notes",
+  "save": "Save",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+
+  "emptyFieldErrorMessage": "This field can't be empty",
+  "notAuthenticatedFailureMessage": "Please sign in to access this feature",
+  "notFoundFailureMessage": "Element was not found",
+
+  "deleteNoteConfirmation": "Are you sure you want to delete this note?"
+}

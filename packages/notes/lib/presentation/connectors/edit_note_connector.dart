@@ -26,8 +26,8 @@ class EditNoteConnector extends StatelessWidget {
         forceRefresh: false,
       )),
       loadingSelector: selectNotesIsLoading,
-      popUpMessageSelector: (state) =>
-          selectNotesPopUpMessage(state) ?? selectNotesBreakingMessage(state),
+      popUpFailureSelector: (state) =>
+          selectNotesPopUpFailure(state) ?? selectNotesBreakingFailure(state),
       dataConverter: (store) => EditNoteViewModel.fromStore(
         store,
         noteId: noteId,

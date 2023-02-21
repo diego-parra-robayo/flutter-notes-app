@@ -1,4 +1,5 @@
 import 'package:redux_core/auth/auth_state.dart';
+import 'package:redux_core/failure/failure.dart';
 import 'package:redux_core/redux_core.dart';
 import 'package:redux_core/store/app_state.dart';
 
@@ -11,10 +12,10 @@ final bool Function(AppState) selectAuthIsLoading = createSelector1(
   (authState) => authState.status == AuthStatus.loading,
 );
 
-final String? Function(AppState) selectAuthFailure = createSelector1(
+final Failure? Function(AppState) selectAuthFailure = createSelector1(
   _selectAuthState,
   (authState) => authState.status == AuthStatus.failure
-      ? authState.failure?.message
+      ? authState.failure
       : null,
 );
 

@@ -5,22 +5,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'app_localizations_en.dart';
-import 'app_localizations_es.dart';
+import 'auth_localizations_en.dart';
+import 'auth_localizations_es.dart';
 
-/// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
+/// Callers can lookup localized strings with an instance of AuthLocalizations
+/// returned by `AuthLocalizations.of(context)`.
 ///
-/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// Applications need to include `AuthLocalizations.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'generated/app_localizations.dart';
+/// import 'l10n/auth_localizations.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: AppLocalizations.localizationsDelegates,
-///   supportedLocales: AppLocalizations.supportedLocales,
+///   localizationsDelegates: AuthLocalizations.localizationsDelegates,
+///   supportedLocales: AuthLocalizations.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -57,18 +57,18 @@ import 'app_localizations_es.dart';
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// be consistent with the languages listed in the AuthLocalizations.supportedLocales
 /// property.
-abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+abstract class AuthLocalizations {
+  AuthLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static AuthLocalizations? of(BuildContext context) {
+    return Localizations.of<AuthLocalizations>(context, AuthLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AuthLocalizations> delegate = _AuthLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -92,78 +92,6 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('es')
   ];
-
-  /// No description provided for @appName.
-  ///
-  /// In en, this message translates to:
-  /// **'Notes'**
-  String get appName;
-
-  /// No description provided for @save.
-  ///
-  /// In en, this message translates to:
-  /// **'Save'**
-  String get save;
-
-  /// No description provided for @confirm.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm'**
-  String get confirm;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// No description provided for @emptyFieldErrorMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'This field can\'t be empty'**
-  String get emptyFieldErrorMessage;
-
-  /// No description provided for @emptyNotesListMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'You haven\'t created a note yet.'**
-  String get emptyNotesListMessage;
-
-  /// No description provided for @createNoteTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Create new note'**
-  String get createNoteTitle;
-
-  /// No description provided for @editNoteTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Edit note'**
-  String get editNoteTitle;
-
-  /// No description provided for @title.
-  ///
-  /// In en, this message translates to:
-  /// **'Title'**
-  String get title;
-
-  /// No description provided for @description.
-  ///
-  /// In en, this message translates to:
-  /// **'Description'**
-  String get description;
-
-  /// No description provided for @deleteNoteConfirmation.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to delete this note?'**
-  String get deleteNoteConfirmation;
-
-  /// No description provided for @deletedNoteMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Note deleted'**
-  String get deletedNoteMessage;
 
   /// No description provided for @email.
   ///
@@ -196,32 +124,32 @@ abstract class AppLocalizations {
   String get invalidEmailErrorMessage;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
-  const _AppLocalizationsDelegate();
+class _AuthLocalizationsDelegate extends LocalizationsDelegate<AuthLocalizations> {
+  const _AuthLocalizationsDelegate();
 
   @override
-  Future<AppLocalizations> load(Locale locale) {
-    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  Future<AuthLocalizations> load(Locale locale) {
+    return SynchronousFuture<AuthLocalizations>(lookupAuthLocalizations(locale));
   }
 
   @override
   bool isSupported(Locale locale) => <String>['en', 'es'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_AuthLocalizationsDelegate old) => false;
 }
 
-AppLocalizations lookupAppLocalizations(Locale locale) {
+AuthLocalizations lookupAuthLocalizations(Locale locale) {
 
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return AppLocalizationsEn();
-    case 'es': return AppLocalizationsEs();
+    case 'en': return AuthLocalizationsEn();
+    case 'es': return AuthLocalizationsEs();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'AuthLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
     'that was used.'

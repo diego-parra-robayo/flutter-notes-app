@@ -1,5 +1,6 @@
+import 'package:core/l10n/core_localizations_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:locale/extensions/app_localizations_extensions.dart';
+import 'package:notes/l10n/notes_localizations_extensions.dart';
 import 'package:notes/presentation/connectors/edit_note_connector.dart';
 import 'package:ui/theme/ui.dart';
 import 'package:ui/widgets_base/custom_text_form_field.dart';
@@ -68,14 +69,14 @@ class _NoteFormState extends State<NoteForm> {
           children: [
             CustomTextFormField(
               validationProps: _validationPropsMap[_NoteFormKeys.title]!,
-              label: context.l10n.title,
+              label: context.l10nNotes.title,
             ),
             SizedBox(height: UI.dimens.d16),
             Expanded(
               child: CustomTextFormField(
                 validationProps:
                     _validationPropsMap[_NoteFormKeys.description]!,
-                label: context.l10n.description,
+                label: context.l10nNotes.description,
               ),
             ),
             SizedBox(height: UI.dimens.d16 * 2),
