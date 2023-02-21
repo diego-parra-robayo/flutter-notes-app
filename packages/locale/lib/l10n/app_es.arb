@@ -4,13 +4,19 @@
   "confirm": "Confirmar",
   "cancel": "Cancelar",
 
+  "emptyFieldErrorMessage": "This field can't be empty",
   "emptyNotesListMessage": "Aún no has creado ninguna nota.",
 
   "createNoteTitle": "Crear una nota",
   "editNoteTitle": "Editar nota",
   "title": "Título",
   "description": "Descripción",
-  "nonEmptyValidationMessage": "This field can't be empty",
   "deleteNoteConfirmation": "¿Seguro deseas eliminar esta nota?",
-  "deletedNoteMessage": "Nota eliminada"
+  "deletedNoteMessage": "Nota eliminada",
+
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "signIn": "Iniciar sesión",
+  "signOut": "Cerrar sesión",
+  "invalidEmailErrorMessage": "Por favor ingresa un correo electrónico válido"
 }

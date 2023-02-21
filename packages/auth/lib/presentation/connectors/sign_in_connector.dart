@@ -1,5 +1,6 @@
 import 'package:auth/di/auth_di.dart';
 import 'package:auth/domain/middlewares/sign_in_middleware.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:redux_core/auth/auth_selectors.dart';
 import 'package:redux_core/store/app_state.dart';
@@ -28,12 +29,28 @@ class SignInConnector extends StatelessWidget {
           },
         ),
       ],
-      dataConverter: (store) => (email, password) => store.dispatch(
-            SignInRequest(email: email, password: password),
+      dataConverter: (store) => (formData) => store.dispatch(
+            SignInRequest(
+              email: formData.email,
+              password: formData.password,
+            ),
           ),
       dataBuilder: builder,
     );
   }
 }
 
-typedef SignInCallback = void Function(String email, String password);
+typedef SignInCallback = void Function(SignInFormData data);
+
+class SignInFormData extends Equatable {
+  final String email;
+  final String password;
+
+  const SignInFormData({
+    required this.email,
+    required this.password,
+  });
+
+  @override
+  List<Object?> get props => [email, password];
+}

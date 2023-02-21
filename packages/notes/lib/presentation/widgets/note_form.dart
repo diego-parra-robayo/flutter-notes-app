@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:notes/presentation/connectors/edit_note_connector.dart';
 import 'package:ui/theme/ui.dart';
+import 'package:ui/widgets_base/custom_text_form_field.dart';
 
 class NoteForm extends StatefulWidget {
   final NoteFormData? initialData;
@@ -18,20 +19,25 @@ class NoteForm extends StatefulWidget {
 }
 
 class _NoteFormState extends State<NoteForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
   bool _isSaveButtonEnabled = false;
+  late final Map<_NoteFormKeys, TextFormFieldValidationProps>
+      _validationPropsMap;
 
   void setInitialValues() {
-    _titleController.text = widget.initialData?.title ?? '';
-    _descriptionController.text = widget.initialData?.description ?? '';
+    _validationPropsMap.reset();
     _isSaveButtonEnabled = false;
   }
 
   @override
   void initState() {
     super.initState();
+    _validationPropsMap = {
+      _NoteFormKeys.title: TextFormFieldValidationProps(
+        validator: (input) =>
+        input.isEmpty ? context.l10n.emptyFieldErrorMessage : null,
+      ),
+      _NoteFormKeys.description: TextFormFieldValidationProps(),
+    };
     //  Still required apart from didUpdateWidget since, when there are no changes
     //  in store note details (they may have been previously loaded by opening and
     //  closing this form), just initState will be called.
@@ -54,33 +60,22 @@ class _NoteFormState extends State<NoteForm> {
     return Padding(
       padding: EdgeInsets.all(UI.dimens.d16),
       child: Form(
-        key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: () => setState(() {
-          _isSaveButtonEnabled = _formKey.currentState?.validate() == true;
+          _isSaveButtonEnabled = _validationPropsMap.isValid();
         }),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              controller: _titleController,
-              decoration: InputDecoration(
-                label: Text(context.l10n.title),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return context.l10n.nonEmptyValidationMessage;
-                }
-                return null;
-              },
+            CustomTextFormField(
+              validationProps: _validationPropsMap[_NoteFormKeys.title]!,
+              label: context.l10n.title,
             ),
             SizedBox(height: UI.dimens.d16),
             Expanded(
-              child: TextFormField(
-                controller: _descriptionController,
-                decoration: InputDecoration(
-                  label: Text(context.l10n.description),
-                ),
+              child: CustomTextFormField(
+                validationProps:
+                    _validationPropsMap[_NoteFormKeys.description]!,
+                label: context.l10n.description,
               ),
             ),
             SizedBox(height: UI.dimens.d16 * 2),
@@ -88,8 +83,12 @@ class _NoteFormState extends State<NoteForm> {
               onPressed: _isSaveButtonEnabled
                   ? () => widget.onSave(
                         NoteFormData(
-                          title: _titleController.text,
-                          description: _descriptionController.text,
+                          title: _validationPropsMap.getText(
+                            _NoteFormKeys.title,
+                          )!,
+                          description: _validationPropsMap.getText(
+                            _NoteFormKeys.description,
+                          )!,
                         ),
                       )
                   : null,
@@ -103,8 +102,9 @@ class _NoteFormState extends State<NoteForm> {
 
   @override
   void dispose() {
-    _titleController.dispose();
-    _descriptionController.dispose();
+    _validationPropsMap.disposeAllControllers();
     super.dispose();
   }
 }
+
+enum _NoteFormKeys { title, description }

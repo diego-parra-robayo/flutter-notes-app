@@ -1,4 +1,6 @@
 import 'package:auth/di/auth_di.dart';
+import 'package:auth/domain/middlewares/middlewares.dart';
+import 'package:auth/navigation/auth_routes.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:notes/di/notes_di.dart';
@@ -13,6 +15,11 @@ class AppDi {
         onAuthenticatedSuccess: (context) => context.goNamed(NotesRoute.home),
       ),
     );
-    getIt.registerSingleton<NotesDi>(NotesDi());
+    getIt.registerSingleton<NotesDi>(
+      NotesDi(
+        onSignOut: (store) => store.dispatch(const SignOutRequest()),
+        onSignedOut: (context) => context.goNamed(AuthRoute.signIn),
+      ),
+    );
   }
 }

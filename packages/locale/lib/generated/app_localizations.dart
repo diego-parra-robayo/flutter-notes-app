@@ -117,6 +117,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @emptyFieldErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This field can\'t be empty'**
+  String get emptyFieldErrorMessage;
+
   /// No description provided for @emptyNotesListMessage.
   ///
   /// In en, this message translates to:
@@ -147,12 +153,6 @@ abstract class AppLocalizations {
   /// **'Description'**
   String get description;
 
-  /// No description provided for @nonEmptyValidationMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'This field can\'t be empty'**
-  String get nonEmptyValidationMessage;
-
   /// No description provided for @deleteNoteConfirmation.
   ///
   /// In en, this message translates to:
@@ -164,6 +164,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Note deleted'**
   String get deletedNoteMessage;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signIn;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// No description provided for @invalidEmailErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get invalidEmailErrorMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

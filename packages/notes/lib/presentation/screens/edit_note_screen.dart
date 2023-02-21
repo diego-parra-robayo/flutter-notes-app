@@ -3,6 +3,7 @@ import 'package:locale/extensions/app_localizations_extensions.dart';
 import 'package:locale/generated/app_localizations.dart';
 import 'package:notes/presentation/connectors/edit_note_connector.dart';
 import 'package:notes/presentation/widgets/note_form.dart';
+import 'package:notes/presentation/widgets/notes_app_bar.dart';
 
 class EditNoteScreen extends StatelessWidget {
   final String? noteId;
@@ -15,9 +16,7 @@ class EditNoteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(getTitle(context.l10n)),
-      ),
+      appBar: NotesAppBar(title: getTitle(context.l10n)),
       body: EditNoteConnector(
         noteId: noteId,
         builder: (context, vm) => NoteForm(

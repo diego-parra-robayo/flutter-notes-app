@@ -17,6 +17,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get emptyFieldErrorMessage => 'This field can\'t be empty';
+
+  @override
   String get emptyNotesListMessage => 'You haven\'t created a note yet.';
 
   @override
@@ -32,11 +35,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get description => 'Description';
 
   @override
-  String get nonEmptyValidationMessage => 'This field can\'t be empty';
-
-  @override
   String get deleteNoteConfirmation => 'Are you sure you want to delete this note?';
 
   @override
   String get deletedNoteMessage => 'Note deleted';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get signIn => 'Sign in';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get invalidEmailErrorMessage => 'Please enter a valid email';
 }
